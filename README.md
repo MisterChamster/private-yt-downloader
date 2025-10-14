@@ -6,7 +6,7 @@ The YT Downloader is a program allowing to download videos and whole playlists f
 - Downloading YouTube videos in playlists
 - 3 save formats
 - Multiple file name customization options
-- User-friendly GUI
+- User-friendly Console Interface
 - Easy to use
   
 ## Installation
