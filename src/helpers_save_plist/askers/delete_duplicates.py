@@ -3,8 +3,8 @@ def ask_del_duplicates() -> bool:
                     "l": False}
 
     while True:
-        print("Duplicates detected. Choose handling option:\n" \
-              "d - Delete duplicates\n" \
+        print("Duplicates detected. Choose handling option:\n"
+              "d - Delete duplicates\n"
               "l - Leave duplicates\n>> ", end="")
         asker = input()
 

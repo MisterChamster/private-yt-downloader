@@ -8,13 +8,13 @@ def ask_numbering_main_menu() -> str:
                     "":   "save"}
 
     while True:
-        print("Choose numbering option:\n" \
-              "o     - Starting on 1\n" \
-              "n     - No numbering\n" \
-              "b     - Beginning on integer...\n" \
-              "e     - Ending on integer...\n" \
-              "r     - Reverse current numbering\n" \
-              "og    - Original numbering\n" \
+        print("Choose numbering option:\n"
+              "o     - Starting on 1\n"
+              "n     - No numbering\n"
+              "b     - Beginning on integer...\n"
+              "e     - Ending on integer...\n"
+              "r     - Reverse current numbering\n"
+              "og    - Original numbering\n"
               "Enter - Save current style\n>> ", end="")
         action = input()
 
@@ -26,7 +26,7 @@ def ask_numbering_main_menu() -> str:
 
 def ask_first_number() -> int:
     while True:
-        print("Input the number of the first element:\n" \
+        print("Input the number of the first element:\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 
@@ -42,7 +42,7 @@ def ask_first_number() -> int:
 def ask_last_number(plist_len: int) -> int:
     lowest_possible = plist_len - 1
     while True:
-        print(f"Input the number of the last element ({lowest_possible} or higher):\n" \
+        print(f"Input the number of the last element ({lowest_possible} or higher):\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 

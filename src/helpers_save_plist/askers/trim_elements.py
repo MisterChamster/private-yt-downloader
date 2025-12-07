@@ -4,9 +4,9 @@ def ask_trimming_main_menu() -> str:
                     "":   "all"}
 
     while True:
-        print("Choose which elements to download:\n" \
-              "c     - Custom settings...\n" \
-              "ls    - List all current elements\n" \
+        print("Choose which elements to download:\n"
+              "c     - Custom settings...\n"
+              "ls    - List all current elements\n"
               "Enter - Save current list of elements\n>> ", end="")
         asker = input()
 
@@ -22,9 +22,9 @@ def ask_custom_trim() -> str:
                     "rt": "return"}
 
     while True:
-        print("Choose custom trimming option:\n" \
-              "te - Trim one element...\n" \
-              "tr - Trim a range of elements...\n" \
+        print("Choose custom trimming option:\n"
+              "te - Trim one element...\n"
+              "tr - Trim a range of elements...\n"
               "rt - Return\n>> ", end="")
         asker = input()
 
@@ -36,7 +36,7 @@ def ask_custom_trim() -> str:
 
 def ask_el_trim(plist_numbers: list) -> int:
     while True:
-        print("Input number of the element to trim:\n" \
+        print("Input number of the element to trim:\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 
@@ -54,7 +54,7 @@ def ask_el_trim(plist_numbers: list) -> int:
 
 def ask_multiple_trim(plist_numbers: list) -> int:
     while True:
-        print("Input number of the first element to trim:\n" \
+        print("Input number of the first element to trim:\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 
@@ -73,7 +73,7 @@ def ask_multiple_trim(plist_numbers: list) -> int:
     print()
 
     while True:
-        print("Input number of the last element to trim:\n" \
+        print("Input number of the last element to trim:\n"
               "(to exit input 'exit')\n>> ", end="")
         asker2 = input()
 

@@ -6,11 +6,11 @@ def ask_trim_names_main_menu() -> str:
                     "":   "save"}
 
     while True:
-        print("Choose element name trimming option:\n" \
-              "tan   - Trim all names...\n" \
-              "ts    - Trim name of a specific element...\n" \
-              "tr    - Trim name of elements in range... \n" \
-              "og    - Return all elements to original names\n" \
+        print("Choose element name trimming option:\n"
+              "tan   - Trim all names...\n"
+              "ts    - Trim name of a specific element...\n"
+              "tr    - Trim name of elements in range... \n"
+              "og    - Return all elements to original names\n"
               "Enter - Save current names\n>> ", end="")
         asker = input()
 
@@ -26,9 +26,9 @@ def ask_length_type() -> str:
                     "rt": "return"}
 
     while True:
-        print("Choose trim length value type:\n" \
-              "i  - Input integer value...\n" \
-              "s  - Input string and calculate it's length...\n" \
+        print("Choose trim length value type:\n"
+              "i  - Input integer value...\n"
+              "s  - Input string and calculate it's length...\n"
               "rt - Return\n>> ", end="")
         asker = input()
 
@@ -40,7 +40,7 @@ def ask_length_type() -> str:
 
 def ask_length_int() -> int:
     while True:
-        print("Input a number of characters to cut:\n" \
+        print("Input a number of characters to cut:\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 
@@ -57,7 +57,7 @@ def ask_length_int() -> int:
 
 def ask_length_str() -> str:
     while True:
-        print("Input string to cut (will count its characters):\n" \
+        print("Input string to cut (will count its characters):\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 
@@ -71,7 +71,7 @@ def ask_trim_front_back() -> str:
                     "e": "end"}
 
     while True:
-        print("Cut characters from (to exit input 'exit'):\n" \
+        print("Cut characters from (to exit input 'exit'):\n"
               "s - start\n" \
               "e - end\n>> ", end="")
         asker = input()
@@ -86,7 +86,7 @@ def ask_trim_front_back() -> str:
 
 def ask_el_name_trim(plist_numbers: list) -> int:
     while True:
-        print("Input number of the element to trim name:\n" \
+        print("Input number of the element to trim name:\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 
@@ -104,7 +104,7 @@ def ask_el_name_trim(plist_numbers: list) -> int:
 
 def ask_multiple_name_trim(plist_numbers: list) -> list:
     while True:
-        print("Input number of the first element to trim name:\n" \
+        print("Input number of the first element to trim name:\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 
@@ -123,7 +123,7 @@ def ask_multiple_name_trim(plist_numbers: list) -> list:
     print()
 
     while True:
-        print("Input number of the last element to trim name:\n" \
+        print("Input number of the last element to trim name:\n"
               "(to exit input 'exit')\n>> ", end="")
         asker2 = input()
 
