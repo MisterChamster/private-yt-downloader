@@ -23,7 +23,7 @@ def ask_save_ext():
         "f - flac\n>> ", end="")
         asker = input()
 
-        if asker not in ["4", "3", "f"]:
+        if asker not in returns_dict:
             print("Invalid input!\n")
         else:
             return returns_dict[asker]
