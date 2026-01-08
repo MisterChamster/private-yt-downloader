@@ -20,7 +20,7 @@ from src.helpers_save_plist.loops.trim_names import trim_names_loop
 def save_plist(plist_url: list) -> None:
     # Get playlist dictionary
     plist_dict = get_plist_dict(plist_url)
-    if plist_dict == None:
+    if not plist_dict:
         return
 
     # Get playlist title
@@ -52,7 +52,7 @@ def save_plist(plist_url: list) -> None:
     plist_list = [[i+1, plist_el_titles[i], plist_urls[i]] for i in range(0, len(plist_urls))]
     plist_list = trim_elements_loop(plist_list)
     print()
-    if plist_list == None:
+    if not plist_list:
         return
     plist_urls = [el[2] for el in plist_list]
 
@@ -68,9 +68,7 @@ def save_plist(plist_url: list) -> None:
     plist_indexes = numbering_loop([el[0] for el in plist_list], plist_el_titles)
     # With zeros    (for file naming)
     plist_indexes_zeros = [zeros_at_beginning(el, max(plist_indexes)) for el in plist_indexes]
-    is_numbered = True
-    if plist_indexes == None:
-        is_numbered = False
+    is_numbered: bool = True if plist_indexes else False
     print()
 
     # Get save path from user
@@ -92,9 +90,9 @@ def save_plist(plist_url: list) -> None:
     print(f"Downloading {plist_title}...")
 
     for index in range(0, len(plist_urls)):
-        final_filename = plist_el_titles_legal[index]
-        if is_numbered:
-            final_filename = plist_indexes_zeros[index] + final_filename
+        final_filename = (plist_el_titles_legal[index]
+                          if not is_numbered
+                          else plist_indexes_zeros[index] + final_filename)
 
         while final_filename in listdir():
             final_filename += "_d"

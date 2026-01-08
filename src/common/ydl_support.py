@@ -4,10 +4,11 @@ from src.common.utils import is_internet_available
 
 
 def get_video_title(url):
-    ydl_getdata = {'quiet': True,
-                   'extract_flat': True,
-                   'force_generic_extractor': True}
-    
+    ydl_getdata = {
+        'quiet': True,
+        'extract_flat': True,
+        'force_generic_extractor': True}
+
     try:
         with YoutubeDL(ydl_getdata) as ydl:
             return ydl.extract_info(url, download=False)["title"]
@@ -20,9 +21,11 @@ def get_video_title(url):
 
 
 def get_plist_dict(url):
-    ydl_getdata = {'quiet': True,
-                   'extract_flat': True,
-                   'force_generic_extractor': True}
+    ydl_getdata = {
+        'quiet': True,
+        'extract_flat': True,
+        'force_generic_extractor': True}
+
     try:
         with YoutubeDL(ydl_getdata) as ydl:
             return ydl.extract_info(url, download=False)
@@ -31,4 +34,4 @@ def get_plist_dict(url):
             print("Internet connection failed.\n\n")
         else:
             print("Something went wrong.\n\n")
-        return None
+        return

@@ -1,8 +1,9 @@
 from socket import create_connection
+from typing import Literal
 
 
 
-def determine_url_type(url):
+def determine_url_type(url: str) -> Literal['plist', 'single', 'invalid']:
     if (len(url) > 34 and url[:34] == 'https://youtube.com/playlist?list='):
         return 'plist'
 
@@ -15,7 +16,7 @@ def determine_url_type(url):
         return 'invalid'
 
 
-def is_internet_available():
+def is_internet_available() -> bool:
     """
     Checks internet availability.
 
@@ -28,10 +29,9 @@ def is_internet_available():
         return True
     except OSError:
         return False
-    return False
 
 
-def illegal_char_remover(suspect_string):
+def illegal_char_remover(suspect_string: str) -> str:
     """
     Removes chars that are illegal in naming a file from string.
 
@@ -58,7 +58,7 @@ def illegal_char_remover(suspect_string):
     return policedstring
 
 
-def get_ydl_options(extension):
+def get_ydl_options(extension: str) -> dict:
     ydl_opts = {"quiet": True}
     if extension == "mp4":
         ydl_opts["merge_output_format"] = "mp4"
@@ -71,5 +71,5 @@ def get_ydl_options(extension):
         ydl_opts["postprocessors"] = [{"key": "FFmpegExtractAudio",
                                        "preferredcodec": "flac"}]
         ydl_opts["format"] = "bestaudio"
-        
+
     return ydl_opts

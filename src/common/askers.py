@@ -12,10 +12,12 @@ def ask_url():
     return url
 
 
-def ask_save_ext():
-    returns_dict = {"4": "mp4",
-                    "3": "mp3",
-                    "f": "flac"}
+def ask_save_ext() -> str:
+    returns_dict = {
+        "4": "mp4",
+        "3": "mp3",
+        "f": "flac"}
+
     while True:
         print("Choose file format for saving:\n"
         "4 - mp4\n"

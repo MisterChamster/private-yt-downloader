@@ -2,6 +2,7 @@ from src.common.askers import ask_url
 from src.common.utils import determine_url_type
 from .save_single import save_single
 from .save_plist import save_plist
+from typing import Literal
 
 
 
@@ -15,7 +16,7 @@ def main_loop() -> None:
         url = ask_url()
         if url == "exit":
             return
-        url_type = determine_url_type(url)
+        url_type: Literal['plist', 'single', 'invalid'] = determine_url_type(url)
 
         if url_type == 'plist':
             print()
@@ -23,3 +24,5 @@ def main_loop() -> None:
         elif url_type == "single":
             print()
             save_single(url)
+        elif url_type == "invalid":
+            print("Invalid URL.\n")
