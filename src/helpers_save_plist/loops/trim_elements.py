@@ -8,7 +8,7 @@ from src.helpers_save_plist.askers.trim_elements import(ask_trimming_main_menu,
 
 
 
-def trim_elements_loop(plist_list: list) -> list:
+def trim_elements_loop(plist_list: list) -> list|None:
     while True:
         print("Current elements in playlist:")
         list_vids(plist_list)
@@ -23,7 +23,7 @@ def trim_elements_loop(plist_list: list) -> list:
         elif action == "custom":
             plist_list = custom_trim_loop(plist_list)
             if plist_list == None:
-                return None
+                return
 
         elif action == "list":
             list_vids(plist_list)

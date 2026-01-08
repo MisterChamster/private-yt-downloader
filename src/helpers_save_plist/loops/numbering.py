@@ -5,7 +5,11 @@ from src.helpers_save_plist.askers.numbering import (ask_numbering_main_menu,
 
 
 
-def numbering_loop(og_numbering: list, plist_vid_titles: list) -> list:
+def numbering_loop(
+    og_numbering:     list[int],
+    plist_vid_titles: list
+) -> list[int]|None:
+
     final_numbering = og_numbering
     while True:
         print("Current numbering:")

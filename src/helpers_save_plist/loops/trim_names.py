@@ -102,7 +102,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
             return final_names
 
 
-def get_trim_length_loop() -> int:
+def get_trim_length_loop() -> int|None:
     trim_len = 0
     while True:
         input_type = ask_length_type()
@@ -111,14 +111,14 @@ def get_trim_length_loop() -> int:
         if input_type == "input_integer":
             trim_len = ask_length_int()
             if trim_len == None:
-                return None
+                return
             return trim_len
 
         elif input_type == "input_string":
             trim_len = ask_length_str()
             if trim_len == None:
-                return None
+                return
             return trim_len
 
         elif input_type == "return":
-            return None
+            return

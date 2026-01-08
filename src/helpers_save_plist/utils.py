@@ -2,7 +2,10 @@ from src.common.utils import illegal_char_remover
 
 
 
-def zeros_at_beginning(number: int, max_element_number: int) -> str:
+def zeros_at_beginning(
+    number: int,
+    max_element_number: int
+) -> str:
     """
     Determines a number in name of element present in a playlist.
 
@@ -31,7 +34,10 @@ def zeros_at_beginning(number: int, max_element_number: int) -> str:
         return f"{gg * '0'}{number}. "
 
 
-def get_indexes_of_searched_item(list_of_items: list, searched_item: int | str) -> list:
+def get_indexes_of_searched_item(
+    list_of_items: list,
+    searched_item: int | str
+) -> list:
     indexes_list = []
     i = 0
     while i < len(list_of_items):
