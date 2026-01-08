@@ -1,14 +1,15 @@
 def ask_trimming_main_menu() -> str:
-    returns_dict = {"c":  "custom",
-                    "ls": "list",
-                    "":   "all"}
+    returns_dict = {
+        "c":  "custom",
+        "ls": "list",
+        "":   "all"}
 
     while True:
         print("Choose which elements to download:\n"
               "c     - Custom settings...\n"
               "ls    - List all current elements\n"
               "Enter - Save current list of elements\n>> ", end="")
-        asker = input()
+        asker = input().strip().lower()
 
         if asker in returns_dict:
             return returns_dict[asker]
@@ -17,9 +18,10 @@ def ask_trimming_main_menu() -> str:
 
 
 def ask_custom_trim() -> str:
-    returns_dict = {"te": "trim_element",
-                    "tr": "trim_range",
-                    "rt": "return"}
+    returns_dict = {
+        "te": "trim_element",
+        "tr": "trim_range",
+        "rt": "return"}
 
     while True:
         print("Choose custom trimming option:\n"
@@ -34,14 +36,14 @@ def ask_custom_trim() -> str:
             print("Incorrect input.\n")
 
 
-def ask_el_trim(plist_numbers: list) -> int:
+def ask_el_trim(plist_numbers: list) -> int|None:
     while True:
         print("Input number of the element to trim:\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 
         if asker == "exit":
-            return None
+            return
         elif not asker.isdigit():
             print("Incorrect input.\n")
             continue
@@ -52,14 +54,14 @@ def ask_el_trim(plist_numbers: list) -> int:
             return el_number
 
 
-def ask_multiple_trim(plist_numbers: list) -> int:
+def ask_multiple_trim(plist_numbers: list) -> int|None:
     while True:
         print("Input number of the first element to trim:\n"
               "(to exit input 'exit')\n>> ", end="")
-        asker = input()
+        asker = input().strip()
 
         if asker == "exit":
-            return None
+            return
         elif not asker.isdigit():
             print("Incorrect input.\n")
             continue
@@ -78,7 +80,7 @@ def ask_multiple_trim(plist_numbers: list) -> int:
         asker2 = input()
 
         if asker2 == "exit":
-            return None
+            return
         elif not asker2.isdigit():
             print("Incorrect input.\n")
             continue

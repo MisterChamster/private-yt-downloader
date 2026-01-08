@@ -1,9 +1,10 @@
 def ask_trim_names_main_menu() -> str:
-    returns_dict = {"tan": "trim_all_elements",
-                    "ts":  "trim_specific",
-                    "tr":  "trim_range",
-                    "og":  "original_names",
-                    "":   "save"}
+    returns_dict = {
+        "tan": "trim_all_elements",
+        "ts":  "trim_specific",
+        "tr":  "trim_range",
+        "og":  "original_names",
+        "":    "save"}
 
     while True:
         print("Choose element name trimming option:\n"
@@ -12,7 +13,7 @@ def ask_trim_names_main_menu() -> str:
               "tr    - Trim name of elements in range... \n"
               "og    - Return all elements to original names\n"
               "Enter - Save current names\n>> ", end="")
-        asker = input()
+        asker = input().strip().lower()
 
         if asker in returns_dict:
             return returns_dict[asker]
@@ -21,16 +22,17 @@ def ask_trim_names_main_menu() -> str:
 
 
 def ask_length_type() -> str:
-    returns_dict = {"i":  "input_integer",
-                    "s":  "input_string",
-                    "rt": "return"}
+    returns_dict = {
+        "i":  "input_integer",
+        "s":  "input_string",
+        "rt": "return"}
 
     while True:
         print("Choose trim length value type:\n"
               "i  - Input integer value...\n"
               "s  - Input string and calculate it's length...\n"
               "rt - Return\n>> ", end="")
-        asker = input()
+        asker = input().strip().lower()
 
         if asker in returns_dict:
             return returns_dict[asker]
@@ -38,60 +40,61 @@ def ask_length_type() -> str:
             print("Incorrect input.\n")
 
 
-def ask_length_int() -> int:
+def ask_length_int() -> int|None:
     while True:
         print("Input a number of characters to cut:\n"
               "(to exit input 'exit')\n>> ", end="")
-        asker = input()
+        asker = input().strip()
 
         if asker == "exit":
-            return None
+            return
         elif not asker.isdigit():
             print("Incorrect input.\n")
         asker_int = int(asker)
         if asker_int == 0:
-            return None
+            return
         else:
             return int(asker)
 
 
-def ask_length_str() -> str:
+def ask_length_str() -> int|None:
     while True:
         print("Input string to cut (will count its characters):\n"
               "(to exit input 'exit')\n>> ", end="")
         asker = input()
 
         if asker == "exit" or asker == "":
-            return None
+            return
         return len(asker)
 
 
-def ask_trim_front_back() -> str:
-    returns_dict = {"s": "start",
-                    "e": "end"}
+def ask_trim_front_back() -> str|None:
+    returns_dict = {
+        "s": "start",
+        "e": "end"}
 
     while True:
         print("Cut characters from (to exit input 'exit'):\n"
               "s - start\n" \
               "e - end\n>> ", end="")
-        asker = input()
+        asker = input().strip().lower()
 
         if asker == "exit":
-            return None
+            return
         elif asker in returns_dict:
             return returns_dict[asker]
         else:
             print("Incorrect input.\n")
 
 
-def ask_el_name_trim(plist_numbers: list) -> int:
+def ask_el_name_trim(plist_numbers: list) -> int|None:
     while True:
         print("Input number of the element to trim name:\n"
               "(to exit input 'exit')\n>> ", end="")
-        asker = input()
+        asker = input().strip()
 
         if asker == "exit":
-            return None
+            return
         elif not asker.isdigit():
             print("Incorrect input.\n")
             continue
@@ -102,14 +105,14 @@ def ask_el_name_trim(plist_numbers: list) -> int:
             return el_number
 
 
-def ask_multiple_name_trim(plist_numbers: list) -> list:
+def ask_multiple_name_trim(plist_numbers: list) -> list[int,int]|None:
     while True:
         print("Input number of the first element to trim name:\n"
               "(to exit input 'exit')\n>> ", end="")
-        asker = input()
+        asker = input().strip()
 
         if asker == "exit":
-            return None
+            return
         elif not asker.isdigit():
             print("Incorrect input.\n")
             continue
@@ -125,10 +128,10 @@ def ask_multiple_name_trim(plist_numbers: list) -> list:
     while True:
         print("Input number of the last element to trim name:\n"
               "(to exit input 'exit')\n>> ", end="")
-        asker2 = input()
+        asker2 = input().strip()
 
         if asker2 == "exit":
-            return None
+            return
         elif not asker2.isdigit():
             print("Incorrect input.\n")
             continue
