@@ -91,7 +91,7 @@ def save_plist(plist_url: list) -> None:
     for index in range(0, len(plist_urls)):
         final_filename = (plist_el_titles_legal[index]
                           if not is_numbered
-                          else plist_indexes_zeros[index] + final_filename)
+                          else plist_indexes_zeros[index] + plist_el_titles_legal[index])
 
         while final_filename in listdir():
             final_filename += "_d"
