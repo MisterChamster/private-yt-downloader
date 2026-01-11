@@ -1,7 +1,3 @@
-from src.common.utils import illegal_char_remover
-
-
-
 def zeros_at_beginning(
     number: int,
     max_element_number: int
@@ -26,12 +22,12 @@ def zeros_at_beginning(
     """
     return ((max_element_number < 10) * f"0{number}. ") + ((max_element_number >= 10) * (f"{(len(str(max_element_number)) - len(str(number))) * '0'}{number}. ")) # I'm really sorry. The same code is written below, but it's readable
     if max_element_number < 10:
-        return f"0{number}. "
+        return f"0{number}."
     else:
-        digits_of_biggest_number    = len(str(max_element_number))
-        digits_of_number            = len(str(number))
-        gg                          = digits_of_biggest_number - digits_of_number
-        return f"{gg * '0'}{number}. "
+        digits_of_biggest_number = len(str(max_element_number))
+        digits_of_number         = len(str(number))
+        gg                       = digits_of_biggest_number - digits_of_number
+        return f"{gg * '0'}{number}."
 
 
 def get_indexes_of_searched_item(
