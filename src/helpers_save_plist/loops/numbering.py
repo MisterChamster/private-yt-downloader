@@ -1,7 +1,5 @@
 from src.helpers_save_plist.utils import list_vid_names
-from src.helpers_save_plist.askers.numbering import (ask_numbering_main_menu,
-                                                     ask_first_number,
-                                                     ask_last_number)
+from src.helpers_save_plist.askers_plist import Askers_Plist
 
 
 
@@ -16,7 +14,7 @@ def numbering_loop(
         list_vid_names(final_numbering, plist_vid_titles)
         print()
 
-        action = ask_numbering_main_menu()
+        action = Askers_Plist.ask_numbering_main_menu()
         print()
 
         if action == "start_on_1":
@@ -28,14 +26,14 @@ def numbering_loop(
             print()
 
         elif action == "begin_on_integer":
-            first_el_num = ask_first_number()
+            first_el_num = Askers_Plist.ask_first_number()
             print()
             if first_el_num == None:
                 continue
             final_numbering = [i for i in range(first_el_num, first_el_num+len(og_numbering))]
 
         elif action == "end_on_integer":
-            last_el_num = ask_last_number(len(og_numbering))
+            last_el_num = Askers_Plist.ask_last_number(len(og_numbering))
             print()
             if last_el_num == None:
                 continue

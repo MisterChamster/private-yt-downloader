@@ -1,10 +1,7 @@
 from src.helpers_save_plist.utils import (list_vids,
                                           del_by_number,
                                           del_by_range)
-from src.helpers_save_plist.askers.trim_elements import(ask_trimming_main_menu,
-                                                        ask_custom_trim,
-                                                        ask_el_trim,
-                                                        ask_multiple_trim,)
+from src.helpers_save_plist.askers_plist import Askers_Plist
 
 
 
@@ -14,7 +11,7 @@ def trim_elements_loop(plist_list: list) -> list|None:
         list_vids(plist_list)
         print()
 
-        action = ask_trimming_main_menu()
+        action = Askers_Plist.ask_trimming_main_menu()
         print()
 
         if action == "all":
@@ -40,12 +37,12 @@ def custom_trim_loop(plist_list: list) -> list:
         list_vids(plist_list)
         print()
 
-        action = ask_custom_trim()
+        action = Askers_Plist.ask_custom_trim()
         print()
 
         if action == "trim_element":
             plist_numbers = [i[0] for i in plist_list]
-            number_to_trim = ask_el_trim(plist_numbers)
+            number_to_trim = Askers_Plist.ask_el_trim(plist_numbers)
             print()
             if number_to_trim is None:
                 continue
@@ -54,7 +51,7 @@ def custom_trim_loop(plist_list: list) -> list:
 
         elif action == "trim_range":
             plist_numbers = [i[0] for i in plist_list]
-            trim_range = ask_multiple_trim(plist_numbers)
+            trim_range = Askers_Plist.ask_multiple_trim(plist_numbers)
             print()
             if trim_range is None:
                 continue

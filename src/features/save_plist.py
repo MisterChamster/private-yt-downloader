@@ -4,7 +4,7 @@ from src.common.askers import Askers
 from src.common.utils import (illegal_char_remover,
                               is_internet_available,
                               get_ydl_options)
-from src.helpers_save_plist.askers.delete_duplicates import ask_del_duplicates
+from src.helpers_save_plist.askers_plist import Askers_Plist
 from src.helpers_save_plist.utils import (zeros_at_beginning,
                                           get_indexes_of_duplicates,
                                           are_duplicates,
@@ -34,7 +34,8 @@ def save_plist(plist_url: list) -> None:
 
     # Check and handle duplicates
     if are_duplicates(plist_urls):
-        if ask_del_duplicates():
+        del_duplicates_choice = Askers_Plist.ask_del_duplicates()
+        if del_duplicates_choice:
             dupli_indexes = get_indexes_of_duplicates(plist_urls)
 
             plist_urls = del_indexes(plist_urls, dupli_indexes)
