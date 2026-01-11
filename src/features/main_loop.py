@@ -1,4 +1,4 @@
-from src.common.askers import ask_url
+from src.common.askers import Askers
 from src.common.utils import determine_url_type
 from .save_single import save_single
 from .save_plist import save_plist
@@ -13,7 +13,7 @@ def main_loop() -> None:
         print("=======================  Welcome to   =======================")
         print("======================= YT Downloader =======================")
         print("=============================================================\n")
-        url = ask_url()
+        url = Askers.ask_url()
         if url == "exit":
             return
         url_type: Literal['plist', 'single', 'invalid'] = determine_url_type(url)

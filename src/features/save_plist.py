@@ -1,7 +1,6 @@
 from yt_dlp import YoutubeDL
 from os import chdir, mkdir, path, listdir
-from src.common.askers import (ask_save_ext,
-                               ask_save_path)
+from src.common.askers import Askers
 from src.common.utils import (illegal_char_remover,
                               is_internet_available,
                               get_ydl_options)
@@ -44,7 +43,7 @@ def save_plist(plist_url: list) -> None:
     # I don't care about indexing b4 deleting duplicates and neither should you
 
     # Get save extension from user and correct ydl options
-    extension = ask_save_ext()
+    extension = Askers.ask_save_ext()
     print()
     ydl_opts = get_ydl_options(extension)
 
@@ -72,7 +71,7 @@ def save_plist(plist_url: list) -> None:
     print()
 
     # Get save path from user
-    save_path = ask_save_path()
+    save_path = Askers.ask_save_path()
     if save_path == "":
         print("Empty path was chosen.")
         return

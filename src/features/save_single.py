@@ -1,7 +1,6 @@
 from yt_dlp import YoutubeDL
 from os import path
-from src.common.askers import (ask_save_ext,
-                               ask_save_path)
+from src.common.askers import Askers
 from src.common.utils import (illegal_char_remover,
                               is_internet_available,
                               get_ydl_options)
@@ -10,13 +9,13 @@ from src.common.ydl_support import get_video_title
 
 
 def save_single(url: str) -> None:
-    extension = ask_save_ext()
+    extension = Askers.ask_save_ext()
     print()
 
     ydl_opts = get_ydl_options(extension)
     og_title = get_video_title(url)
 
-    save_path = ask_save_path()
+    save_path = Askers.ask_save_path()
     if save_path == "":
         print("Empty path was chosen.")
         return
