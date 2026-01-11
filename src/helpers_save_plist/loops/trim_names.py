@@ -1,11 +1,5 @@
 from src.helpers_save_plist.utils import list_vid_names
-from src.helpers_save_plist.askers.trim_names import (ask_trim_names_main_menu,
-                                                      ask_length_type,
-                                                      ask_length_int,
-                                                      ask_length_str,
-                                                      ask_trim_front_back,
-                                                      ask_el_name_trim,
-                                                      ask_multiple_name_trim)
+from src.helpers_save_plist.askers_plist import Askers_Plist
 
 
 
@@ -16,7 +10,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
         list_vid_names(plist_numbers, final_names)
         print()
 
-        action = ask_trim_names_main_menu()
+        action = Askers_Plist.ask_trim_names_main_menu()
         print()
 
         if action == "trim_all_elements":
@@ -25,7 +19,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
             if trim_len == None:
                 continue
 
-            trim_side = ask_trim_front_back()
+            trim_side = Askers_Plist.ask_trim_front_back()
             print()
             if trim_side == None:
                 continue
@@ -40,7 +34,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
             if trim_len == None:
                 continue
 
-            trim_side = ask_trim_front_back()
+            trim_side = Askers_Plist.ask_trim_front_back()
             print()
             if trim_side == None:
                 continue
@@ -48,7 +42,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
             list_vid_names(plist_numbers, final_names)
             print()
 
-            number_to_trim = ask_el_name_trim(plist_numbers)
+            number_to_trim = Askers_Plist.ask_el_name_trim(plist_numbers)
             print()
             if number_to_trim == None:
                 continue
@@ -69,7 +63,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
             if trim_len == None:
                 continue
 
-            trim_side = ask_trim_front_back()
+            trim_side = Askers_Plist.ask_trim_front_back()
             print()
             if trim_side == None:
                 continue
@@ -77,7 +71,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
             list_vid_names(plist_numbers, final_names)
             print()
 
-            range_to_trim = ask_multiple_name_trim(plist_numbers)
+            range_to_trim = Askers_Plist.ask_multiple_name_trim(plist_numbers)
             print()
             if range_to_trim == None:
                 continue
@@ -105,17 +99,17 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
 def get_trim_length_loop() -> int|None:
     trim_len = 0
     while True:
-        input_type = ask_length_type()
+        input_type = Askers_Plist.ask_length_type()
         print()
 
         if input_type == "input_integer":
-            trim_len = ask_length_int()
+            trim_len = Askers_Plist.ask_length_int()
             if trim_len == None:
                 return
             return trim_len
 
         elif input_type == "input_string":
-            trim_len = ask_length_str()
+            trim_len = Askers_Plist.ask_length_str()
             if trim_len == None:
                 return
             return trim_len
