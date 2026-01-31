@@ -1,17 +1,15 @@
-from src.helpers_save_plist.utils import (list_vids,
-                                          del_by_number,
-                                          del_by_range)
-from src.helpers_save_plist.askers_plist import Askers_Plist
+from src.helpers_save_plist.plist_utils import Plist_Utils
+from src.helpers_save_plist.plist_askers import Plist_Askers
 
 
 
 def trim_elements_loop(plist_list: list) -> list|None:
     while True:
         print("Current elements in playlist:")
-        list_vids(plist_list)
+        Plist_Utils.list_vids(plist_list)
         print()
 
-        action = Askers_Plist.ask_trimming_main_menu()
+        action = Plist_Askers.ask_trimming_main_menu()
         print()
 
         if action == "all":
@@ -23,7 +21,7 @@ def trim_elements_loop(plist_list: list) -> list|None:
                 return
 
         elif action == "list":
-            list_vids(plist_list)
+            Plist_Utils.list_vids(plist_list)
             print()
 
 
@@ -34,28 +32,28 @@ def custom_trim_loop(plist_list: list) -> list:
             return None
 
         print("Current elements in playlist:")
-        list_vids(plist_list)
+        Plist_Utils.list_vids(plist_list)
         print()
 
-        action = Askers_Plist.ask_custom_trim()
+        action = Plist_Askers.ask_custom_trim()
         print()
 
         if action == "trim_element":
             plist_numbers = [i[0] for i in plist_list]
-            number_to_trim = Askers_Plist.ask_el_trim(plist_numbers)
+            number_to_trim = Plist_Askers.ask_el_trim(plist_numbers)
             print()
             if number_to_trim is None:
                 continue
-            plist_list = del_by_number(plist_list, number_to_trim)
+            plist_list = Plist_Utils.del_by_number(plist_list, number_to_trim)
             return plist_list
 
         elif action == "trim_range":
             plist_numbers = [i[0] for i in plist_list]
-            trim_range = Askers_Plist.ask_multiple_trim(plist_numbers)
+            trim_range = Plist_Askers.ask_multiple_trim(plist_numbers)
             print()
             if trim_range is None:
                 continue
-            plist_list = del_by_range(plist_list, trim_range[0], trim_range[1])
+            plist_list = Plist_Utils.del_by_range(plist_list, trim_range[0], trim_range[1])
             return plist_list
 
         elif action == "return":

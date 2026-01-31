@@ -4,11 +4,8 @@ from src.common.askers import Askers
 from src.common.utils import (illegal_char_remover,
                               is_internet_available,
                               get_ydl_options)
-from src.helpers_save_plist.askers_plist import Askers_Plist
-from src.helpers_save_plist.utils import (zeros_at_beginning,
-                                          get_indexes_of_duplicates,
-                                          are_duplicates,
-                                          del_indexes)
+from src.helpers_save_plist.plist_askers import Plist_Askers
+from src.helpers_save_plist.plist_utils import Plist_Utils
 from src.common.ydl_support import get_plist_dict
 from src.helpers_save_plist.loops.trim_elements import trim_elements_loop
 from src.helpers_save_plist.loops.numbering import numbering_loop
@@ -33,13 +30,13 @@ def save_plist(plist_url: list) -> None:
     del(plist_dict)
 
     # Check and handle duplicates
-    if are_duplicates(plist_urls):
-        del_duplicates_choice = Askers_Plist.ask_del_duplicates()
+    if Plist_Utils.are_duplicates(plist_urls):
+        del_duplicates_choice = Plist_Askers.ask_del_duplicates()
 
         if del_duplicates_choice:
-            dupli_indexes   = get_indexes_of_duplicates(plist_urls)
-            plist_urls      = del_indexes(plist_urls, dupli_indexes)
-            plist_el_titles = del_indexes(plist_el_titles, dupli_indexes)
+            dupli_indexes   = Plist_Utils.get_indexes_of_duplicates(plist_urls)
+            plist_urls      = Plist_Utils.del_indexes(plist_urls, dupli_indexes)
+            plist_el_titles = Plist_Utils.del_indexes(plist_el_titles, dupli_indexes)
         print()
     # I don't care about indexing b4 deleting duplicates and neither should you
 
@@ -67,7 +64,7 @@ def save_plist(plist_url: list) -> None:
     # Without zeros (for metadata later)
     plist_indexes = numbering_loop([el[0] for el in plist_list], plist_el_titles)
     # With zeros    (for file naming)
-    plist_indexes_zeros = [zeros_at_beginning(el, max(plist_indexes)) for el in plist_indexes]
+    plist_indexes_zeros = [Plist_Utils.zeros_at_beginning(el, max(plist_indexes)) for el in plist_indexes]
     is_numbered: bool = True if plist_indexes else False
     print()
 

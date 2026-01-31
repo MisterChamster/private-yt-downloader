@@ -1,4 +1,4 @@
-class Askers_Plist():
+class Plist_Askers():
     # =============================== DUPLICATES ===============================
     @staticmethod
     def ask_del_duplicates() -> bool:
