@@ -3,17 +3,16 @@ from typing import Literal
 
 
 
-def determine_url_type(url: str) -> Literal['plist', 'single', 'invalid']:
-    if (len(url) > 34 and url[:34] == 'https://youtube.com/playlist?list='):
+def determine_url_type(url: str) -> Literal['plist', 'single'] | None:
+    if (len(url) > 34 and url.startswith('https://youtube.com/playlist?list=')):
         return 'plist'
 
-    elif (len(url) > 17 and url[:17] == 'https://youtu.be/') or \
-         (len(url) > 29 and url[:29] == 'https://www.youtube.com/watch'):
+    elif ((len(url) > 17 and url.startswith('https://youtu.be/')) or
+          (len(url) > 29 and url.startswith('https://www.youtube.com/watch'))):
         return 'single'
 
     else:
-        print("Invalid URL!\n")
-        return 'invalid'
+        return
 
 
 def is_internet_available() -> bool:

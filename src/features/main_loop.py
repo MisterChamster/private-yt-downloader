@@ -9,20 +9,20 @@ from typing import Literal
 def main_loop() -> None:
     print()
     while True:
-        print("=============================================================")
-        print("=======================  Welcome to   =======================")
-        print("======================= YT Downloader =======================")
-        print("=============================================================\n")
+        print("=============================================================\n"
+              "=======================  Welcome to   =======================\n"
+              "======================= YT Downloader =======================\n"
+              "=============================================================\n")
         url = Askers.ask_url()
         if not url:
             return
         url_type: Literal['plist', 'single', 'invalid'] = determine_url_type(url)
 
-        if url_type == 'plist':
+        if not url_type:
+            print("Invalid URL.\n")
+        elif url_type == 'plist':
             print()
             save_plist(url)
         elif url_type == "single":
             print()
             save_single(url)
-        elif url_type == "invalid":
-            print("Invalid URL.\n")
