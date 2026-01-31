@@ -14,7 +14,7 @@ def main_loop() -> None:
         print("======================= YT Downloader =======================")
         print("=============================================================\n")
         url = Askers.ask_url()
-        if url == "exit":
+        if not url:
             return
         url_type: Literal['plist', 'single', 'invalid'] = determine_url_type(url)
 
