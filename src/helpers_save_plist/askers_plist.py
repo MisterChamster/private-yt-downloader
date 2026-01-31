@@ -8,8 +8,8 @@ class Askers_Plist():
 
         while True:
             print("Duplicates detected. Choose handling option:\n"
-                "d - Delete duplicates\n"
-                "l - Leave duplicates\n>> ", end="")
+                  "d - Delete duplicates\n"
+                  "l - Leave duplicates\n>> ", end="")
             asker = input().strip().lower()
 
             if asker in returns_dict:
@@ -32,13 +32,13 @@ class Askers_Plist():
 
         while True:
             print("Choose numbering option:\n"
-                "o     - Starting on 1\n"
-                "n     - No numbering\n"
-                "b     - Beginning on integer...\n"
-                "e     - Ending on integer...\n"
-                "r     - Reverse current numbering\n"
-                "og    - Original numbering\n"
-                "Enter - Save current style\n>> ", end="")
+                  "o     - Starting on 1\n"
+                  "n     - No numbering\n"
+                  "b     - Beginning on integer...\n"
+                  "e     - Ending on integer...\n"
+                  "r     - Reverse current numbering\n"
+                  "og    - Original numbering\n"
+                  "Enter - Save current style\n>> ", end="")
             action = input().strip().lower()
 
             if action in returns_dict:

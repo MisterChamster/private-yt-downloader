@@ -35,10 +35,10 @@ def save_plist(plist_url: list) -> None:
     # Check and handle duplicates
     if are_duplicates(plist_urls):
         del_duplicates_choice = Askers_Plist.ask_del_duplicates()
-        if del_duplicates_choice:
-            dupli_indexes = get_indexes_of_duplicates(plist_urls)
 
-            plist_urls = del_indexes(plist_urls, dupli_indexes)
+        if del_duplicates_choice:
+            dupli_indexes   = get_indexes_of_duplicates(plist_urls)
+            plist_urls      = del_indexes(plist_urls, dupli_indexes)
             plist_el_titles = del_indexes(plist_el_titles, dupli_indexes)
         print()
     # I don't care about indexing b4 deleting duplicates and neither should you

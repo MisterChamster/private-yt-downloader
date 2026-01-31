@@ -20,7 +20,7 @@ def get_video_title(url):
         return "Error"
 
 
-def get_plist_dict(url):
+def get_plist_dict(url) -> dict | None:
     ydl_getdata = {
         'quiet': True,
         'extract_flat': True,
