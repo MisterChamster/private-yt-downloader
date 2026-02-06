@@ -36,9 +36,9 @@ class Askers():
 
         while True:
             print("Choose file format for saving:\n"
-            "4 - mp4\n"
-            "3 - mp3\n"
-            "f - flac\n>> ", end="")
+                  "4 - mp4\n"
+                  "3 - mp3\n"
+                  "f - flac\n>> ", end="")
             asker = input().lower().strip()
 
             if asker not in returns_dict:
