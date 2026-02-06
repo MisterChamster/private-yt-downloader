@@ -3,6 +3,22 @@ from typing import Literal
 
 
 
+def clean_url(in_url: str) -> str:
+    #If user copies browser link when on vid from playlist
+    #ID tracker lmao
+    #A/B testing
+    #How opened
+    #Promotion
+    #Time stamp
+    bad_stuff = ['&list', '?si', '&ab_channel', '&feature', '&pp', '&t']
+
+    for el in bad_stuff:
+        if el in in_url:
+            print("MRPPPPPPPPP")
+            in_url = in_url[:in_url.find(el)]
+    return in_url
+
+
 def determine_url_type(url: str) -> Literal['plist', 'single'] | None:
     if ((len(url) > 17 and url.startswith('https://youtu.be/')) or
           (len(url) > 29 and url.startswith('https://www.youtube.com/watch'))):
