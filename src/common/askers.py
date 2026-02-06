@@ -13,20 +13,8 @@ class Askers():
               "(input 'exit' to exit program)\n>> ", end="")
         asker = input().strip()
 
-        #If user copies browser link when on vid from playlist
-        #ID tracker lmao
-        #A/B testing
-        #How opened
-        #Promotion
-        #Time stamp
-        bad_stuff = ['&list', '&si', '&ab_channel', '&feature', '&pp', '&t']
-
         if asker == "exit":
             return
-        for el in bad_stuff:
-            if el in asker:
-                asker = asker[:asker.find(el)]
-
         return asker
 
 
