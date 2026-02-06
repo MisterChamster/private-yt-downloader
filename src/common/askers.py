@@ -4,6 +4,9 @@ import os
 
 
 class Askers():
+    downloads_path: str
+
+
     @staticmethod
     def ask_url() -> str | None:
         print("Enter URL of YouTube video or playlist:\n"
@@ -50,8 +53,7 @@ class Askers():
     @staticmethod
     def ask_save_path():
         original_path = os.getcwd()
-        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-        os.chdir(desktop_path)
+        os.chdir(Askers.downloads_path)
         folder_selected = filedialog.askdirectory(title="Select download folder")
         os.chdir(original_path)
         return folder_selected
