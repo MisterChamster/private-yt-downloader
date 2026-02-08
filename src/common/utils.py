@@ -14,7 +14,6 @@ def clean_url(in_url: str) -> str:
 
     for el in bad_stuff:
         if el in in_url:
-            print("MRPPPPPPPPP")
             in_url = in_url[:in_url.find(el)]
     return in_url
 
