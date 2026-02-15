@@ -20,10 +20,6 @@ def trim_elements_loop(plist_list: list) -> list|None:
             if plist_list == None:
                 return
 
-        elif action == "list":
-            Plist_Utils.list_vids(plist_list)
-            print()
-
 
 def custom_trim_loop(plist_list: list) -> list:
     while True:

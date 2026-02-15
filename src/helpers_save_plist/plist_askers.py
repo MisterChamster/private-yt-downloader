@@ -88,15 +88,13 @@ class Plist_Askers():
     @staticmethod
     def ask_trimming_main_menu() -> str:
         returns_dict = {
-            "c":  "custom",
-            "ls": "list",
-            "":   "all"}
+            "c": "custom",
+            "":  "all"}
 
         while True:
             print("Choose which elements to download:\n"
-                "c     - Custom settings...\n"
-                "ls    - List all current elements\n"
-                "Enter - Save current list of elements\n>> ", end="")
+                  "c     - Custom settings...\n"
+                  "Enter - Save current list of elements\n>> ", end="")
             asker = input().strip().lower()
 
             if asker in returns_dict:
