@@ -5,6 +5,7 @@
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Additional notes](#additional-notes)
 
 ## Introduction
 The YT Downloader is a program allowing to download videos and whole playlists from YouTube. It has many customisation options for file naming, so that users can have tailor-made names of each and every element of the playlist.
