@@ -1,9 +1,7 @@
 from yt_dlp import YoutubeDL
 from os import chdir, mkdir, path, listdir
 from src.common.askers import Askers
-from src.common.utils import (illegal_char_remover,
-                              is_internet_available,
-                              get_ydl_options)
+import src.common.utils as utils
 from src.helpers_save_plist.plist_askers import Plist_Askers
 from src.helpers_save_plist.plist_utils import Plist_Utils
 from src.common.ydl_support import get_plist_dict
@@ -43,7 +41,7 @@ def save_plist(plist_url: list) -> None:
     # Get save extension from user and correct ydl options
     extension = Askers.ask_save_ext()
     print()
-    ydl_opts = get_ydl_options(extension)
+    ydl_opts = utils.get_ydl_options(extension)
 
     # Make user specify which elements to download
     plist_list = [[i+1, plist_el_titles[i], plist_urls[i]] for i in range(0, len(plist_urls))]
@@ -58,7 +56,7 @@ def save_plist(plist_url: list) -> None:
     plist_el_titles = trim_names_loop([el[0] for el in plist_list], [el[1] for el in plist_list])
     print()
     # List with legals   (for file names)
-    plist_el_titles_legal = [illegal_char_remover(el) for el in plist_el_titles]
+    plist_el_titles_legal = [utils.illegal_char_remover(el) for el in plist_el_titles]
 
     # Get indexing style from user
     # Without zeros (for metadata later)
@@ -76,7 +74,7 @@ def save_plist(plist_url: list) -> None:
     chdir(save_path)
 
     # Get dir name and create it
-    dir_name = illegal_char_remover(plist_title)
+    dir_name = utils.illegal_char_remover(plist_title)
     while path.exists(save_path + "/" + dir_name):
         dir_name += "_d"
     mkdir(dir_name)
@@ -100,7 +98,7 @@ def save_plist(plist_url: list) -> None:
                 ydl.download([plist_urls[index]])
             print(final_filename)
         except:
-            if not is_internet_available():
+            if not utils.is_internet_available():
                 print("Internet connection failed.\n\n")
                 return
             else:

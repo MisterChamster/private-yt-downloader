@@ -89,13 +89,6 @@ class Plist_Utils():
 
 
     @staticmethod
-    def list_vids(plist_list: list) -> None:
-        # print("Hello! I list videos. You're pretty.")
-        for i in range(0, len(plist_list)):
-            print(f"{plist_list[i][0]}. {plist_list[i][1]}")
-
-
-    @staticmethod
     def del_by_number(plist_list: list, number: int) -> list:
         i = 0
         while i < len(plist_list):
@@ -116,3 +109,9 @@ class Plist_Utils():
     def list_vid_names(plist_numbers: list, plist_vid_titles: list) -> None:
         for i in range(0, len(plist_vid_titles)):
             print(f"{plist_numbers[i]}. {plist_vid_titles[i]}")
+
+
+    @staticmethod
+    def list_vids(plist_list: list) -> None:
+        for i in range(0, len(plist_list)):
+            print(f"{plist_list[i][0]}. {plist_list[i][1]}")
