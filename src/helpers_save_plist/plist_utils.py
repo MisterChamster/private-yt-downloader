@@ -112,6 +112,9 @@ class Plist_Utils():
 
 
     @staticmethod
-    def list_vids(plist_list: list) -> None:
+    def list_vids(plist_list: list, numbered: bool = False) -> None:
         for i in range(0, len(plist_list)):
-            print(f"{plist_list[i][0]}. {plist_list[i][1]}")
+            number = (plist_list[i][0] + ". "
+                      if numbered else
+                      "")
+            print(f"{number}{plist_list[i][1]}")

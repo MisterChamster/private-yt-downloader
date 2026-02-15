@@ -21,11 +21,11 @@ def trim_elements_loop(plist_list: list) -> list|None:
                 return
 
 
-def custom_trim_loop(plist_list: list) -> list:
+def custom_trim_loop(plist_list: list) -> list | None:
     while True:
         if not plist_list:
             print("All elements have been removed.\n\n")
-            return None
+            return
 
         print("Current elements in playlist:")
         Plist_Utils.list_vids(plist_list)
