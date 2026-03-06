@@ -48,7 +48,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_first_number() -> int|None:
+    def ask_first_number() -> int | None:
         while True:
             print("Input the number of the first element:\n"
                 "(input 'exit' to exit)\n>> ", end="")
@@ -64,7 +64,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_last_number(plist_len: int) -> int|None:
+    def ask_last_number(plist_len: int) -> int | None:
         lowest_possible = plist_len - 1
         while True:
             print(f"Input the number of the last element ({lowest_possible} or higher):\n"
@@ -124,10 +124,10 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_el_trim(plist_numbers: list) -> int|None:
+    def ask_el_trim(plist_numbers: list) -> int | None:
         while True:
             print("Input number of the element to trim:\n"
-                "(input 'exit' to exit)\n>> ", end="")
+                  "(input 'exit' to exit)\n>> ", end="")
             asker = input()
 
             if asker == "exit":
@@ -143,7 +143,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_multiple_trim(plist_numbers: list) -> int|None:
+    def ask_multiple_trim(plist_numbers: list) -> int | None:
         while True:
             print("Input number of the first element to trim:\n"
                 "(input 'exit' to exit)\n>> ", end="")
@@ -229,7 +229,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_length_int() -> int|None:
+    def ask_length_int() -> int | None:
         while True:
             print("Input a number of characters to cut:\n"
                 "(input 'exit' to exit)\n>> ", end="")
@@ -247,7 +247,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_length_str() -> int|None:
+    def ask_length_str() -> int | None:
         while True:
             print("Input string to cut (will count its characters):\n"
                 "(input 'exit' to exit)\n>> ", end="")
@@ -259,7 +259,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_trim_front_back() -> str|None:
+    def ask_trim_front_back() -> str | None:
         returns_dict = {
             "s": "start",
             "e": "end"}
@@ -279,7 +279,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_el_name_trim(plist_numbers: list) -> int|None:
+    def ask_el_name_trim(plist_numbers: list) -> int | None:
         while True:
             print("Input number of the element to trim name:\n"
                 "(input 'exit' to exit)\n>> ", end="")
@@ -298,7 +298,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_multiple_name_trim(plist_numbers: list) -> list[int,int]|None:
+    def ask_multiple_name_trim(plist_numbers: list) -> list[int,int] | None:
         while True:
             print("Input number of the first element to trim name:\n"
                 "(input 'exit' to exit)\n>> ", end="")
