@@ -1,4 +1,5 @@
 from yt_dlp import YoutubeDL
+
 from os import path
 from src.common.askers import Askers
 from src.common.utils import (illegal_char_remover,

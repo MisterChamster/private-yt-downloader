@@ -1,9 +1,10 @@
+from typing import Literal
+from pathlib import Path
+
 from src.common.askers import Askers
 from src.common.utils import determine_url_type, clean_url
 from .save_single import save_single
 from .save_plist import save_plist
-from typing import Literal
-from pathlib import Path
 
 
 
@@ -18,6 +19,7 @@ def main_loop() -> None:
               "=======================  Welcome to   =======================\n"
               "======================= YT Downloader =======================\n"
               "=============================================================\n")
+        # Get url from user and clean it
         url = Askers.ask_url()
         if not url:
             return
@@ -29,9 +31,13 @@ def main_loop() -> None:
 
         if not url_type:
             print("Invalid URL.\n")
-        elif url_type == 'plist':
-            print()
-            save_plist(url)
+
+        # Single stuff
         elif url_type == "single":
             print()
             save_single(url)
+
+        # Playlist stuff
+        elif url_type == 'plist':
+            print()
+            save_plist(url)

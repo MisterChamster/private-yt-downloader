@@ -3,7 +3,7 @@ from src.helpers_save_plist.plist_askers import Plist_Askers
 
 
 
-def trim_elements_loop(plist_list: list) -> list|None:
+def trim_elements_loop(plist_list: list) -> list | None:
     while True:
         print("Current elements in playlist:")
         Plist_Utils.list_vids(plist_list)
