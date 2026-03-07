@@ -4,7 +4,7 @@ from os import chdir, mkdir, path, listdir
 from src.common.askers import Askers
 from src.helpers_save_plist.plist_askers import Plist_Askers
 from src.helpers_save_plist.plist_utils import Plist_Utils
-import src.common.utils as utils
+from src.common.utils import Utils
 from src.common.ydl_support import get_plist_dict
 from src.helpers_save_plist.loops.trim_elements import trim_elements_loop
 from src.helpers_save_plist.loops.numbering import numbering_loop
@@ -46,7 +46,7 @@ def save_plist(plist_url: list) -> None:
     # Get save extension from user and correct ydl options
     extension = Askers.ask_save_ext()
     print()
-    ydl_opts = utils.get_ydl_options(extension)
+    ydl_opts = Utils.get_ydl_options(extension)
 
     # Make user specify which elements to download
     plist_list = [[i+1, plist_el_titles[i], plist_urls[i]] for i in range(0, len(plist_urls))]
@@ -61,7 +61,7 @@ def save_plist(plist_url: list) -> None:
     plist_el_titles = trim_names_loop([el[0] for el in plist_list], [el[1] for el in plist_list])
     print()
     # List with legals   (for file names)
-    plist_el_titles_legal = [utils.illegal_char_remover(el) for el in plist_el_titles]
+    plist_el_titles_legal = [Utils.illegal_char_remover(el) for el in plist_el_titles]
 
     # Get indexing style from user
     # Without zeros (for metadata later)
@@ -79,7 +79,7 @@ def save_plist(plist_url: list) -> None:
     chdir(save_path)
 
     # Get dir name and create it
-    dir_name = utils.illegal_char_remover(plist_title)
+    dir_name = Utils.illegal_char_remover(plist_title)
     while path.exists(save_path + "/" + dir_name):
         dir_name += "_d"
     mkdir(dir_name)
@@ -90,9 +90,10 @@ def save_plist(plist_url: list) -> None:
     print(f"Downloading {plist_title}...")
 
     for index in range(0, len(plist_urls)):
-        final_filename = (plist_el_titles_legal[index]
-                          if not is_numbered
-                          else plist_indexes_zeros[index] + plist_el_titles_legal[index])
+        final_filename = (
+            plist_el_titles_legal[index]
+            if not is_numbered
+            else plist_indexes_zeros[index] + plist_el_titles_legal[index])
 
         while final_filename in listdir():
             final_filename += "_d"
@@ -103,19 +104,20 @@ def save_plist(plist_url: list) -> None:
                 ydl.download([plist_urls[index]])
             print(final_filename)
         except:
-            if not utils.is_internet_available():
+            if not Utils.is_internet_available():
                 print("Internet connection failed.\n\n")
                 return
             else:
                 total_errors += 1
                 print(f"{final_filename} could not be downloaded. Here's link to this video: {plist_urls[index]}")
 
+    print()
     if total_errors == 0:
-        print("\n" + plist_title + " playlist has been successfully downloaded.\n\n")
+        print(f"{plist_title} playlist has been successfully downloaded.\n\n")
     elif total_errors == 1:
-        print("\n" + "Downloading " + plist_title + " didn't go smooth. There has been 1 exception.\n\n")
+        print(f"Downloading {plist_title} didn't go smooth. There has been 1 exception.\n\n")
     else:
-        print("\n" + "Downloading " + plist_title + " didn't go smooth. There have been " + str(total_errors) + " exceptions.\n\n")
+        print(f"Downloading {plist_title} didn't go smooth. There have been {total_errors} exceptions.\n\n")
 
 
     # Now we have:
