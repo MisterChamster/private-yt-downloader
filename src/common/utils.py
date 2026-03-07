@@ -10,7 +10,7 @@ def clean_url(in_url: str) -> str:
     #How opened
     #Promotion
     #Time stamp
-    bad_stuff = ['&list', '?si', '&ab_channel', '&feature', '&pp', '&t']
+    bad_stuff = ['&list', '&si', '?si', '&ab_channel', '&feature', '&pp', '&t']
 
     for el in bad_stuff:
         if el in in_url:
