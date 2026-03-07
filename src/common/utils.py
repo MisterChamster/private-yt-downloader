@@ -3,14 +3,17 @@ from typing import Literal
 
 
 
+# =========================================================
+# ======================= URL UTILS =======================
+# =========================================================
 def clean_url(in_url: str) -> str:
-    #If user copies browser link when on vid from playlist
-    #ID tracker lmao
-    #A/B testing
-    #How opened
-    #Promotion
-    #Time stamp
-    bad_stuff = ['&list', '&si', '?si', '&ab_channel', '&feature', '&pp', '&t']
+    bad_stuff = ['&list', #If user copies browser link when on vid from playlist
+                 '&si',         #ID tracker lmao
+                 '?si',
+                 '&ab_channel', #A/B testing
+                 '&feature',    #How opened
+                 '&pp',         #Promotion
+                 '&t']          #Time stamp
 
     for el in bad_stuff:
         if el in in_url:
@@ -30,6 +33,9 @@ def determine_url_type(url: str) -> Literal['plist', 'single'] | None:
         return
 
 
+    # =========================================================
+    # ====================== UTILS UTILS ======================
+    # =========================================================
 def is_internet_available() -> bool:
     """
     Checks internet availability.

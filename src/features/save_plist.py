@@ -33,7 +33,7 @@ def save_plist(plist_url: list) -> None:
 
 
     # Check and handle duplicates
-    if Plist_Utils.are_duplicates(plist_urls):
+    if duplis_flag:
         del_duplicates_choice = Plist_Askers.ask_del_duplicates()
 
         if del_duplicates_choice:
