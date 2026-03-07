@@ -1,4 +1,38 @@
 class Plist_Askers():
+    # =============================== PLIST MENU ===============================
+    def ask_plist_menu(duplicates_problem: bool = False) -> str:
+        returns_dict = {
+            "f": "change_format",
+            "e": "edit_elements",
+            "n": "change_names",
+            "u": "change_numbering",
+            "p": "change_save_path",
+            "l": "change_link",
+            "d": "download",
+            "e": "exit"}
+        if duplicates_problem:
+            returns_dict["d"] = "handle_duplicates"
+
+        while True:
+            print(":\n")
+            if duplicates_problem:
+                print("d - Handle dupilates")
+            print("f - Change saving format\n"
+                  "e - Edit elements list\n"
+                  "n - Edit elements' names\n"
+                  "u - Edit elements' numbering\n"
+                  "p - Change save path\n"
+                  "l - Change link\n"
+                  "d - Download\n"
+                  "e - Exit program\n>> ", end="")
+            action = input().strip().lower()
+
+            if action in returns_dict:
+                return returns_dict[action]
+            else:
+                print("Incorrect input.\n")
+
+
     # =============================== DUPLICATES ===============================
     @staticmethod
     def ask_del_duplicates() -> bool:
