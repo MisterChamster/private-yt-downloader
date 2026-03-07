@@ -2,9 +2,9 @@ from typing import Literal
 from pathlib import Path
 
 from src.common.askers import Askers
-from src.common.utils import Utils
-from .save_single import save_single
-from .save_plist import save_plist
+from src.common.utils  import Utils
+from src.features.save_single import save_single
+from src.features.save_plist  import save_plist
 
 
 
@@ -12,6 +12,7 @@ src_path = Path(__file__).resolve().parent.parent
 downloads_path = str(src_path.parent / "downloads")
 Askers.downloads_path = downloads_path
 settings_path = str(src_path / "settings.json")
+Utils.settings_path = settings_path
 
 def main_loop() -> None:
     print()
