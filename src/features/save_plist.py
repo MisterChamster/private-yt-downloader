@@ -28,6 +28,10 @@ def save_plist(plist_url: list) -> None:
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
     del(plist_dict)
 
+    duplis_flag = Plist_Utils.are_duplicates(plist_urls)
+    asker = Plist_Askers.ask_plist_menu(duplis_flag)
+
+
     # Check and handle duplicates
     if Plist_Utils.are_duplicates(plist_urls):
         del_duplicates_choice = Plist_Askers.ask_del_duplicates()
