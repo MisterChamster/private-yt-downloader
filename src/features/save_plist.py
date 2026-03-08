@@ -1,5 +1,6 @@
 from yt_dlp import YoutubeDL
 from os import chdir, mkdir, path, listdir
+from typing import Literal
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
@@ -12,7 +13,7 @@ import src.helpers_save_plist.loops.trim_names    as trim_names
 
 
 
-def save_plist(plist_url: list) -> None:
+def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     # Get playlist dictionary
     plist_dict = ydl_support.get_plist_dict(plist_url)
     if not plist_dict:
@@ -20,8 +21,6 @@ def save_plist(plist_url: list) -> None:
 
     # Get playlist title
     plist_title = plist_dict['title']
-    print(f"Playlist: {plist_title}")
-    print()
 
     # Get lists with videos data
     plist_urls = [el['url'] for el in plist_dict['entries']]
@@ -29,9 +28,37 @@ def save_plist(plist_url: list) -> None:
     del(plist_dict)
 
     duplis_flag = Plist_Utils.are_duplicates(plist_urls)
-    current_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
-    print(f"Curr format: {current_format}")
-    asker = Plist_Askers.ask_plist_menu(duplis_flag)
+
+    while True:
+        current_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
+        print(f"Playlist: {plist_title}")
+        print()
+        print(f"Curr format: {current_format}")
+        asker = Plist_Askers.ask_plist_menu(duplis_flag)
+
+        if asker == "f":
+            break
+
+        elif asker == "e":
+            break
+
+        elif asker == "n":
+            break
+
+        elif asker == "u":
+            break
+
+        elif asker == "p":
+            break
+
+        elif asker == "l":
+            return "repeat"
+
+        elif asker == "d":
+            break
+
+        elif asker == "e":
+            return "exit"
 
 
     # Check and handle duplicates

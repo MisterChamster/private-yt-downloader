@@ -45,4 +45,8 @@ def main_loop() -> None:
         # Playlist stuff
         elif url_type == 'plist':
             print()
-            save_plist.save_plist(url)
+            ret_flag = save_plist.save_plist(url)
+            if ret_flag == "exit":
+                return
+            elif ret_flag == "repeat":
+                continue
