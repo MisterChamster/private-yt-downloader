@@ -2,6 +2,7 @@ from socket import create_connection
 
 from typing import Literal
 from pathlib import Path
+import json
 
 
 
@@ -39,6 +40,56 @@ class Utils():
 
         else:
             return
+
+
+    # =========================================================
+    # ====================== JSON UTILS  ======================
+    # =========================================================
+    @staticmethod
+    def save_value_to_settings(
+        json_key: str,
+        json_val: bool|str|int|float
+    ) -> None:
+
+        with open(Utils.settings_path) as f:
+            config = json.load(f)
+
+        config[json_key] = json_val
+        with open(Utils.settings_path, "w") as f:
+            json.dump(config, f, indent=2)
+
+
+    @staticmethod
+    def fix_value_in_json(
+        adress:      Path,
+        json_key:    str,
+        default_val: bool|str|int|float
+    ) -> None:
+
+        with open(adress) as f:
+            config = json.load(f)
+
+        if json_key not in config.keys():
+            print(f"[WARNING] Key value '{json_key}' could not be found in {adress}. Resorting to default value ('{default_val}').\nFixing {adress}...")
+            try:
+                Utils.save_value_to_settings(json_key, default_val)
+                print(f"{json_key} has been fixed in {adress}")
+            except Exception as e:
+                print(f"{json_key} could not have been fixed in {adress}\n{e}")
+        return
+
+
+    @staticmethod
+    def get_val_from_json(
+        adress:  Path,
+        json_key: str
+    ) -> str|bool|int|float:
+
+        with open(adress) as f:
+            config = json.load(f)
+
+        temp = config[json_key]
+        return temp
 
 
     # =========================================================
