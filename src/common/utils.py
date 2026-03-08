@@ -7,7 +7,7 @@ import json
 
 
 class Utils():
-    settings_path: str
+    settings_path: Path
 
     # =========================================================
     # ======================= URL UTILS =======================

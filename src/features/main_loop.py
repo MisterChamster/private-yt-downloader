@@ -8,10 +8,10 @@ import src.features.save_plist  as save_plist
 
 
 
-src_path = Path(__file__).resolve().parent.parent
-downloads_path = str(src_path.parent / "downloads")
+proj_path = Path(__file__).resolve().parent.parent.parent
+downloads_path = str(proj_path / "downloads")
 Askers.downloads_path = downloads_path
-settings_path = str(src_path / "settings.json")
+settings_path = proj_path / "settings.json"
 Utils.settings_path = settings_path
 
 def main_loop() -> None:
