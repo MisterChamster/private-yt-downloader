@@ -29,6 +29,8 @@ def save_plist(plist_url: list) -> None:
     del(plist_dict)
 
     duplis_flag = Plist_Utils.are_duplicates(plist_urls)
+    current_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
+    print(f"Curr format: {current_format}")
     asker = Plist_Askers.ask_plist_menu(duplis_flag)
 
 

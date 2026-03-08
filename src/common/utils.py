@@ -79,8 +79,8 @@ class Utils():
 
 
     @staticmethod
-    def get_val_from_json(
-        adress:  Path,
+    def _get_val_from_json(
+        adress:   Path,
         json_key: str
     ) -> str|bool|int|float:
 
@@ -89,6 +89,13 @@ class Utils():
 
         temp = config[json_key]
         return temp
+
+
+    @staticmethod
+    def get_val_from_settings(json_key: str) -> str|bool|int|float:
+        return Utils._get_val_from_json(
+            Utils.settings_path,
+            json_key)
 
 
     # =========================================================

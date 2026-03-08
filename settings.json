@@ -1,9 +1,9 @@
 {
     "MIMI": "KOKO",
     "PIPI": "POPO",
-    "FORMAT": "mp3",
+    "PLIST_SAVE_FORMAT": "mp3",
     // Handle it!!
-    "DEFAULT_SAVE_PATH": "",
-    "NUMBERING": "idk yet",
-    "DUPLICATES_IDKFSJAJFKS": "Ireallydontknowyet"
+    "PLIST_DEFAULT_SAVE_PATH": "",
+    "PLIST_NUMBERING": "idk yet",
+    "PLIST_DUPLICATES": "Ireallydontknowyet"
 }
