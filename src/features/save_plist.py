@@ -2,19 +2,19 @@ from yt_dlp import YoutubeDL
 from os import chdir, mkdir, path, listdir
 
 from src.common.askers import Askers
+from src.common.utils  import Utils
 from src.helpers_save_plist.plist_askers import Plist_Askers
-from src.helpers_save_plist.plist_utils import Plist_Utils
-from src.common.utils import Utils
-from src.common.ydl_support import get_plist_dict
-from src.helpers_save_plist.loops.trim_elements import trim_elements_loop
-from src.helpers_save_plist.loops.numbering import numbering_loop
-from src.helpers_save_plist.loops.trim_names import trim_names_loop
+from src.helpers_save_plist.plist_utils  import Plist_Utils
+import src.common.ydl_support as ydl_support
+import src.helpers_save_plist.loops.trim_elements as trim_elements
+import src.helpers_save_plist.loops.numbering     as numbering
+import src.helpers_save_plist.loops.trim_names    as trim_names
 
 
 
 def save_plist(plist_url: list) -> None:
     # Get playlist dictionary
-    plist_dict = get_plist_dict(plist_url)
+    plist_dict = ydl_support.get_plist_dict(plist_url)
     if not plist_dict:
         return
 
@@ -50,7 +50,7 @@ def save_plist(plist_url: list) -> None:
 
     # Make user specify which elements to download
     plist_list = [[i+1, plist_el_titles[i], plist_urls[i]] for i in range(0, len(plist_urls))]
-    plist_list = trim_elements_loop(plist_list)
+    plist_list = trim_elements.trim_elements_loop(plist_list)
     print()
     if not plist_list:
         return
@@ -58,14 +58,17 @@ def save_plist(plist_url: list) -> None:
 
     # Ask user to trim elements names
     # List with illegals (for metadata later)
-    plist_el_titles = trim_names_loop([el[0] for el in plist_list], [el[1] for el in plist_list])
+    plist_el_titles = trim_names.trim_names_loop(
+        [el[0] for el in plist_list], [el[1] for el in plist_list])
     print()
     # List with legals   (for file names)
-    plist_el_titles_legal = [Utils.illegal_char_remover(el) for el in plist_el_titles]
+    plist_el_titles_legal = [
+        Utils.illegal_char_remover(el) for el in plist_el_titles]
 
     # Get indexing style from user
     # Without zeros (for metadata later)
-    plist_indexes = numbering_loop([el[0] for el in plist_list], plist_el_titles)
+    plist_indexes = numbering.numbering_loop(
+        [el[0] for el in plist_list], plist_el_titles)
     # With zeros    (for file naming)
     plist_indexes_zeros = [Plist_Utils.zeros_at_beginning(el, max(plist_indexes)) for el in plist_indexes]
     is_numbered: bool = True if plist_indexes else False

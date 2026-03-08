@@ -3,8 +3,8 @@ from pathlib import Path
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
-from src.features.save_single import save_single
-from src.features.save_plist  import save_plist
+import src.features.save_single as save_single
+import src.features.save_plist  as save_plist
 
 
 
@@ -40,9 +40,9 @@ def main_loop() -> None:
         # Single stuff
         elif url_type == "single":
             print()
-            save_single(url)
+            save_single.save_single(url)
 
         # Playlist stuff
         elif url_type == 'plist':
             print()
-            save_plist(url)
+            save_plist.save_plist(url)
