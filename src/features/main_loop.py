@@ -23,7 +23,7 @@ def main_loop() -> None:
               "=============================================================\n")
         # Get url from user and clean it
         url = Askers.ask_url()
-        if not url:
+        if url == "exit":
             return
         cleaned_url = Utils.clean_url(url)
         if cleaned_url != url:
@@ -35,7 +35,7 @@ def main_loop() -> None:
             'invalid'] = Utils.determine_url_type(url)
 
         if not url_type:
-            print("Invalid URL.\n")
+            print("Invalid URL.\n\n")
 
         # Single stuff
         elif url_type == "single":
