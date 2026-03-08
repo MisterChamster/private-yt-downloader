@@ -36,7 +36,10 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print(f"Curr format: {current_format}")
         asker = Plist_Askers.ask_plist_menu(duplis_flag)
 
-        if asker == "f":
+        if asker == "i" and duplis_flag:
+            break
+
+        elif asker == "f":
             break
 
         elif asker == "e":

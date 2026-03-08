@@ -11,12 +11,12 @@ class Plist_Askers():
             "d": "download",
             "e": "exit"}
         if duplicates_problem:
-            returns_dict["d"] = "handle_duplicates"
+            returns_dict["i"] = "handle_duplicates"
 
         while True:
             print(":\n")
             if duplicates_problem:
-                print("d - Handle dupilates")
+                print("i - Handle duplicates")
             print("f - Change saving format\n"
                   "e - Edit elements list\n"
                   "n - Edit elements' names\n"
