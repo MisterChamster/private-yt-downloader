@@ -29,6 +29,7 @@ def main_loop() -> None:
         if cleaned_url != url:
             url = cleaned_url
             print("Your link has been cleaned of fluff.")
+
         url_type: Literal[
             'plist',
             'single',
@@ -36,9 +37,11 @@ def main_loop() -> None:
 
         if not url_type:
             print("Invalid URL.\n\n")
+            continue
 
+        print()
         # Single stuff
-        elif url_type == "single":
+        if url_type == "single":
             print()
             save_single.save_single(url)
 

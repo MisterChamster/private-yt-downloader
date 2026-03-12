@@ -14,7 +14,6 @@ class Plist_Askers():
             returns_dict["i"] = "handle_duplicates"
 
         while True:
-            print(":\n")
             if duplicates_problem:
                 print("i - Handle duplicates")
             print("f - Change saving format\n"

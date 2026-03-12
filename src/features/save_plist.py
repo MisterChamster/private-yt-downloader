@@ -38,6 +38,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print(f"Curr save path: {setts_path}")
         print()
         asker = Plist_Askers.ask_plist_menu(duplis_flag)
+        print()
 
         if asker == "handle_duplicates" and duplis_flag:
             break

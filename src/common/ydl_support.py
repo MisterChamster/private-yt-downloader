@@ -29,7 +29,8 @@ def get_plist_dict(url) -> dict | None:
 
     try:
         with YoutubeDL(ydl_getdata) as ydl:
-            return ydl.extract_info(url, download=False)
+            extract_info = ydl.extract_info(url, download=False)
+            return extract_info
     except:
         if not Utils.is_internet_available():
             print("Internet connection failed.\n\n")
