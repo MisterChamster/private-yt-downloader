@@ -33,7 +33,7 @@ class Elements_List():
         self.new_len = len(urls_list)
 
 
-    def new_to_og(self):
+    def set_new_to_og(self):
         self.new_urls_list    = self.og_urls_list
         self.new_names_list   = self.og_names_list
         self.new_numbers_list = self.og_numbers_list

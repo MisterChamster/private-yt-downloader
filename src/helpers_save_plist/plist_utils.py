@@ -22,7 +22,6 @@ class Plist_Utils():
         Returns:
             str: zeros determined by function + number + ". "
         """
-        return ((max_element_number < 10) * f"0{number}. ") + ((max_element_number >= 10) * (f"{(len(str(max_element_number)) - len(str(number))) * '0'}{number}. ")) # I'm really sorry. The same code is written below, but it's readable
         if max_element_number < 10:
             return f"0{number}."
         else:
@@ -47,7 +46,7 @@ class Plist_Utils():
 
 
     @staticmethod
-    def are_duplicates(list_of_items: list) -> bool:
+    def has_duplicates(list_of_items: list) -> bool:
         i = 0
         while i+1 < len(list_of_items):
             item_appearances = Plist_Utils.get_indexes_of_searched_item(

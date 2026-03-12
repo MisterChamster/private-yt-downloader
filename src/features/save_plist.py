@@ -28,7 +28,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
     del(plist_dict)
 
-    duplis_flag = Plist_Utils.are_duplicates(plist_urls)
+    duplis_flag = Plist_Utils.has_duplicates(plist_urls)
     setts_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
     ydl_opts = Utils.get_ydl_options(setts_format)
     setts_path = Utils.get_val_from_settings("SAVE_PATH")
