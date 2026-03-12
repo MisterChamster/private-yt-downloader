@@ -41,6 +41,7 @@ class Elements_List():
         self.del_duplicates  = del_duplicates
 
         self.calc_numbering_list()
+        self.delete_duplicates_accordingly()
 
 
     def calc_numbering_list(self) -> None:
@@ -56,12 +57,18 @@ class Elements_List():
                 for el in range(self.new_len)]
 
 
-    def delete_duplicates(self) -> None:
+    def _delete_duplicates(self) -> None:
         dupli_indexes = Plist_Utils.get_indexes_of_duplicates(self.new_urls_list)
         i = len(dupli_indexes) - 1
         while i >= 0:
             self.pop_new(dupli_indexes[i])
             i -= 1
+
+
+    def delete_duplicates_accordingly(self) -> None:
+        if not self.del_duplicates:
+            return
+        self._delete_duplicates()
 
 
     def set_new_to_og(self) -> None:
