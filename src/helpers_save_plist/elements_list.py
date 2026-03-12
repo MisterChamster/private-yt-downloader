@@ -56,10 +56,18 @@ class Elements_List():
                 for el in range(self.new_len)]
 
 
-    def set_new_to_og(self):
-        self.new_urls_list    = self.og_urls_list
-        self.new_names_list   = self.og_names_list
-        self.new_index_in_og  = [i for i in range(len(self.og_urls_list))]
+    def delete_duplicates(self) -> None:
+        dupli_indexes = Plist_Utils.get_indexes_of_duplicates(self.new_urls_list)
+        i = len(dupli_indexes) - 1
+        while i >= 0:
+            self.pop_new(dupli_indexes[i])
+            i -= 1
+
+
+    def set_new_to_og(self) -> None:
+        self.new_urls_list   = self.og_urls_list
+        self.new_names_list  = self.og_names_list
+        self.new_index_in_og = [i for i in range(len(self.og_urls_list))]
         self.new_len = len(self.og_urls_list)
         self.calc_numbering_list()
 
