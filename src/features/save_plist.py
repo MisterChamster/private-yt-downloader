@@ -36,31 +36,31 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print(f"Curr format: {current_format}")
         asker = Plist_Askers.ask_plist_menu(duplis_flag)
 
-        if asker == "i" and duplis_flag:
+        if asker == "handle_duplicates" and duplis_flag:
             break
 
-        elif asker == "f":
+        elif asker == "change_format":
             break
 
-        elif asker == "e":
+        elif asker == "edit_elements":
             break
 
-        elif asker == "n":
+        elif asker == "change_names":
             break
 
-        elif asker == "u":
+        elif asker == "change_numbering":
             break
 
-        elif asker == "p":
+        elif asker == "change_save_path":
             break
 
-        elif asker == "l":
+        elif asker == "change_link":
             return "repeat"
 
-        elif asker == "d":
+        elif asker == "download":
             break
 
-        elif asker == "e":
+        elif asker == "exit":
             return "exit"
 
 
