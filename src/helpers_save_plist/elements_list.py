@@ -43,16 +43,15 @@ class Elements_List():
     def calc_numbering_list(self) -> None:
         if not self.numbering:
             self.new_numbers_list = ['' for el in range(self.new_len)]
-            return
 
-        if not self.numbering_has_zeros:
+        elif not self.numbering_has_zeros:
             self.new_numbers_list = [el for el in range(self.new_len)]
-            return
 
-        if self.numbering_has_zeros:
+        elif self.numbering_has_zeros:
             self.new_numbers_list = [
                 Plist_Utils.zeros_at_beginning(el, self.new_len)
                 for el in range(self.new_len)]
+        return
 
 
     def set_new_to_og(self):
