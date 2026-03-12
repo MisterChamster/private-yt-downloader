@@ -80,13 +80,20 @@ class Elements_List():
     def restore_elements_to_og(self) -> None:
         self.new_urls_list = self.og_urls_list.copy()
         temp_names_list = self.og_names_list.copy()
-        for index in range(self.new_index_in_og):
+        for index in range(self.new_len):
             changed_name = self.new_names_list[index]
             index_to_change = self.new_index_in_og[index]
             temp_names_list[index_to_change] = changed_name
         self.new_names_list = temp_names_list.copy()
 
         self.update_newlen()
+
+
+    def restore_names_to_og(self) -> None:
+        for index in range(self.new_len):
+            index_in_og = self.new_index_in_og[index]
+            og_name = self.og_names_list[index_in_og]
+            self.new_names_list[index] = og_name
 
 
     def set_new_to_og(self) -> None:
