@@ -16,13 +16,15 @@ class Elements_List():
     new_len: int
     numbering: bool
     numbering_has_zeros: bool
+    del_duplicates: bool
 
 
     def __init__(self,
                  urls_list: list[str],
                  names_list: list[str],
                  numbering: bool,
-                 numbering_has_zeros: bool
+                 numbering_has_zeros: bool,
+                 del_duplicates: bool
     ) -> None:
         if len(urls_list) != len(names_list):
             raise ValueError("Lists not of the same length")
@@ -36,6 +38,7 @@ class Elements_List():
         self.new_len         = len(urls_list)
         self.numbering       = numbering
         self.numbering_has_zeros = numbering_has_zeros
+        self.del_duplicates  = del_duplicates
 
         self.calc_numbering_list()
 

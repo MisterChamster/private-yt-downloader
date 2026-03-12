@@ -6,5 +6,5 @@
   "PLIST_DEFAULT_SAVE_PATH": "",
   "PLIST_NUMBERING": true,
   "PLIST_NUMBERING_HAS_ZEROS": true,
-  "PLIST_DUPLICATES": "Ireallydontknowyet"
+  "PLIST_DEL_DUPLICATES": true
 }

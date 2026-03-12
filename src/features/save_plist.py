@@ -27,6 +27,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     setts_path   = Utils.get_val_from_settings("SAVE_PATH")
     setts_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
     setts_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
+    setts_del_duplicates      = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
     ydl_opts     = Utils.get_ydl_options(setts_format)
 
     # Get lists with videos data
@@ -37,7 +38,8 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     yt_list = Elements_List(plist_urls,
                             plist_el_titles,
                             setts_numbering,
-                            setts_numbering_has_zeros)
+                            setts_numbering_has_zeros,
+                            setts_del_duplicates)
 
     while True:
         numbering_string = ("None"
@@ -49,6 +51,9 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print(f"Format:    {setts_format}")
         print(f"Save path: {setts_path}")
         print(f"Numbering: {numbering_string}")
+        if duplis_flag:
+            del_msg = f"Duplicates deleting: {setts_del_duplicates}\n"
+            print(del_msg, end="")
         print()
         asker = Plist_Askers.ask_plist_menu(duplis_flag)
         print()
