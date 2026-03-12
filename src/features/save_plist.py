@@ -28,10 +28,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     del(plist_dict)
 
     duplis_flag = Plist_Utils.are_duplicates(plist_urls)
+    setts_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
+    ydl_opts = Utils.get_ydl_options(setts_format)
+    setts_path = Utils.get_val_from_settings("SAVE_PATH")
 
     while True:
-        setts_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
-        setts_path = Utils.get_val_from_settings("SAVE_PATH")
         print(f"Playlist: {plist_title}")
         print()
         print(f"Curr format:    {setts_format}")
@@ -44,7 +45,14 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             pass
 
         elif asker == "change_format":
-            pass
+            extension = Askers.ask_save_ext()
+            print()
+            if extension == setts_format:
+                continue
+
+            ydl_opts = Utils.get_ydl_options(extension)
+            setts_format = extension
+            Utils.save_value_to_settings("PLIST_SAVE_FORMAT", extension)
 
         elif asker == "edit_elements":
             pass
