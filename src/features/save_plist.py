@@ -4,8 +4,9 @@ from typing import Literal
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
-from src.helpers_save_plist.plist_askers import Plist_Askers
-from src.helpers_save_plist.plist_utils  import Plist_Utils
+from src.helpers_save_plist.plist_askers  import Plist_Askers
+from src.helpers_save_plist.plist_utils   import Plist_Utils
+from src.helpers_save_plist.elements_list import Elements_List
 import src.common.ydl_support as ydl_support
 import src.helpers_save_plist.loops.trim_elements as trim_elements
 import src.helpers_save_plist.loops.numbering     as numbering
@@ -23,7 +24,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     plist_title = plist_dict['title']
 
     # Get lists with videos data
-    plist_urls = [el['url'] for el in plist_dict['entries']]
+    plist_urls      = [el['url'] for el in plist_dict['entries']]
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
     del(plist_dict)
 
