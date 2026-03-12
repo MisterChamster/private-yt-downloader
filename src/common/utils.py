@@ -46,7 +46,14 @@ class Utils():
     # =========================================================
     @staticmethod
     def save_value_to_settings(
-        json_key: str,
+        json_key: Literal[
+            "SAVE_PATH",
+            "PLIST_SAVE_FORMAT",
+            "PLIST_DEFAULT_SAVE_PATH",
+            "PLIST_NUMBERING",
+            "PLIST_DUPLICATES",
+            "MIMI",
+            "PIPI"],
         json_val: bool|str|int|float
     ) -> None:
 
