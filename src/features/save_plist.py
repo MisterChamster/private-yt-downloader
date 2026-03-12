@@ -56,7 +56,15 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             pass
 
         elif asker == "change_save_path":
-            pass
+            save_path = Askers.ask_save_path()
+            print()
+            if save_path == "":
+                print("Empty path was chosen.\n\n")
+                continue
+            if not path.exists(save_path):
+                print("Invalid path.\n\n")
+                continue
+            Utils.save_value_to_settings("SAVE_PATH", save_path)
 
         elif asker == "change_link":
             return "repeat"
@@ -113,14 +121,8 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     is_numbered: bool = True if plist_indexes else False
     print()
 
-    # Get save path from user
-    save_path = Askers.ask_save_path()
-    if save_path == "":
-        print("Empty path was chosen.")
-        return
-    chdir(save_path)
-
     # Get dir name and create it
+    chdir(save_path)
     dir_name = Utils.illegal_char_remover(plist_title)
     while path.exists(save_path + "/" + dir_name):
         dir_name += "_d"
