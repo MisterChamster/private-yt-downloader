@@ -30,10 +30,13 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     duplis_flag = Plist_Utils.are_duplicates(plist_urls)
 
     while True:
-        current_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
+        setts_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
+        setts_path = Utils.get_val_from_settings("SAVE_PATH")
         print(f"Playlist: {plist_title}")
         print()
-        print(f"Curr format: {current_format}")
+        print(f"Curr format:    {setts_format}")
+        print(f"Curr save path: {setts_path}")
+        print()
         asker = Plist_Askers.ask_plist_menu(duplis_flag)
 
         if asker == "handle_duplicates" and duplis_flag:
