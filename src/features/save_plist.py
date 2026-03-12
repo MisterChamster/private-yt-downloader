@@ -41,28 +41,31 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print()
 
         if asker == "handle_duplicates" and duplis_flag:
-            break
+            pass
 
         elif asker == "change_format":
-            break
+            pass
 
         elif asker == "edit_elements":
-            break
+            pass
 
         elif asker == "change_names":
-            break
+            pass
 
         elif asker == "change_numbering":
-            break
+            pass
 
         elif asker == "change_save_path":
-            break
+            pass
 
         elif asker == "change_link":
             return "repeat"
 
         elif asker == "download":
-            break
+            if not path.exists(setts_path):
+                print("Save path does not exist on your device.")
+                continue
+            pass
 
         elif asker == "exit":
             return "exit"
