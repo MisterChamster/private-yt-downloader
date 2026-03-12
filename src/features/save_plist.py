@@ -24,18 +24,20 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     plist_title = plist_dict['title']
 
     setts_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
-    ydl_opts     = Utils.get_ydl_options(setts_format)
     setts_path   = Utils.get_val_from_settings("SAVE_PATH")
     setts_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
     setts_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
+    ydl_opts     = Utils.get_ydl_options(setts_format)
 
     # Get lists with videos data
     plist_urls      = [el['url'] for el in plist_dict['entries']]
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
-    duplis_flag  = Plist_Utils.has_duplicates(plist_urls)
     del(plist_dict)
-    # CHANGE INPUT FOR ELEMENTS_LIST. MAKE IT CREATE NUMBERING LIST WITHING ITSELF
-    # WHEN? IDK. MAYBE WHEN IT'S RETURNED ONLY. BUT IT'S PROBS STOOPID
+    duplis_flag = Plist_Utils.has_duplicates(plist_urls)
+    yt_list = Elements_List(plist_urls,
+                            plist_el_titles,
+                            setts_numbering,
+                            setts_numbering_has_zeros)
 
     while True:
         numbering_string = ("None"

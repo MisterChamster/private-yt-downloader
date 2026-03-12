@@ -42,7 +42,7 @@ class Elements_List():
 
     def calc_numbering_list(self) -> None:
         if not self.numbering:
-            self.new_numbers_list = ['' for el in range(self.new_len)]
+            self.new_numbers_list = ['' for _ in range(self.new_len)]
 
         elif not self.numbering_has_zeros:
             self.new_numbers_list = [el for el in range(self.new_len)]
@@ -51,7 +51,6 @@ class Elements_List():
             self.new_numbers_list = [
                 Plist_Utils.zeros_at_beginning(el, self.new_len)
                 for el in range(self.new_len)]
-        return
 
 
     def set_new_to_og(self):
@@ -59,6 +58,7 @@ class Elements_List():
         self.new_names_list   = self.og_names_list
         self.new_index_in_og  = [i for i in range(len(self.og_urls_list))]
         self.new_len = len(self.og_urls_list)
+        self.calc_numbering_list()
 
 
     def update_newlen(self) -> None:
