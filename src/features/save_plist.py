@@ -59,6 +59,9 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print()
 
         if asker == "handle_duplicates" and duplis_flag:
+            # if deleted - ask if user wants to restore
+            # if not - ask if user wants to delete
+            # handle both accordingly.
             pass
 
         elif asker == "change_format":
