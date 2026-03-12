@@ -28,16 +28,23 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
     del(plist_dict)
 
-    duplis_flag = Plist_Utils.has_duplicates(plist_urls)
+    duplis_flag  = Plist_Utils.has_duplicates(plist_urls)
     setts_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
-    ydl_opts = Utils.get_ydl_options(setts_format)
-    setts_path = Utils.get_val_from_settings("SAVE_PATH")
+    ydl_opts     = Utils.get_ydl_options(setts_format)
+    setts_path   = Utils.get_val_from_settings("SAVE_PATH")
+    setts_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
+    setts_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
 
     while True:
-        print(f"Playlist: {plist_title}")
-        print()
-        print(f"Curr format:    {setts_format}")
-        print(f"Curr save path: {setts_path}")
+        numbering_string = ("None"
+                            if not setts_numbering else
+                            "Yes, with zeros"
+                            if setts_numbering_has_zeros else
+                            "Yes, without zeros")
+        print(f"Playlist: {plist_title}\n")
+        print(f"Format:    {setts_format}")
+        print(f"Save path: {setts_path}")
+        print(f"Numbering: {numbering_string}")
         print()
         asker = Plist_Askers.ask_plist_menu(duplis_flag)
         print()

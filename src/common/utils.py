@@ -51,6 +51,7 @@ class Utils():
             "PLIST_SAVE_FORMAT",
             "PLIST_DEFAULT_SAVE_PATH",
             "PLIST_NUMBERING",
+            "PLIST_NUMBERING_HAS_ZEROS",
             "PLIST_DUPLICATES",
             "MIMI",
             "PIPI"],

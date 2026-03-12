@@ -4,6 +4,7 @@
   "SAVE_PATH": "None",
   "PLIST_SAVE_FORMAT": "mp3",
   "PLIST_DEFAULT_SAVE_PATH": "",
-  "PLIST_NUMBERING": "idk yet",
+  "PLIST_NUMBERING": true,
+  "PLIST_NUMBERING_HAS_ZEROS": true,
   "PLIST_DUPLICATES": "Ireallydontknowyet"
 }
