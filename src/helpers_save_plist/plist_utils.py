@@ -23,12 +23,13 @@ class Plist_Utils():
             str: zeros determined by function + number + ". "
         """
         if max_element_number < 10:
-            return f"0{number}."
+            return f"0{number}"
         else:
             digits_of_biggest_number = len(str(max_element_number))
             digits_of_number         = len(str(number))
-            gg                       = digits_of_biggest_number - digits_of_number
-            return f"{gg * '0'}{number}."
+            num_of_zeros = digits_of_biggest_number - digits_of_number
+            zeros_final  = num_of_zeros * '0'
+            return f"{zeros_final}{number}"
 
 
     @staticmethod
