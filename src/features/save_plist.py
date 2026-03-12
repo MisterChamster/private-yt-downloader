@@ -110,10 +110,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print()
     # I don't care about indexing b4 deleting duplicates and neither should you
 
-    # Get save extension from user and correct ydl options
-    extension = Askers.ask_save_ext()
-    print()
-    ydl_opts = Utils.get_ydl_options(extension)
 
     # Make user specify which elements to download
     plist_list = [[i+1, plist_el_titles[i], plist_urls[i]] for i in range(0, len(plist_urls))]
