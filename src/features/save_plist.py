@@ -139,7 +139,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         print()
                         continue
 
-                    continue
+                    yt_list.pop_new_range(start_el, ending_el)
+                    if yt_list.new_len == 0:
+                        print("There are no elements left in the playlist!\n\n")
+                        return
+
                 elif action == 'return':
                     break
 

@@ -111,3 +111,10 @@ class Elements_List():
         self.new_numbers_list.pop(index)
         self.new_index_in_og.pop(index)
         self.update_newlen()
+
+    def pop_new_range(self, index_s, index_e) -> None:
+        del(self.new_urls_list[index_s:index_e])
+        del(self.new_names_list[index_s:index_e])
+        del(self.new_numbers_list[index_s:index_e])
+        del(self.new_index_in_og[index_s:index_e])
+        self.update_newlen()
