@@ -8,7 +8,6 @@ from src.helpers_save_plist.plist_askers  import Plist_Askers
 from src.helpers_save_plist.plist_utils   import Plist_Utils
 from src.helpers_save_plist.elements_list import Elements_List
 import src.common.ydl_support as ydl_support
-import src.helpers_save_plist.loops.trim_elements as trim_elements
 import src.helpers_save_plist.loops.numbering     as numbering
 import src.helpers_save_plist.loops.trim_names    as trim_names
 
@@ -160,14 +159,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             return "exit"
 
 
-
-    # Make user specify which elements to download
-    plist_list = [[i+1, plist_el_titles[i], plist_urls[i]] for i in range(0, len(plist_urls))]
-    plist_list = trim_elements.trim_elements_loop(plist_list)
-    print()
-    if not plist_list:
-        return
-    plist_urls = [el[2] for el in plist_list]
 
     # Ask user to trim elements names
     # List with illegals (for metadata later)
