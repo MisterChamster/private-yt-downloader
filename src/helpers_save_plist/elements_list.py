@@ -106,11 +106,7 @@ class Elements_List():
 
 
     def pop_new(self, index) -> None:
-        if index > 1010:
-            print(f"Huhh{index}: {len(self.og_urls_list)}")
         self.new_urls_list.pop(index)
-        if index > 1010:
-            print(f"Huhh{index}: {len(self.og_urls_list)}")
         self.new_names_list.pop(index)
         self.new_numbers_list.pop(index)
         self.new_index_in_og.pop(index)

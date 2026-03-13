@@ -173,7 +173,7 @@ class Plist_Askers():
                 continue
 
             start_el = int(asker)
-            if start_el >= plist_len-1 or start_el < 0:
+            if start_el >= plist_len-1 or start_el <= 0:
                 print("Number is unavailable.\n")
             else:
                 start_index = start_el - 1
@@ -190,16 +190,18 @@ class Plist_Askers():
 
             if asker == "r":
                 return
-            elif asker == "l":
-                return plist_len
+            elif asker in ["l", "-1"]:
+                return -1
             elif not asker.isdigit():
                 print("Incorrect input.\n")
                 continue
 
             ending_el = int(asker)
-            if ending_el >= plist_len or ending_el >= start_el:
+            if ending_el > plist_len or ending_el >= start_el:
                 print("Number is unavailable.\n")
             else:
+                if ending_el == plist_len:
+                    return -1
                 end_index = ending_el - 1
                 return end_index
 
