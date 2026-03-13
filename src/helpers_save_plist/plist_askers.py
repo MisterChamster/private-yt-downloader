@@ -122,10 +122,10 @@ class Plist_Askers():
     def ask_multiple_trim(plist_numbers: list) -> list[int, int] | None:
         while True:
             print("Input number of the first element to trim:\n"
-                  "(input 'exit' to exit)\n>> ", end="")
+                  "(input 'r' to return)\n>> ", end="")
             asker = input().strip().lower()
 
-            if asker == "exit":
+            if asker == "return":
                 return
             elif not asker.isdigit():
                 print("Incorrect input.\n")
@@ -141,10 +141,10 @@ class Plist_Askers():
 
         while True:
             print("Input number of the last element to trim:\n"
-                "(input 'exit' to exit)\n>> ", end="")
+                "(input 'r' to return)\n>> ", end="")
             asker2 = input().strip().lower()
 
-            if asker2 == "exit":
+            if asker2 == "return":
                 return
             elif not asker2.isdigit():
                 print("Incorrect input.\n")
@@ -157,6 +157,51 @@ class Plist_Askers():
                 print("End number can't be smaller than the start number.\n")
             else:
                 return [start_el, end_el]
+
+
+    @staticmethod
+    def ask_multiple_first_index(plist_len: int) -> int | None:
+        while True:
+            print("Input number of the first element to trim:\n"
+                  "(input 'r' to return)\n>> ", end="")
+            asker = input().strip().lower()
+
+            if asker == "return":
+                return
+            elif not asker.isdigit():
+                print("Incorrect input.\n")
+                continue
+
+            start_el = int(asker)
+            if start_el >= plist_len-1 or start_el < 0:
+                print("Number is unavailable.\n")
+            else:
+                start_index = start_el - 1
+                return start_index
+
+
+    @staticmethod
+    def ask_multiple_second_index(plist_len: int, start_el: int) -> int | None:
+        while True:
+            print("Input number of the first element to trim:\n"
+                  "(input 'l' to select last element of the playlist)\n"
+                  "(input 'r' to return)\n>> ", end="")
+            asker = input().strip().lower()
+
+            if asker == "r":
+                return
+            elif asker == "l":
+                return plist_len
+            elif not asker.isdigit():
+                print("Incorrect input.\n")
+                continue
+
+            ending_el = int(asker)
+            if ending_el >= plist_len or ending_el >= start_el:
+                print("Number is unavailable.\n")
+            else:
+                end_index = ending_el - 1
+                return end_index
 
 
     # ============================= NAME TRIMMING =============================

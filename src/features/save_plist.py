@@ -126,6 +126,19 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         print("\n")
 
                 elif action == 'remove_range':
+                    start_el: int = Plist_Askers.ask_multiple_first_index(
+                        yt_list.new_len)
+                    if not start_el:
+                        print()
+                        continue
+
+                    ending_el = Plist_Askers.ask_multiple_second_index(
+                        yt_list.new_len,
+                        start_el)
+                    if not ending_el:
+                        print()
+                        continue
+
                     continue
                 elif action == 'return':
                     break
