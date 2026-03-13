@@ -99,7 +99,13 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 print()
 
                 if action == 'remove_single':
-                    continue
+                    # Print elements with nums
+                    remove_number = Plist_Askers.ask_single_index_remove(yt_list.new_len)
+                    if not remove_number:
+                        continue
+                    remove_index = remove_number-1
+                    yt_list.pop_new(remove_index)
+
                 elif action == 'remove_range':
                     continue
                 elif action == 'return':

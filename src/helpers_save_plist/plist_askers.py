@@ -98,11 +98,11 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_single_remove(plist_len: int) -> int | None:
+    def ask_single_index_remove(plist_len: int) -> int | None:
         while True:
             print("Input number of the element to remove:\n"
                   "('r' to return)\n>> ", end="")
-            asker = input()
+            asker = input().strip().lower()
 
             if asker == "r":
                 return
