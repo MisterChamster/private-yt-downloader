@@ -29,12 +29,12 @@ class Elements_List():
         if len(urls_list) != len(names_list):
             raise ValueError("Lists not of the same length")
 
-        self.og_urls_list   = urls_list
-        self.og_names_list  = names_list
+        self.og_urls_list   = urls_list.copy()
+        self.og_names_list  = names_list.copy()
         self.og_len         = len(urls_list)
 
-        self.new_urls_list  = urls_list
-        self.new_names_list = names_list
+        self.new_urls_list  = urls_list.copy()
+        self.new_names_list = names_list.copy()
         self.new_len        = len(urls_list)
         self.numbering      = numbering
         self.numbering_has_zeros = numbering_has_zeros
