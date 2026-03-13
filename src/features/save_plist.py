@@ -51,8 +51,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                             if setts_numbering_has_zeros else
                             "Yes, without zeros")
 
-        for el in yt_list.new_names_list:
-            print(el)
+        Utils.print_list(yt_list.new_names_list)
         print()
         print(f"Playlist:  {plist_title}")
         print(f"Format:    {setts_format}")
@@ -104,8 +103,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     return
 
                 print("Current elements in playlist:")
-                for el in yt_list.new_names_list:
-                    print(el)
+                Utils.print_list(yt_list.new_names_list)
                 print()
                 action = Plist_Askers.ask_el_removal_menu()
                 print()
@@ -117,8 +115,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                             print("There are no elements left in the playlist!\n\n")
                             return
 
-                        for i, name in enumerate(yt_list.new_names_list):
-                            print(f"{i+1}. {name}")
+                        Utils.print_list(yt_list.new_names_list, True)
                         print()
                         remove_number = Plist_Askers.ask_single_index_remove(yt_list.new_len)
                         if not remove_number:
@@ -134,6 +131,12 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     break
 
         elif asker == "change_names":
+            while True:
+                print("Current names:")
+                Utils.print_list(yt_list.new_names_list)
+                print()
+
+                break
             pass
 
         elif asker == "change_numbering":

@@ -171,3 +171,14 @@ class Utils():
             ydl_opts["format"] = "bestaudio"
 
         return ydl_opts
+
+
+    @staticmethod
+    def print_list(input_list: list, is_numbered: bool = False):
+        if is_numbered:
+            for i, name in enumerate(input_list):
+                print(f"{i+1}. {name}")
+
+        else:
+            for name in input_list:
+                print(name)
