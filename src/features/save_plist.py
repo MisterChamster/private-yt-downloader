@@ -125,17 +125,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             return "exit"
 
 
-    # Check and handle duplicates
-    if duplis_flag:
-        del_duplicates_choice = Plist_Askers.ask_del_duplicates()
-
-        if del_duplicates_choice:
-            dupli_indexes   = Plist_Utils.get_indexes_of_duplicates(plist_urls)
-            plist_urls      = Plist_Utils.del_indexes(plist_urls, dupli_indexes)
-            plist_el_titles = Plist_Utils.del_indexes(plist_el_titles, dupli_indexes)
-        print()
-    # I don't care about indexing b4 deleting duplicates and neither should you
-
 
     # Make user specify which elements to download
     plist_list = [[i+1, plist_el_titles[i], plist_urls[i]] for i in range(0, len(plist_urls))]
