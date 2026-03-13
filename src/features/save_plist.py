@@ -94,7 +94,9 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 print("Current elements in playlist:")
                 for el in yt_list.new_names_list:
                     print(el)
-                # Plist_Utils.list_vids(yt_list.new_names_list)
+                print()
+
+                action = Plist_Askers.ask_trimming_main_menu()
                 print()
                 break
             pass

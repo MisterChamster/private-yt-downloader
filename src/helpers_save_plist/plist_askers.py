@@ -1,3 +1,7 @@
+from typing import Literal
+
+
+
 class Plist_Askers():
     # =============================== PLIST MENU ===============================
     def ask_plist_menu(duplicates_problem: bool = False) -> str:
@@ -71,15 +75,15 @@ class Plist_Askers():
 
     # ============================ ELEMENT TRIMMING ============================
     @staticmethod
-    def ask_trimming_main_menu() -> str:
+    def ask_trimming_main_menu() -> Literal['custom', 'return']:
         returns_dict = {
             "c": "custom",
-            "":  "all"}
+            "r": "return"}
 
         while True:
             print("Choose which elements to download:\n"
-                  "c     - Custom settings...\n"
-                  "Enter - Save current list of elements\n>> ", end="")
+                  "c - Custom settings...\n"
+                  "r - Return\n>> ", end="")
             asker = input().strip().lower()
 
             if asker in returns_dict:

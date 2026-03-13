@@ -17,7 +17,7 @@ def ask_trim_elements_loop(plist_list: list) -> list | None:
 
         elif action == "custom":
             plist_list = custom_trim_loop(plist_list)
-            if plist_list == None:
+            if not plist_list:
                 return
 
 
