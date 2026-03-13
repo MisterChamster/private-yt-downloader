@@ -95,11 +95,15 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 for el in yt_list.new_names_list:
                     print(el)
                 print()
-
-                action = Plist_Askers.ask_trimming_main_menu()
+                action = Plist_Askers.ask_el_removal_menu()
                 print()
-                break
-            pass
+
+                if action == 'remove_single':
+                    continue
+                elif action == 'remove_range':
+                    continue
+                elif action == 'return':
+                    break
 
         elif asker == "change_names":
             pass
