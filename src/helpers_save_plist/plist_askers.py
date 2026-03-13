@@ -75,24 +75,6 @@ class Plist_Askers():
 
     # ============================ ELEMENT TRIMMING ============================
     @staticmethod
-    def ask_trimming_main_menu() -> Literal['custom', 'return']:
-        returns_dict = {
-            "c": "custom",
-            "r": "return"}
-
-        while True:
-            print("Choose which elements to download:\n"
-                  "c - Custom settings...\n"
-                  "r - Return\n>> ", end="")
-            asker = input().strip().lower()
-
-            if asker in returns_dict:
-                return returns_dict[asker]
-            else:
-                print("Incorrect input.\n")
-
-
-    @staticmethod
     def ask_el_removal_menu() -> Literal[
         'remove_single',
         'remove_range',
@@ -116,20 +98,22 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_el_trim(plist_numbers: list) -> int | None:
+    def ask_single_remove(plist_len: int) -> int | None:
         while True:
-            print("Input number of the element to trim:\n"
-                  "(input 'exit' to exit)\n>> ", end="")
+            print("Input number of the element to remove:\n"
+                  "('r' to return)\n>> ", end="")
             asker = input()
 
-            if asker == "exit":
+            if asker == "r":
                 return
             elif not asker.isdigit():
                 print("Incorrect input.\n")
                 continue
+
             el_number = int(asker)
-            if el_number not in plist_numbers:
+            if el_number > plist_len or el_number < 1:
                 print("Number is not an element on videos list.\n")
+                continue
             else:
                 return el_number
 
