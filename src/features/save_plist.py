@@ -59,10 +59,25 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print()
 
         if asker == "handle_duplicates" and duplis_flag:
-            # if deleted - ask if user wants to restore
-            # if not - ask if user wants to delete
-            # handle both accordingly.
-            pass
+            if setts_del_duplicates:
+                asker = Plist_Askers.ask_delete_duplis()
+                if not asker:
+                    continue
+                setts_del_duplicates = not setts_del_duplicates
+                Utils.save_value_to_settings(
+                    "PLIST_DUPLICATES",
+                    setts_del_duplicates)
+                yt_list.delete_duplicates_accordingly()
+
+            elif not setts_del_duplicates:
+                asker = Plist_Askers.ask_restore_duplis()
+                if not asker:
+                    continue
+                setts_del_duplicates = not setts_del_duplicates
+                Utils.save_value_to_settings(
+                    "PLIST_DUPLICATES",
+                    setts_del_duplicates)
+                yt_list.restore_elements_to_og()
 
         elif asker == "change_format":
             extension = Askers.ask_save_ext()

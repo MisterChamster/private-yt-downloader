@@ -51,6 +51,42 @@ class Plist_Askers():
                 print("Incorrect input.\n\n")
 
 
+    @staticmethod
+    def ask_delete_duplis() -> bool:
+        returns_dict = {
+            "d": True,
+            "r": False}
+
+        while True:
+            print("Duplicates detected.\n"
+                  "d - Delete duplicates\n"
+                  "r - Return\n>> ", end="")
+            asker = input().strip().lower()
+
+            if asker in returns_dict:
+                return returns_dict[asker]
+            else:
+                print("Incorrect input.\n\n")
+
+
+    @staticmethod
+    def ask_restore_duplis() -> bool:
+        returns_dict = {
+            "t": True,
+            "r": False}
+
+        while True:
+            print("Duplicates have been detected and deleted.\n"
+                  "t - Restore duplicates\n"
+                  "r - Return\n>> ", end="")
+            asker = input().strip().lower()
+
+            if asker in returns_dict:
+                return returns_dict[asker]
+            else:
+                print("Incorrect input.\n\n")
+
+
     # ============================ ELEMENT TRIMMING ============================
     @staticmethod
     def ask_trimming_main_menu() -> str:

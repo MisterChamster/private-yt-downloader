@@ -69,6 +69,7 @@ class Elements_List():
         while i >= 0:
             self.pop_new(dupli_indexes[i])
             i -= 1
+        self.del_duplicates = True
 
 
     def delete_duplicates_accordingly(self) -> None:
@@ -87,6 +88,7 @@ class Elements_List():
         self.new_names_list = temp_names_list.copy()
 
         self.update_newlen()
+        self.del_duplicates = False
 
 
     def restore_names_to_og(self) -> None:
