@@ -119,11 +119,11 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_multiple_trim(plist_numbers: list) -> int | None:
+    def ask_multiple_trim(plist_numbers: list) -> list[int, int] | None:
         while True:
             print("Input number of the first element to trim:\n"
-                "(input 'exit' to exit)\n>> ", end="")
-            asker = input().strip()
+                  "(input 'exit' to exit)\n>> ", end="")
+            asker = input().strip().lower()
 
             if asker == "exit":
                 return
@@ -142,7 +142,7 @@ class Plist_Askers():
         while True:
             print("Input number of the last element to trim:\n"
                 "(input 'exit' to exit)\n>> ", end="")
-            asker2 = input()
+            asker2 = input().strip().lower()
 
             if asker2 == "exit":
                 return
