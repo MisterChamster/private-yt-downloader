@@ -19,13 +19,15 @@ class Askers():
         returns_dict = {
             "4": "mp4",
             "3": "mp3",
-            "f": "flac"}
+            "f": "flac",
+            "r": "return"}
 
         while True:
             print("Choose file format for saving:\n"
                   "4 - mp4\n"
                   "3 - mp3\n"
-                  "f - flac\n>> ", end="")
+                  "f - flac\n"
+                  "r - Return\n>> ", end="")
             asker = input().lower().strip()
 
             if asker not in returns_dict:

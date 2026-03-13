@@ -42,6 +42,10 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                             setts_del_duplicates)
 
     while True:
+        if yt_list.new_len == 0:
+            print("There are no elements left in the playlist!\n\n")
+            return
+
         numbering_string = ("None"
                             if not setts_numbering else
                             "Yes, with zeros"
@@ -56,7 +60,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             print(del_msg, end="")
         print()
         asker = Plist_Askers.ask_plist_menu(duplis_flag)
-        print()
+        print("\n")
 
         if asker == "handle_duplicates" and duplis_flag:
             if not setts_del_duplicates:
@@ -82,7 +86,8 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         elif asker == "change_format":
             extension = Askers.ask_save_ext()
             print()
-            if extension == setts_format:
+            if extension in (setts_format, "return"):
+                print()
                 continue
 
             ydl_opts = Utils.get_ydl_options(extension)
@@ -91,6 +96,10 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
         elif asker == "remove_elements":
             while True:
+                if yt_list.new_len == 0:
+                    print("There are no elements left in the playlist!\n\n")
+                    return
+
                 print("Current elements in playlist:")
                 for el in yt_list.new_names_list:
                     print(el)
@@ -99,12 +108,22 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 print()
 
                 if action == 'remove_single':
-                    # Print elements with nums
-                    remove_number = Plist_Askers.ask_single_index_remove(yt_list.new_len)
-                    if not remove_number:
-                        continue
-                    remove_index = remove_number-1
-                    yt_list.pop_new(remove_index)
+                    print()
+                    while True:
+                        if yt_list.new_len == 0:
+                            print("There are no elements left in the playlist!\n\n")
+                            return
+
+                        for i, name in enumerate(yt_list.new_names_list):
+                            print(f"{i+1}. {name}")
+                        print()
+                        remove_number = Plist_Askers.ask_single_index_remove(yt_list.new_len)
+                        if not remove_number:
+                            break
+
+                        remove_index = remove_number-1
+                        yt_list.pop_new(remove_index)
+                        print("\n")
 
                 elif action == 'remove_range':
                     continue
