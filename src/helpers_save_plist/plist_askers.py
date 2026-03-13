@@ -3,7 +3,7 @@ class Plist_Askers():
     def ask_plist_menu(duplicates_problem: bool = False) -> str:
         returns_dict = {
             "f": "change_format",
-            "e": "edit_elements",
+            "i": "edit_elements",
             "n": "change_names",
             "u": "change_numbering",
             "p": "change_save_path",
@@ -11,13 +11,13 @@ class Plist_Askers():
             "d": "download",
             "e": "exit"}
         if duplicates_problem:
-            returns_dict["i"] = "handle_duplicates"
+            returns_dict["c"] = "handle_duplicates"
 
         while True:
             if duplicates_problem:
-                print("i - Handle duplicates")
+                print("c - Handle duplicates")
             print("f - Change saving format\n"
-                  "e - Edit elements list\n"
+                  "i - Edit elements list\n"
                   "n - Edit elements' names\n"
                   "u - Edit elements' numbering\n"
                   "p - Change save path\n"
@@ -72,12 +72,12 @@ class Plist_Askers():
     @staticmethod
     def ask_restore_duplis() -> bool:
         returns_dict = {
-            "t": True,
+            "s": True,
             "r": False}
 
         while True:
             print("Duplicates have been detected and deleted.\n"
-                  "t - Restore duplicates\n"
+                  "s - Restore duplicates\n"
                   "r - Return\n>> ", end="")
             asker = input().strip().lower()
 

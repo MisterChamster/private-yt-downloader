@@ -42,7 +42,8 @@ class Elements_List():
 
         self.reset_new_index_in_og()
         self.calc_numbering_list()
-        self.delete_duplicates_accordingly()
+        if self.del_duplicates:
+            self.delete_duplicates()
 
 
     def reset_new_index_in_og(self):
@@ -63,19 +64,13 @@ class Elements_List():
                 for el in range(self.new_len)]
 
 
-    def _delete_duplicates(self) -> None:
+    def delete_duplicates(self) -> None:
         dupli_indexes = Plist_Utils.get_indexes_of_duplicates(self.new_urls_list)
         i = len(dupli_indexes) - 1
         while i >= 0:
             self.pop_new(dupli_indexes[i])
             i -= 1
         self.del_duplicates = True
-
-
-    def delete_duplicates_accordingly(self) -> None:
-        if not self.del_duplicates:
-            return
-        self._delete_duplicates()
 
 
     def restore_elements_to_og(self) -> None:
@@ -102,7 +97,7 @@ class Elements_List():
         self.new_urls_list   = self.og_urls_list
         self.new_names_list  = self.og_names_list
         self.new_index_in_og = [i for i in range(len(self.og_urls_list))]
-        self.new_len = len(self.og_urls_list)
+        self.update_newlen()
         self.calc_numbering_list()
 
 
@@ -111,8 +106,12 @@ class Elements_List():
 
 
     def pop_new(self, index) -> None:
-        self.new_urls_list.pop[index]
-        self.new_names_list.pop[index]
-        self.new_numbers_list.pop[index]
-        self.new_index_in_og.pop[index]
+        if index > 1010:
+            print(f"Huhh{index}: {len(self.og_urls_list)}")
+        self.new_urls_list.pop(index)
+        if index > 1010:
+            print(f"Huhh{index}: {len(self.og_urls_list)}")
+        self.new_names_list.pop(index)
+        self.new_numbers_list.pop(index)
+        self.new_index_in_og.pop(index)
         self.update_newlen()

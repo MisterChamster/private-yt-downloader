@@ -51,6 +51,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print(f"Format:    {setts_format}")
         print(f"Save path: {setts_path}")
         print(f"Numbering: {numbering_string}")
+        print(f"mrp:       {len(yt_list.og_urls_list)}")
         if duplis_flag:
             del_msg = f"Duplicates deleting: {setts_del_duplicates}\n"
             print(del_msg, end="")
@@ -59,23 +60,23 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print()
 
         if asker == "handle_duplicates" and duplis_flag:
-            if setts_del_duplicates:
+            if not setts_del_duplicates:
                 asker = Plist_Askers.ask_delete_duplis()
                 if not asker:
                     continue
                 setts_del_duplicates = not setts_del_duplicates
                 Utils.save_value_to_settings(
-                    "PLIST_DUPLICATES",
+                    "PLIST_DEL_DUPLICATES",
                     setts_del_duplicates)
-                yt_list.delete_duplicates_accordingly()
+                yt_list.delete_duplicates()
 
-            elif not setts_del_duplicates:
+            elif setts_del_duplicates:
                 asker = Plist_Askers.ask_restore_duplis()
                 if not asker:
                     continue
                 setts_del_duplicates = not setts_del_duplicates
                 Utils.save_value_to_settings(
-                    "PLIST_DUPLICATES",
+                    "PLIST_DEL_DUPLICATES",
                     setts_del_duplicates)
                 yt_list.restore_elements_to_og()
 
@@ -90,6 +91,8 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             Utils.save_value_to_settings("PLIST_SAVE_FORMAT", extension)
 
         elif asker == "edit_elements":
+            print(yt_list.og_len)
+            print(yt_list.new_len)
             pass
 
         elif asker == "change_names":
