@@ -50,7 +50,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                             "Yes, with zeros"
                             if setts_numbering_has_zeros else
                             "Yes, without zeros")
-        print(f"Playlist: {plist_title}\n")
+
+        for el in yt_list.new_names_list:
+            print(el)
+        print()
+        print(f"Playlist:  {plist_title}")
         print(f"Format:    {setts_format}")
         print(f"Save path: {setts_path}")
         print(f"Numbering: {numbering_string}")
