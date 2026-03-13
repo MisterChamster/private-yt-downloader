@@ -51,7 +51,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print(f"Format:    {setts_format}")
         print(f"Save path: {setts_path}")
         print(f"Numbering: {numbering_string}")
-        print(f"mrp:       {len(yt_list.og_urls_list)}")
         if duplis_flag:
             del_msg = f"Duplicates deleting: {setts_del_duplicates}\n"
             print(del_msg, end="")
@@ -91,8 +90,13 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             Utils.save_value_to_settings("PLIST_SAVE_FORMAT", extension)
 
         elif asker == "edit_elements":
-            print(yt_list.og_len)
-            print(yt_list.new_len)
+            while True:
+                print("Current elements in playlist:")
+                for el in yt_list.new_names_list:
+                    print(el)
+                # Plist_Utils.list_vids(yt_list.new_names_list)
+                print()
+                break
             pass
 
         elif asker == "change_names":
