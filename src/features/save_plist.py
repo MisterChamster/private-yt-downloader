@@ -28,7 +28,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     setts_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
     setts_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
     setts_del_duplicates      = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
-    ydl_opts     = Utils.get_ydl_options(setts_format)
+    ydl_opts = Utils.get_ydl_options(setts_format)
 
     # Get lists with videos data
     plist_urls      = [el['url'] for el in plist_dict['entries']]
@@ -89,7 +89,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             setts_format = extension
             Utils.save_value_to_settings("PLIST_SAVE_FORMAT", extension)
 
-        elif asker == "edit_elements":
+        elif asker == "remove_elements":
             while True:
                 print("Current elements in playlist:")
                 for el in yt_list.new_names_list:

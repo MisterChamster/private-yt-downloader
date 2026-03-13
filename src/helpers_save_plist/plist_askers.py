@@ -7,7 +7,7 @@ class Plist_Askers():
     def ask_plist_menu(duplicates_problem: bool = False) -> str:
         returns_dict = {
             "f": "change_format",
-            "i": "edit_elements",
+            "r": "remove_elements",
             "n": "change_names",
             "u": "change_numbering",
             "p": "change_save_path",
@@ -21,7 +21,7 @@ class Plist_Askers():
             if duplicates_problem:
                 print("c - Handle duplicates")
             print("f - Change saving format\n"
-                  "i - Edit elements list\n"
+                  "r - Remove elements to download\n"
                   "n - Edit elements' names\n"
                   "u - Edit elements' numbering\n"
                   "p - Change save path\n"
@@ -101,10 +101,10 @@ class Plist_Askers():
 
         while True:
             print("Choose custom trimming option:\n"
-                "te - Trim one element...\n"
-                "tr - Trim a range of elements...\n"
-                "rt - Return\n>> ", end="")
-            asker = input()
+                  "te - Trim one element...\n"
+                  "tr - Trim a range of elements...\n"
+                  "rt - Return\n>> ", end="")
+            asker = input().strip().lower()
 
             if asker in returns_dict:
                 return returns_dict[asker]
