@@ -16,12 +16,12 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
         if action == "trim_all_elements":
             trim_len = get_trim_length_loop()
             print()
-            if trim_len == None:
+            if not trim_len:
                 continue
 
             trim_side = Plist_Askers.ask_trim_front_back()
             print()
-            if trim_side == None:
+            if not trim_side:
                 continue
             elif trim_side == "start":
                 final_names = [el[trim_len:] for el in final_names]
@@ -31,12 +31,12 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
         elif action == "trim_specific":
             trim_len = get_trim_length_loop()
             print()
-            if trim_len == None:
+            if not trim_len:
                 continue
 
             trim_side = Plist_Askers.ask_trim_front_back()
             print()
-            if trim_side == None:
+            if not trim_side:
                 continue
 
             Plist_Utils.list_vid_names(plist_numbers, final_names)
@@ -44,7 +44,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
 
             number_to_trim = Plist_Askers.ask_el_name_trim(plist_numbers)
             print()
-            if number_to_trim == None:
+            if not number_to_trim:
                 continue
 
             i = 0
@@ -60,12 +60,12 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
         elif action == "trim_range":
             trim_len = get_trim_length_loop()
             print()
-            if trim_len == None:
+            if not trim_len:
                 continue
 
             trim_side = Plist_Askers.ask_trim_front_back()
             print()
-            if trim_side == None:
+            if not trim_side:
                 continue
 
             Plist_Utils.list_vid_names(plist_numbers, final_names)
@@ -73,7 +73,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
 
             range_to_trim = Plist_Askers.ask_multiple_name_trim(plist_numbers)
             print()
-            if range_to_trim == None:
+            if not range_to_trim:
                 continue
 
             i = 0
