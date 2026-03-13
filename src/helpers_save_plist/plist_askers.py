@@ -93,17 +93,20 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_custom_trim() -> str:
+    def ask_el_removal_menu() -> Literal[
+        'remove_single',
+        'remove_range',
+        'return']:
         returns_dict = {
-            "te": "trim_element",
-            "tr": "trim_range",
-            "rt": "return"}
+            "s": "remove_single",
+            "g": "remove_range",
+            "r": "return"}
 
         while True:
-            print("Choose custom trimming option:\n"
-                  "te - Trim one element...\n"
-                  "tr - Trim a range of elements...\n"
-                  "rt - Return\n>> ", end="")
+            print("Choose element removal option:\n"
+                  "s - Remove single element...\n"
+                  "g - Remove a range of elements...\n"
+                  "r - Return\n>> ", end="")
             asker = input().strip().lower()
 
             if asker in returns_dict:
