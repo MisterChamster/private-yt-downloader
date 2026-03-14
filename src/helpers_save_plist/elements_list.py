@@ -29,26 +29,30 @@ class Elements_List():
         if len(urls_list) != len(names_list):
             raise ValueError("Lists not of the same length")
 
-        self.og_urls_list   = urls_list.copy()
-        self.og_names_list  = names_list.copy()
-        self.og_len         = len(urls_list)
+        self.og_urls_list  = urls_list.copy()
+        self.og_names_list = names_list.copy()
+        self.og_len        = len(urls_list)
 
         self.new_urls_list  = urls_list.copy()
         self.new_names_list = names_list.copy()
-        self.new_len        = len(urls_list)
         self.numbering      = numbering
         self.numbering_has_zeros = numbering_has_zeros
-        self.del_duplicates  = del_duplicates
+        self.del_duplicates = del_duplicates
 
         self.reset_new_index_in_og()
+        self.update_newlen()
         self.calc_numbering_list()
         if self.del_duplicates:
             self.delete_duplicates()
 
 
-    def reset_new_index_in_og(self):
+    def reset_new_index_in_og(self) -> None:
         self.new_index_in_og = [
             i for i in range(len(self.new_urls_list))]
+
+
+    def update_newlen(self) -> None:
+        self.new_len = len(self.new_urls_list)
 
 
     def calc_numbering_list(self) -> None:
@@ -101,16 +105,14 @@ class Elements_List():
         self.calc_numbering_list()
 
 
-    def update_newlen(self) -> None:
-        self.new_len = len(self.new_urls_list)
-
-
+    # ================================== POP ==================================
     def pop_new(self, index) -> None:
         self.new_urls_list.pop(index)
         self.new_names_list.pop(index)
         self.new_numbers_list.pop(index)
         self.new_index_in_og.pop(index)
         self.update_newlen()
+
 
     def pop_new_range(self, index_s, index_e) -> None:
         del(self.new_urls_list[index_s:index_e])
