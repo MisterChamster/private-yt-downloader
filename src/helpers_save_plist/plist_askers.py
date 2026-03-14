@@ -216,25 +216,26 @@ class Plist_Askers():
 
     # =============================== NUMBERING ===============================
     @staticmethod
-    def ask_numbering_main_menu() -> str:
+    def ask_numbering_menu(
+        numbering_enabled: bool,
+        zeros_enabled: bool
+    ) -> str:
         returns_dict = {
-            "o":  "start_on_1",
-            "n":  "no_numbering",
-            "b":  "begin_on_integer",
-            "e":  "end_on_integer",
-            "r":  "reverse_numbering",
-            "og": "original_numbering",
-            "":   "save"}
+            "n": "change_numbering",
+            "z": "change_zeros",
+            "r": "return"}
+        numbering_msg = ("Disable"
+                         if numbering_enabled else
+                         "Enable")
+        zeros_msg = ("Disable"
+                     if zeros_enabled else
+                     "Enable")
 
         while True:
             print("Choose numbering option:\n"
-                  "o     - Starting on 1\n"
-                  "n     - No numbering\n"
-                  "b     - Beginning on integer...\n"
-                  "e     - Ending on integer...\n"
-                  "r     - Reverse current numbering\n"
-                  "og    - Original numbering\n"
-                  "Enter - Save current style\n>> ", end="")
+                 f"n - {numbering_msg} element numbering\n"
+                 f"z - {zeros_msg} zeros before numbers\n"
+                  "r - Return\n>> ", end="")
             action = input().strip().lower()
 
             if action in returns_dict:
@@ -275,7 +276,7 @@ class Plist_Askers():
 
             last_el_num = int(asker)
             if last_el_num < lowest_possible:
-                print("Given number is too small.\n")
+                print("Given number is too small.\n\n")
             else:
                 return last_el_num
 

@@ -244,7 +244,17 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 yt_list.print_newnames_numbering()
                 print()
 
-                break
+                asker = Plist_Askers.ask_numbering_menu(
+                    yt_list.numbering,
+                    yt_list.numbering_has_zeros)
+                print("\n")
+
+                if asker == "change_numbering":
+                    yt_list.numbering = not yt_list.numbering
+                elif asker == "change_zeros":
+                    yt_list.numbering_has_zeros = not yt_list.numbering_has_zeros
+                elif asker == "return":
+                    break
 
             pass
 
