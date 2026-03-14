@@ -240,7 +240,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
                 elif action == "return":
                     break
-            pass
 
         elif asker == "change_numbering":
             pass
@@ -271,16 +270,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         elif asker == "exit":
             return "exit"
 
-
-
-    # Ask user to trim elements names
-    # List with illegals (for metadata later)
-    plist_el_titles = trim_names.trim_names_loop(
-        [el[0] for el in plist_list], [el[1] for el in plist_list])
-    print()
-    # List with legals   (for file names)
-    plist_el_titles_legal = [
-        Utils.illegal_char_remover(el) for el in plist_el_titles]
 
     # Get indexing style from user
     # Without zeros (for metadata later)
