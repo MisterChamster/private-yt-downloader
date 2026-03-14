@@ -67,6 +67,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         if asker == "handle_duplicates" and duplis_flag:
             if not setts_del_duplicates:
                 asker = Plist_Askers.ask_delete_duplis()
+                print("\n")
                 if not asker:
                     continue
                 setts_del_duplicates = not setts_del_duplicates
@@ -77,6 +78,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
             elif setts_del_duplicates:
                 asker = Plist_Askers.ask_restore_duplis()
+                print("\n")
                 if not asker:
                     continue
                 setts_del_duplicates = not setts_del_duplicates
@@ -106,7 +108,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 Utils.print_list(yt_list.new_names_list)
                 print()
                 action = Plist_Askers.ask_el_removal_menu()
-                print()
+                print("\n")
 
                 if action == 'remove_single':
                     print()
@@ -118,27 +120,27 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         Utils.print_list(yt_list.new_names_list, True)
                         print()
                         remove_number = Plist_Askers.ask_single_index_remove(yt_list.new_len)
+                        print("\n")
                         if not remove_number:
                             break
 
                         remove_index = remove_number-1
                         yt_list.pop_new(remove_index)
-                        print("\n")
 
                 elif action == 'remove_range':
                     start_el_index: int = Plist_Askers.ask_first_index(
                         yt_list.new_len,
                         'remove')
+                    print("\n")
                     if not start_el_index:
-                        print()
                         continue
 
                     ending_el_index = Plist_Askers.ask_second_index(
                         yt_list.new_len,
                         'remove',
                         start_el_index)
+                    print("\n")
                     if not ending_el_index:
-                        print()
                         continue
 
                     yt_list.pop_new_range(start_el_index, ending_el_index)
@@ -156,23 +158,24 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 print()
 
                 action = Plist_Askers.ask_trim_names_option()
-                print()
+                print("\n")
                 print("Current names:")
                 Utils.print_list(yt_list.new_names_list, True)
                 print()
 
                 if action == "trim_single":
                     trim_index = Plist_Askers.ask_trim_single_index(yt_list.new_len)
-                    print()
+                    print("\n")
                     if not trim_index:
                         continue
 
                     trim_front_back = Plist_Askers.ask_trim_front_back()
-                    print()
+                    print("\n")
                     if trim_front_back == 'return':
                         continue
 
                     trim_len = Plist_Askers.ask_trim_length()
+                    print("\n")
                     if not trim_len:
                         continue
 
@@ -186,7 +189,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     start_el_index: int = Plist_Askers.ask_first_index(
                         yt_list.new_len,
                         'trim')
-                    print()
+                    print("\n")
                     if not start_el_index:
                         continue
 
@@ -194,16 +197,17 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         yt_list.new_len,
                         'trim',
                         start_el_index)
-                    print()
+                    print("\n")
                     if not ending_el_index:
                         continue
 
                     trim_front_back = Plist_Askers.ask_trim_front_back()
-                    print()
+                    print("\n")
                     if trim_front_back == 'return':
                         continue
 
                     trim_len = Plist_Askers.ask_trim_length()
+                    print("\n")
                     if not trim_len:
                         continue
 
@@ -216,11 +220,12 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
                 elif action == "trim_all_names":
                     trim_front_back = Plist_Askers.ask_trim_front_back()
-                    print()
+                    print("\n")
                     if trim_front_back == 'return':
                         continue
 
                     trim_len = Plist_Askers.ask_trim_length()
+                    print("\n")
                     if not trim_len:
                         continue
 

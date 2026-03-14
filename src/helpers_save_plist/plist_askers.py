@@ -109,7 +109,7 @@ class Plist_Askers():
             if asker == "r":
                 return
             elif not asker.isdigit():
-                print("Incorrect input.\n")
+                print("Incorrect input.\n\n")
                 continue
 
             el_number = int(asker)
@@ -154,7 +154,7 @@ class Plist_Askers():
     def ask_trim_single_index(plist_len: int) -> int | None:
         while True:
             print("Input number of the element to trim name:\n"
-                  "(input 'r' to return)\n>> ", end="")
+                  "('r' to return)\n>> ", end="")
             asker = input().strip().lower()
 
             if asker == "r":
