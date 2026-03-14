@@ -50,35 +50,26 @@ def save_single(url: str) -> str:
             return "repeat"
 
         elif asker == "download":
-            pass
+            ydl_opts["paths"] = {"home": save_path}
+
+            filename = Utils.illegal_char_remover(video_title)
+            i = 1
+            while path.exists(str(Path(save_path) / filename)):
+                filename += "_d"*i
+                i += 1
+            ydl_opts["outtmpl"] = filename
+
+            print("Downloading...")
+            try:
+                with YoutubeDL(ydl_opts) as ydl:
+                    ydl.download([url])
+                print(f"{filename} has been successfully downloaded.\n\n")
+
+            except:
+                if not Utils.is_internet_available():
+                    print("Internet connection failed.\n\n")
+                else:
+                    print("Something went wrong.\n\n")
 
         elif asker == "exit":
             return "exit"
-
-    pass
-
-
-
-    if save_path == "":
-        print("Empty path was chosen.")
-        return
-    ydl_opts["paths"] = {"home": save_path}
-
-    finalname = Utils.illegal_char_remover(video_title)
-    i = 1
-    while path.exists(str(Path(save_path) / finalname)):
-        finalname += "_d"*i
-        i += 1
-    ydl_opts["outtmpl"] = finalname
-
-    print("Downloading...")
-    try:
-        with YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
-        print(f"{finalname} has been successfully downloaded.\n\n")
-    except:
-        if not Utils.is_internet_available():
-            print("Internet connection failed.\n\n")
-        else:
-            print("Something went wrong.\n\n")
-        return
