@@ -160,6 +160,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 print()
 
                 if action == "trim_single":
+                    trim_index = Plist_Askers.ask_trim_single_index(yt_list.new_len)
                     pass
 
                 elif action == "trim_range":

@@ -198,6 +198,26 @@ class Plist_Askers():
 
 
     @staticmethod
+    def ask_trim_single_index(plist_len: int) -> int | None:
+        while True:
+            print("Input number of the element to trim name:\n"
+                  "(input 'r' to return)\n>> ", end="")
+            asker = input().strip().lower()
+
+            if asker == "r":
+                return
+            elif not asker.isdigit():
+                print("Incorrect input.\n\n")
+                continue
+
+            el_number = int(asker)
+            if el_number > plist_len or el_number <= 0:
+                print("Number is not an element on videos list.\n")
+            else:
+                return el_number-1
+
+
+    @staticmethod
     def ask_length_type() -> str:
         returns_dict = {
             "i": "input_integer",
@@ -265,25 +285,6 @@ class Plist_Askers():
                 return returns_dict[asker]
             else:
                 print("Incorrect input.\n\n")
-
-
-    @staticmethod
-    def ask_el_name_trim(plist_numbers: list) -> int | None:
-        while True:
-            print("Input number of the element to trim name:\n"
-                  "(input 'r' to return)\n>> ", end="")
-            asker = input().strip()
-
-            if asker == "r":
-                return
-            elif not asker.isdigit():
-                print("Incorrect input.\n\n")
-                continue
-            el_number = int(asker)
-            if el_number not in plist_numbers:
-                print("Number is not an element on videos list.\n")
-            else:
-                return el_number
 
 
     @staticmethod
