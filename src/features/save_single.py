@@ -9,6 +9,11 @@ from src.common.ydl_support import get_video_title
 
 
 def save_single(url: str) -> None:
+    print()
+    asker = Askers.ask_single_menu()
+    print("\n")
+
+
     extension = Askers.ask_save_ext()
     print()
 
