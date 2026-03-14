@@ -99,27 +99,6 @@ class Plist_Askers():
                 print("Incorrect input.\n")
 
 
-    @staticmethod
-    def ask_single_index_remove(plist_len: int) -> int | None:
-        while True:
-            print("Input number of the element to remove:\n"
-                  "('r' to return)\n>> ", end="")
-            asker = input().strip().lower()
-
-            if asker == "r":
-                return
-            elif not asker.isdigit():
-                print("Incorrect input.\n\n")
-                continue
-
-            el_number = int(asker)
-            if el_number > plist_len or el_number < 1:
-                print("Number is not an element on videos list.\n")
-                continue
-            else:
-                return el_number
-
-
     # ============================= NAME TRIMMING =============================
     @staticmethod
     def ask_trim_names_option() -> Literal[
@@ -148,26 +127,6 @@ class Plist_Askers():
                 return returns_dict[asker]
             else:
                 print("Incorrect input.\n\n")
-
-
-    @staticmethod
-    def ask_trim_single_index(plist_len: int) -> int | None:
-        while True:
-            print("Input number of the element to trim name:\n"
-                  "('r' to return)\n>> ", end="")
-            asker = input().strip().lower()
-
-            if asker == "r":
-                return
-            elif not asker.isdigit():
-                print("Incorrect input.\n\n")
-                continue
-
-            el_number = int(asker)
-            if el_number > plist_len or el_number <= 0:
-                print("Number is not an element on videos list.\n")
-            else:
-                return el_number-1
 
 
     @staticmethod
@@ -322,6 +281,32 @@ class Plist_Askers():
 
 
     # ================================ GENERIC ================================
+    @staticmethod
+    def ask_single_index(
+        plist_len: int,
+        action: Literal['remove', 'trim']
+    ) -> int | None:
+        string = ('trim its name'
+                  if action == 'trim' else
+                  'remove it')
+        while True:
+            print(f"Input number of the element to {string}:\n"
+                   "('r' to return)\n>> ", end="")
+            asker = input().strip().lower()
+
+            if asker == "r":
+                return
+            elif not asker.isdigit():
+                print("Incorrect input.\n\n")
+                continue
+
+            el_number = int(asker)
+            if el_number > plist_len or el_number <= 0:
+                print("Number is not an element on videos list.\n")
+            else:
+                return el_number-1
+
+
     @staticmethod
     def ask_first_index(
         plist_len: int,

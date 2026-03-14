@@ -119,7 +119,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
                         Utils.print_list(yt_list.new_names_list, True)
                         print()
-                        remove_number = Plist_Askers.ask_single_index_remove(yt_list.new_len)
+                        remove_number = Plist_Askers.ask_single_index(yt_list.new_len, 'remove')
                         print("\n")
                         if not remove_number:
                             break
@@ -164,7 +164,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 print()
 
                 if action == "trim_single":
-                    trim_index = Plist_Askers.ask_trim_single_index(yt_list.new_len)
+                    trim_index = Plist_Askers.ask_single_index(yt_list.new_len, 'trim')
                     print("\n")
                     if not trim_index:
                         continue
