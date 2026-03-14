@@ -155,14 +155,14 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
                 action = Plist_Askers.ask_trim_names_option()
                 print()
-                if action == "trim_all_elements":
+                if action == "trim_all_names":
                     pass
                 elif action == "trim_single":
                     pass
                 elif action == "trim_range":
                     pass
                 elif action == "original_names":
-                    pass
+                    yt_list.restore_names_to_og()
                 elif action == "return":
                     break
             pass

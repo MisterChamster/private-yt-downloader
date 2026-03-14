@@ -168,13 +168,13 @@ class Plist_Askers():
     # ============================= NAME TRIMMING =============================
     @staticmethod
     def ask_trim_names_option() -> Literal[
-        "trim_all_elements",
+        "trim_all_names",
         "trim_single",
         "trim_range",
         "original_names",
         "return"]:
         returns_dict = {
-            "a": "trim_all_elements",
+            "a": "trim_all_names",
             "s": "trim_single",
             "g": "trim_range",
             "o": "original_names",
