@@ -1,15 +1,23 @@
-from src.common.askers import Askers
-from src.common.utils import determine_url_type, clean_url
-from .save_single import save_single
-from .save_plist import save_plist
 from typing import Literal
 from pathlib import Path
 
+from src.common.askers import Askers
+from src.common.utils  import Utils
+import src.features.save_single as save_single
+import src.features.save_plist  as save_plist
 
 
-src_path = Path(__file__).resolve().parent.parent
-downloads_path = str(src_path.parent / "downloads")
+
+proj_path = Path(__file__).resolve().parent.parent.parent
+settings_path = str(Path(proj_path) / "settings.json")
+Utils.settings_path = settings_path
+
+downloads_path = str(Path(proj_path) / "downloads")
 Askers.downloads_path = downloads_path
+path_in_setts = Utils.get_val_from_settings("SAVE_PATH")
+if path_in_setts == "None":
+    Utils.save_value_to_settings("SAVE_PATH", downloads_path)
+
 
 def main_loop() -> None:
     print()
@@ -18,20 +26,39 @@ def main_loop() -> None:
               "=======================  Welcome to   =======================\n"
               "======================= YT Downloader =======================\n"
               "=============================================================\n")
+        # Get url from user and clean it
         url = Askers.ask_url()
-        if not url:
+        if url == "e":
             return
-        cleaned_url = clean_url(url)
+        cleaned_url = Utils.clean_url(url)
         if cleaned_url != url:
             url = cleaned_url
             print("Your link has been cleaned of fluff.")
-        url_type: Literal['plist', 'single', 'invalid'] = determine_url_type(url)
+
+        url_type: Literal[
+            'plist',
+            'single',
+            'invalid'] = Utils.determine_url_type(url)
 
         if not url_type:
-            print("Invalid URL.\n")
+            print("Invalid URL.\n\n")
+            continue
+
+        print()
+        # Single stuff
+        if url_type == "single":
+            print()
+            ret_flag = save_single.save_single(url)
+            if ret_flag == "exit":
+                return
+            elif ret_flag == "repeat":
+                continue
+
+        # Playlist stuff
         elif url_type == 'plist':
             print()
-            save_plist(url)
-        elif url_type == "single":
-            print()
-            save_single(url)
+            ret_flag = save_plist.save_plist(url)
+            if ret_flag == "exit":
+                return
+            elif ret_flag == "repeat":
+                continue

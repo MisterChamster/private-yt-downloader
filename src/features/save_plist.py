@@ -1,128 +1,334 @@
-from yt_dlp import YoutubeDL
-from os import chdir, mkdir, path, listdir
+from yt_dlp import  YoutubeDL
+from typing import  Literal
+from pathlib import Path
+from os     import  chdir, mkdir, path, listdir
+
 from src.common.askers import Askers
-import src.common.utils as utils
-from src.helpers_save_plist.plist_askers import Plist_Askers
-from src.helpers_save_plist.plist_utils import Plist_Utils
-from src.common.ydl_support import get_plist_dict
-from src.helpers_save_plist.loops.trim_elements import trim_elements_loop
-from src.helpers_save_plist.loops.numbering import numbering_loop
-from src.helpers_save_plist.loops.trim_names import trim_names_loop
+from src.common.utils  import Utils
+from src.helpers_save_plist.plist_askers  import Plist_Askers
+from src.helpers_save_plist.plist_utils   import Plist_Utils
+from src.helpers_save_plist.elements_list import Elements_List
+import src.common.ydl_support as ydl_support
 
 
 
-def save_plist(plist_url: list) -> None:
+def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     # Get playlist dictionary
-    plist_dict = get_plist_dict(plist_url)
+    plist_dict = ydl_support.get_plist_dict(plist_url)
     if not plist_dict:
         return
 
-    # Get playlist title
+    # Get playlist title and lists with videos data
     plist_title = plist_dict['title']
-    print(f"Playlist: {plist_title}")
-    print()
-
-    # Get lists with videos data
-    plist_urls = [el['url'] for el in plist_dict['entries']]
+    plist_urls      = [el['url']   for el in plist_dict['entries']]
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
     del(plist_dict)
 
-    # Check and handle duplicates
-    if Plist_Utils.are_duplicates(plist_urls):
-        del_duplicates_choice = Plist_Askers.ask_del_duplicates()
+    save_format              = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
+    save_path                = Utils.get_val_from_settings("SAVE_PATH")
+    save_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
+    save_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
+    del_duplicates           = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
+    ydl_opts    = Utils.get_ydl_options(save_format)
+    duplis_flag = Plist_Utils.has_duplicates(plist_urls)
+    yt_list     = Elements_List(
+        plist_urls,
+        plist_el_titles,
+        save_numbering,
+        save_numbering_has_zeros,
+        del_duplicates)
 
-        if del_duplicates_choice:
-            dupli_indexes   = Plist_Utils.get_indexes_of_duplicates(plist_urls)
-            plist_urls      = Plist_Utils.del_indexes(plist_urls, dupli_indexes)
-            plist_el_titles = Plist_Utils.del_indexes(plist_el_titles, dupli_indexes)
+    while True:
+        if yt_list.new_len == 0:
+            print("There are no elements left in the playlist!\n\n")
+            return
+
+        numbering_string = ("None"
+                            if not save_numbering else
+                            "Yes, with zeros"
+                            if save_numbering_has_zeros else
+                            "Yes, without zeros")
+
+        Utils.print_list(yt_list.new_names_list)
         print()
-    # I don't care about indexing b4 deleting duplicates and neither should you
+        print(f"Playlist:  {plist_title}")
+        print(f"Format:    {save_format}")
+        print(f"Save path: {save_path}")
+        print(f"Numbering: {numbering_string}")
+        if duplis_flag:
+            duplis_del_msg = f"Duplicates deleting: {del_duplicates}\n"
+            print(duplis_del_msg, end="")
+        print()
+        asker = Plist_Askers.ask_plist_menu(duplis_flag)
+        print("\n")
 
-    # Get save extension from user and correct ydl options
-    extension = Askers.ask_save_ext()
-    print()
-    ydl_opts = utils.get_ydl_options(extension)
+        if asker == "handle_duplicates" and duplis_flag:
+            if not del_duplicates:
+                asker = Plist_Askers.ask_delete_duplis()
+                print("\n")
+                if not asker:
+                    continue
+                del_duplicates = not del_duplicates
+                Utils.save_value_to_settings(
+                    "PLIST_DEL_DUPLICATES",
+                    del_duplicates)
+                yt_list.delete_duplicates()
 
-    # Make user specify which elements to download
-    plist_list = [[i+1, plist_el_titles[i], plist_urls[i]] for i in range(0, len(plist_urls))]
-    plist_list = trim_elements_loop(plist_list)
-    print()
-    if not plist_list:
-        return
-    plist_urls = [el[2] for el in plist_list]
+            elif del_duplicates:
+                asker = Plist_Askers.ask_restore_duplis()
+                print("\n")
+                if not asker:
+                    continue
+                del_duplicates = not del_duplicates
+                Utils.save_value_to_settings(
+                    "PLIST_DEL_DUPLICATES",
+                    del_duplicates)
+                yt_list.restore_elements_to_og()
 
-    # Ask user to trim elements names
-    # List with illegals (for metadata later)
-    plist_el_titles = trim_names_loop([el[0] for el in plist_list], [el[1] for el in plist_list])
-    print()
-    # List with legals   (for file names)
-    plist_el_titles_legal = [utils.illegal_char_remover(el) for el in plist_el_titles]
+        elif asker == "change_format":
+            extension = Askers.ask_save_ext()
+            print("\n")
+            if extension in (save_format, "return"):
+                continue
 
-    # Get indexing style from user
-    # Without zeros (for metadata later)
-    plist_indexes = numbering_loop([el[0] for el in plist_list], plist_el_titles)
-    # With zeros    (for file naming)
-    plist_indexes_zeros = [Plist_Utils.zeros_at_beginning(el, max(plist_indexes)) for el in plist_indexes]
-    is_numbered: bool = True if plist_indexes else False
-    print()
+            ydl_opts = Utils.get_ydl_options(extension)
+            save_format = extension
+            Utils.save_value_to_settings("PLIST_SAVE_FORMAT", extension)
 
-    # Get save path from user
-    save_path = Askers.ask_save_path()
-    if save_path == "":
-        print("Empty path was chosen.")
-        return
-    chdir(save_path)
+        elif asker == "remove_elements":
+            while True:
+                if yt_list.new_len == 0:
+                    print("There are no elements left in the playlist!\n\n")
+                    return
 
-    # Get dir name and create it
-    dir_name = utils.illegal_char_remover(plist_title)
-    while path.exists(save_path + "/" + dir_name):
-        dir_name += "_d"
-    mkdir(dir_name)
-    chdir(dir_name)
-    ydl_opts["paths"] = {"home": save_path + "/" + dir_name}
+                print("Current elements in playlist:")
+                Utils.print_list(yt_list.new_names_list)
+                print()
+                action = Plist_Askers.ask_el_removal_menu()
+                print("\n")
 
-    total_errors = 0
-    print(f"Downloading {plist_title}...")
+                if action == 'remove_single':
+                    print()
+                    while True:
+                        if yt_list.new_len == 0:
+                            print("There are no elements left in the playlist!\n\n")
+                            return
 
-    for index in range(0, len(plist_urls)):
-        final_filename = (plist_el_titles_legal[index]
-                          if not is_numbered
-                          else plist_indexes_zeros[index] + plist_el_titles_legal[index])
+                        Utils.print_list(yt_list.new_names_list, True)
+                        print()
+                        remove_number = Plist_Askers.ask_single_index(yt_list.new_len, 'remove')
+                        print("\n")
+                        if not remove_number:
+                            break
 
-        while final_filename in listdir():
-            final_filename += "_d"
-        ydl_opts["outtmpl"] = final_filename
+                        remove_index = remove_number-1
+                        yt_list.pop_new(remove_index)
 
-        try:
-            with YoutubeDL(ydl_opts) as ydl:
-                ydl.download([plist_urls[index]])
-            print(final_filename)
-        except:
-            if not utils.is_internet_available():
-                print("Internet connection failed.\n\n")
-                return
+                elif action == 'remove_range':
+                    start_el_index: int = Plist_Askers.ask_first_index(
+                        yt_list.new_len,
+                        'remove')
+                    print("\n")
+                    if not start_el_index:
+                        continue
+
+                    ending_el_index = Plist_Askers.ask_second_index(
+                        yt_list.new_len,
+                        'remove',
+                        start_el_index)
+                    print("\n")
+                    if not ending_el_index:
+                        continue
+
+                    yt_list.pop_new_range(start_el_index, ending_el_index)
+                    if yt_list.new_len == 0:
+                        print("There are no elements left in the playlist!\n\n")
+                        return
+
+                elif action == 'return':
+                    break
+
+        elif asker == "trim_names":
+            while True:
+                print("Current names:")
+                Utils.print_list(yt_list.new_names_list)
+                print()
+
+                action = Plist_Askers.ask_trim_names_option()
+                print("\n")
+                print("Current names:")
+                Utils.print_list(yt_list.new_names_list, True)
+                print()
+
+                if action == "trim_single":
+                    trim_index = Plist_Askers.ask_single_index(yt_list.new_len, 'trim')
+                    print("\n")
+                    if not isinstance(trim_index, int):
+                        continue
+
+                    trim_front_back = Plist_Askers.ask_trim_front_back()
+                    print("\n")
+                    if trim_front_back == 'return':
+                        continue
+
+                    trim_len = Plist_Askers.ask_trim_length()
+                    print("\n")
+                    if not trim_len:
+                        continue
+
+                    old_name = yt_list.new_names_list[trim_index]
+                    if trim_front_back == 'start':
+                        yt_list.new_names_list[trim_index] = old_name[trim_len:]
+                    elif trim_front_back == 'end':
+                        yt_list.new_names_list[trim_index] = old_name[:trim_len]
+
+                elif action == "trim_range":
+                    start_el_index: int = Plist_Askers.ask_first_index(
+                        yt_list.new_len,
+                        'trim')
+                    print("\n")
+                    if not start_el_index:
+                        continue
+
+                    ending_el_index = Plist_Askers.ask_second_index(
+                        yt_list.new_len,
+                        'trim',
+                        start_el_index)
+                    print("\n")
+                    if not ending_el_index:
+                        continue
+
+                    trim_front_back = Plist_Askers.ask_trim_front_back()
+                    print("\n")
+                    if trim_front_back == 'return':
+                        continue
+
+                    trim_len = Plist_Askers.ask_trim_length()
+                    print("\n")
+                    if not trim_len:
+                        continue
+
+                    for i, name in enumerate(
+                    yt_list.new_names_list[start_el_index:ending_el_index+1]):
+                        if trim_front_back == 'start':
+                            yt_list.new_names_list[i] = name[trim_len:]
+                        elif trim_front_back == 'end':
+                            yt_list.new_names_list[i] = name[:trim_len]
+
+                elif action == "trim_all_names":
+                    trim_front_back = Plist_Askers.ask_trim_front_back()
+                    print("\n")
+                    if trim_front_back == 'return':
+                        continue
+
+                    trim_len = Plist_Askers.ask_trim_length()
+                    print("\n")
+                    if not trim_len:
+                        continue
+
+                    for i, name in enumerate(yt_list.new_names_list):
+                        if trim_front_back == 'start':
+                            yt_list.new_names_list[i] = name[trim_len:]
+                        elif trim_front_back == 'end':
+                            yt_list.new_names_list[i] = name[:trim_len]
+
+                elif action == "original_names":
+                    yt_list.restore_names_to_og()
+
+                elif action == "return":
+                    break
+
+        elif asker == "change_numbering":
+            while True:
+                print("Current numbering:")
+                yt_list.print_newnames_numbering()
+                print()
+
+                asker = Plist_Askers.ask_numbering_menu(
+                    yt_list.numbering,
+                    yt_list.numbering_has_zeros)
+                print("\n")
+
+                if asker == "change_numbering":
+                    yt_list.numbering = not yt_list.numbering
+                    Utils.save_value_to_settings(
+                        'PLIST_NUMBERING',
+                        yt_list.numbering)
+                elif asker == "change_zeros":
+                    yt_list.numbering_has_zeros = not yt_list.numbering_has_zeros
+                    Utils.save_value_to_settings(
+                        'PLIST_NUMBERING_HAS_ZEROS',
+                        yt_list.numbering_has_zeros)
+                elif asker == "return":
+                    break
+
+        elif asker == "change_save_path":
+            save_path = Askers.ask_save_path()
+            print("\n")
+
+            if save_path == "":
+                print("Empty path was chosen.\n\n")
+                continue
+            if not path.exists(save_path):
+                print("Invalid path.\n\n")
+                continue
+
+            Utils.save_value_to_settings("SAVE_PATH", save_path)
+
+        elif asker == "change_link":
+            return "repeat"
+
+        elif asker == "rev_to_original":
+            yt_list = Elements_List(
+                plist_urls,
+                plist_el_titles,
+                save_numbering,
+                save_numbering_has_zeros,
+                del_duplicates)
+
+        elif asker == "download":
+            if not path.exists(save_path):
+                print("Save path does not exist on your device.")
+                continue
+
+            # Get dir name and create it
+            chdir(save_path)
+            dir_name = Utils.illegal_char_remover(plist_title)
+            while (Path(save_path) / dir_name).exists():
+                dir_name += "_d"
+            mkdir(dir_name)
+            chdir(dir_name)
+            ydl_opts["paths"] = {"home": str(Path(save_path) / dir_name)}
+
+            total_errors = 0
+            print(f"Downloading {plist_title}...")
+
+            for index in range(yt_list.new_len):
+                filename = yt_list.get_filename_for_download(index)
+                while filename in listdir():
+                    filename += "_d"
+                ydl_opts["outtmpl"] = filename
+
+                url = yt_list.new_urls_list[index]
+                try:
+                    with YoutubeDL(ydl_opts) as ydl:
+                        ydl.download([url])
+                    print(filename)
+                except:
+                    if not Utils.is_internet_available():
+                        print("Internet connection failed.\n\n")
+                        return
+                    else:
+                        total_errors += 1
+                        print(f"{filename} could not be downloaded. Here's link to it: {url}")
+
+            print()
+            if total_errors == 0:
+                print(f"{plist_title} playlist has been successfully downloaded.\n\n")
+            elif total_errors == 1:
+                print(f"Downloading {plist_title} didn't go smooth. There has been 1 exception.\n\n")
             else:
-                total_errors += 1
-                print(f"{final_filename} could not be downloaded. Here's link to this video: {plist_urls[index]}")
+                print(f"Downloading {plist_title} didn't go smooth. There have been {total_errors} exceptions.\n\n")
 
-    if total_errors == 0:
-        print("\n" + plist_title + " playlist has been successfully downloaded.\n\n")
-    elif total_errors == 1:
-        print("\n" + "Downloading " + plist_title + " didn't go smooth. There has been 1 exception.\n\n")
-    else:
-        print("\n" + "Downloading " + plist_title + " didn't go smooth. There have been " + str(total_errors) + " exceptions.\n\n")
-
-
-    # Now we have:
-    # - plist_title
-    # - dir_name
-    # - extension
-    # - ydl_opts
-    # - plist_list
-    # - og_names
-
-    # - plist_urls
-    # - plist_el_titles (for metadata later)
-    # - plist_el_titles_legal
-    # - plist_indexes (for metadata later)
-    # - plist_indexes_zeros
+        elif asker == "exit":
+            return "exit"
