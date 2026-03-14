@@ -175,9 +175,9 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     len_type = Plist_Askers.ask_length_type()
                     print()
                     if len_type == 'input_integer':
-                        pass
+                        trim_len = Plist_Askers.ask_length_int()
                     elif len_type == 'input_string':
-                        pass
+                        trim_len = Plist_Askers.ask_length_str()
                     elif len_type == 'return':
                         continue
 
@@ -207,9 +207,9 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     len_type = Plist_Askers.ask_length_type()
                     print()
                     if len_type == 'input_integer':
-                        pass
+                        trim_len = Plist_Askers.ask_length_int()
                     elif len_type == 'input_string':
-                        pass
+                        trim_len = Plist_Askers.ask_length_str()
                     elif len_type == 'return':
                         continue
 
@@ -224,9 +224,9 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     len_type = Plist_Askers.ask_length_type()
                     print()
                     if len_type == 'input_integer':
-                        pass
+                        trim_len = Plist_Askers.ask_length_int()
                     elif len_type == 'input_string':
-                        pass
+                        trim_len = Plist_Askers.ask_length_str()
                     elif len_type == 'return':
                         continue
 

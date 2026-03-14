@@ -217,16 +217,13 @@ class Plist_Askers():
                   "(input 'r' to return)\n>> ", end="")
             asker = input().strip().lower()
 
-            if asker == "r":
+            if asker in ['r', '0']:
                 return
             elif not asker.isdigit():
                 print("Incorrect input.\n\n")
 
             asker_int = int(asker)
-            if asker_int == 0:
-                return
-            else:
-                return int(asker)
+            return asker_int
 
 
     @staticmethod
@@ -236,7 +233,7 @@ class Plist_Askers():
                   "(input 'r' to return)\n>> ", end="")
             asker = input()
 
-            if asker == "r" or asker == "":
+            if asker in ['r', '']:
                 return
             return len(asker)
 
