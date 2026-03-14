@@ -139,3 +139,17 @@ class Elements_List():
                 number = Plist_Utils.zeros_at_beginning(i+1, self.new_len)
                 print(f"{number}. {name}")
             return
+
+
+    # ================================ GETTERS ================================
+    def get_filename_for_download(self, index: int) -> str:
+        name = self.new_names_list[index]
+        if not self.numbering:
+            return name
+
+        number = index + 1
+        if self.numbering_has_zeros:
+            number = Plist_Utils.zeros_at_beginning(number, self.new_len)
+        else:
+            number = str(number)
+        return f"{number}. {name}"
