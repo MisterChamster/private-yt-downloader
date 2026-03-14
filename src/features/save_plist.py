@@ -25,7 +25,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     del(plist_dict)
 
     setts_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
-    setts_path   = Utils.get_val_from_settings("SAVE_PATH")
+    save_path   = Utils.get_val_from_settings("SAVE_PATH")
     setts_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
     setts_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
     setts_del_duplicates      = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
@@ -52,7 +52,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print()
         print(f"Playlist:  {plist_title}")
         print(f"Format:    {setts_format}")
-        print(f"Save path: {setts_path}")
+        print(f"Save path: {save_path}")
         print(f"Numbering: {numbering_string}")
         if duplis_flag:
             duplis_del_msg = f"Duplicates deleting: {setts_del_duplicates}\n"
@@ -279,7 +279,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 setts_del_duplicates)
 
         elif asker == "download":
-            if not path.exists(setts_path):
+            if not path.exists(save_path):
                 print("Save path does not exist on your device.")
                 continue
 
