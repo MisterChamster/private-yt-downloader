@@ -8,7 +8,7 @@ class Plist_Askers():
         returns_dict = {
             "f": "change_format",
             "r": "remove_elements",
-            "n": "change_names",
+            "n": "trim_names",
             "u": "change_numbering",
             "p": "change_save_path",
             "l": "change_link",
@@ -22,7 +22,7 @@ class Plist_Askers():
                 print("c - Handle duplicates")
             print("f - Change saving format\n"
                   "r - Remove elements to download\n"
-                  "n - Edit elements' names\n"
+                  "n - Trim elements' names\n"
                   "u - Edit elements' numbering\n"
                   "p - Change save path\n"
                   "l - Change link\n"
@@ -167,21 +167,26 @@ class Plist_Askers():
 
     # ============================= NAME TRIMMING =============================
     @staticmethod
-    def ask_trim_names_main_menu() -> str:
+    def ask_trim_names_option() -> Literal[
+        "trim_all_elements",
+        "trim_single",
+        "trim_range",
+        "original_names",
+        "return"]:
         returns_dict = {
-            "tan": "trim_all_elements",
-            "ts":  "trim_specific",
-            "tr":  "trim_range",
-            "og":  "original_names",
-            "":    "save"}
+            "a": "trim_all_elements",
+            "s": "trim_single",
+            "g": "trim_range",
+            "o": "original_names",
+            "r": "return"}
 
         while True:
             print("Choose element name trimming option:\n"
-                "tan   - Trim all names...\n"
-                "ts    - Trim name of a specific element...\n"
-                "tr    - Trim name of elements in range... \n"
-                "og    - Return all elements to original names\n"
-                "Enter - Save current names\n>> ", end="")
+                  "a - Trim all names...\n"
+                  "s - Trim name of a single element...\n"
+                  "g - Trim name of elements in range... \n"
+                  "o - Return all elements to original names\n"
+                  "r - Return\n>> ", end="")
             asker = input().strip().lower()
 
             if asker in returns_dict:

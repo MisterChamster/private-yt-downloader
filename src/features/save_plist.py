@@ -147,13 +147,24 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 elif action == 'return':
                     break
 
-        elif asker == "change_names":
+        elif asker == "trim_names":
             while True:
                 print("Current names:")
                 Utils.print_list(yt_list.new_names_list)
                 print()
 
-                break
+                action = Plist_Askers.ask_trim_names_option()
+                print()
+                if action == "trim_all_elements":
+                    pass
+                elif action == "trim_single":
+                    pass
+                elif action == "trim_range":
+                    pass
+                elif action == "original_names":
+                    pass
+                elif action == "return":
+                    break
             pass
 
         elif asker == "change_numbering":

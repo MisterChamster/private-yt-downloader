@@ -10,7 +10,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
         Plist_Utils.list_vid_names(plist_numbers, final_names)
         print()
 
-        action = Plist_Askers.ask_trim_names_main_menu()
+        action = Plist_Askers.ask_trim_names_option()
         print()
 
         if action == "trim_all_elements":
@@ -28,7 +28,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
             elif trim_side == "end":
                 final_names = [el[:-trim_len] for el in final_names]
 
-        elif action == "trim_specific":
+        elif action == "trim_single":
             trim_len = get_trim_length_loop()
             print()
             if not trim_len:
