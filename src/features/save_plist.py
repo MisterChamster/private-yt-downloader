@@ -24,18 +24,18 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
     del(plist_dict)
 
-    setts_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
+    save_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
     save_path   = Utils.get_val_from_settings("SAVE_PATH")
-    setts_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
-    setts_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
-    setts_del_duplicates      = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
-    ydl_opts = Utils.get_ydl_options(setts_format)
+    save_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
+    save_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
+    del_duplicates           = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
+    ydl_opts = Utils.get_ydl_options(save_format)
     duplis_flag = Plist_Utils.has_duplicates(plist_urls)
     yt_list = Elements_List(plist_urls,
                             plist_el_titles,
-                            setts_numbering,
-                            setts_numbering_has_zeros,
-                            setts_del_duplicates)
+                            save_numbering,
+                            save_numbering_has_zeros,
+                            del_duplicates)
 
     while True:
         if yt_list.new_len == 0:
@@ -43,56 +43,56 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             return
 
         numbering_string = ("None"
-                            if not setts_numbering else
+                            if not save_numbering else
                             "Yes, with zeros"
-                            if setts_numbering_has_zeros else
+                            if save_numbering_has_zeros else
                             "Yes, without zeros")
 
         Utils.print_list(yt_list.new_names_list)
         print()
         print(f"Playlist:  {plist_title}")
-        print(f"Format:    {setts_format}")
+        print(f"Format:    {save_format}")
         print(f"Save path: {save_path}")
         print(f"Numbering: {numbering_string}")
         if duplis_flag:
-            duplis_del_msg = f"Duplicates deleting: {setts_del_duplicates}\n"
+            duplis_del_msg = f"Duplicates deleting: {del_duplicates}\n"
             print(duplis_del_msg, end="")
         print()
         asker = Plist_Askers.ask_plist_menu(duplis_flag)
         print("\n")
 
         if asker == "handle_duplicates" and duplis_flag:
-            if not setts_del_duplicates:
+            if not del_duplicates:
                 asker = Plist_Askers.ask_delete_duplis()
                 print("\n")
                 if not asker:
                     continue
-                setts_del_duplicates = not setts_del_duplicates
+                del_duplicates = not del_duplicates
                 Utils.save_value_to_settings(
                     "PLIST_DEL_DUPLICATES",
-                    setts_del_duplicates)
+                    del_duplicates)
                 yt_list.delete_duplicates()
 
-            elif setts_del_duplicates:
+            elif del_duplicates:
                 asker = Plist_Askers.ask_restore_duplis()
                 print("\n")
                 if not asker:
                     continue
-                setts_del_duplicates = not setts_del_duplicates
+                del_duplicates = not del_duplicates
                 Utils.save_value_to_settings(
                     "PLIST_DEL_DUPLICATES",
-                    setts_del_duplicates)
+                    del_duplicates)
                 yt_list.restore_elements_to_og()
 
         elif asker == "change_format":
             extension = Askers.ask_save_ext()
             print()
-            if extension in (setts_format, "return"):
+            if extension in (save_format, "return"):
                 print()
                 continue
 
             ydl_opts = Utils.get_ydl_options(extension)
-            setts_format = extension
+            save_format = extension
             Utils.save_value_to_settings("PLIST_SAVE_FORMAT", extension)
 
         elif asker == "remove_elements":
@@ -251,8 +251,14 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
                 if asker == "change_numbering":
                     yt_list.numbering = not yt_list.numbering
+                    Utils.save_value_to_settings(
+                        'PLIST_NUMBERING',
+                        yt_list.numbering)
                 elif asker == "change_zeros":
                     yt_list.numbering_has_zeros = not yt_list.numbering_has_zeros
+                    Utils.save_value_to_settings(
+                        'PLIST_NUMBERING_HAS_ZEROS',
+                        yt_list.numbering_has_zeros)
                 elif asker == "return":
                     break
 
@@ -274,9 +280,9 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             yt_list = Elements_List(
                 plist_urls,
                 plist_el_titles,
-                setts_numbering,
-                setts_numbering_has_zeros,
-                setts_del_duplicates)
+                save_numbering,
+                save_numbering_has_zeros,
+                del_duplicates)
 
         elif asker == "download":
             if not path.exists(save_path):
