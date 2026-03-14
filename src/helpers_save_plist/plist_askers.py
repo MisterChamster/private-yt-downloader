@@ -120,61 +120,6 @@ class Plist_Askers():
                 return el_number
 
 
-    @staticmethod
-    def ask_first_index(
-        plist_len: int,
-        action: Literal['remove', 'trim']
-    ) -> int | None:
-        while True:
-            print(f"Input number of the first element to {action}:\n"
-                   "(input 'r' to return)\n>> ", end="")
-            asker = input().strip().lower()
-
-            if asker == "r":
-                return
-            elif not asker.isdigit():
-                print("Incorrect input.\n")
-                continue
-
-            start_el = int(asker)
-            if start_el >= plist_len-1 or start_el <= 0:
-                print("Number is unavailable.\n")
-            else:
-                start_index = start_el - 1
-                return start_index
-
-
-    @staticmethod
-    def ask_second_index(
-        plist_len: int,
-        action: Literal['remove', 'trim'],
-        start_el_index: int
-    ) -> int | None:
-        while True:
-            print(f"Input number of the first element to {action}:\n"
-                   "(input 'l' to select last element of the playlist)\n"
-                   "(input 'r' to return)\n>> ", end="")
-            asker = input().strip().lower()
-
-            if asker == "r":
-                return
-            elif asker in ["l", "-1"]:
-                return -1
-            elif not asker.isdigit():
-                print("Incorrect input.\n")
-                continue
-
-            ending_el = int(asker)
-            if (ending_el <= start_el_index+1 or
-                ending_el > plist_len):
-                print("Number is unavailable.\n")
-            else:
-                if ending_el == plist_len:
-                    return -1
-                end_index = ending_el - 1
-                return end_index
-
-
     # ============================= NAME TRIMMING =============================
     @staticmethod
     def ask_trim_names_option() -> Literal[
@@ -400,3 +345,59 @@ class Plist_Askers():
                 print("Given number is too small.\n")
             else:
                 return last_el_num
+
+
+    # ================================ GENERIC ================================
+    @staticmethod
+    def ask_first_index(
+        plist_len: int,
+        action: Literal['remove', 'trim']
+    ) -> int | None:
+        while True:
+            print(f"Input number of the first element to {action}:\n"
+                   "(input 'r' to return)\n>> ", end="")
+            asker = input().strip().lower()
+
+            if asker == "r":
+                return
+            elif not asker.isdigit():
+                print("Incorrect input.\n")
+                continue
+
+            start_el = int(asker)
+            if start_el >= plist_len-1 or start_el <= 0:
+                print("Number is unavailable.\n")
+            else:
+                start_index = start_el - 1
+                return start_index
+
+
+    @staticmethod
+    def ask_second_index(
+        plist_len: int,
+        action: Literal['remove', 'trim'],
+        start_el_index: int
+    ) -> int | None:
+        while True:
+            print(f"Input number of the first element to {action}:\n"
+                   "(input 'l' to select last element of the playlist)\n"
+                   "(input 'r' to return)\n>> ", end="")
+            asker = input().strip().lower()
+
+            if asker == "r":
+                return
+            elif asker in ["l", "-1"]:
+                return -1
+            elif not asker.isdigit():
+                print("Incorrect input.\n")
+                continue
+
+            ending_el = int(asker)
+            if (ending_el <= start_el_index+1 or
+                ending_el > plist_len):
+                print("Number is unavailable.\n")
+            else:
+                if ending_el == plist_len:
+                    return -1
+                end_index = ending_el - 1
+                return end_index
