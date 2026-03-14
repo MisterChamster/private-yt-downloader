@@ -1,6 +1,5 @@
-from socket import create_connection
-
-from typing import Literal
+from socket  import create_connection
+from typing  import Literal
 from pathlib import Path
 import json
 
