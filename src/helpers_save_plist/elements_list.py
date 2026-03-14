@@ -4,8 +4,8 @@ from src.helpers_save_plist.plist_utils import Plist_Utils
 
 class Elements_List():
     # immutable
-    og_urls_list:    list[str]
-    og_names_list:   list[str]
+    og_urls_list:  list[str]
+    og_names_list: list[str]
     og_len: int
 
     #mutable
@@ -20,9 +20,9 @@ class Elements_List():
 
 
     def __init__(self,
-                 urls_list: list[str],
+                 urls_list:  list[str],
                  names_list: list[str],
-                 numbering: bool,
+                 numbering:  bool,
                  numbering_has_zeros: bool,
                  del_duplicates: bool
     ) -> None:

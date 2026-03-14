@@ -192,6 +192,9 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         elif asker == "change_link":
             return "repeat"
 
+        elif asker == "rev_to_original":
+            pass
+
         elif asker == "download":
             if not path.exists(setts_path):
                 print("Save path does not exist on your device.")

@@ -12,6 +12,7 @@ class Plist_Askers():
             "u": "change_numbering",
             "p": "change_save_path",
             "l": "change_link",
+            "o": "rev_to_original",
             "d": "download",
             "e": "exit"}
         if duplicates_problem:
@@ -26,6 +27,7 @@ class Plist_Askers():
                   "u - Edit elements' numbering\n"
                   "p - Change save path\n"
                   "l - Change link\n"
+                  "o - Revert to original playlist\n"
                   "d - Download\n"
                   "e - Exit program\n>> ", end="")
             action = input().strip().lower()
