@@ -295,23 +295,19 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             total_errors = 0
             print(f"Downloading {plist_title}...")
 
+            for index in range(yt_list.new_len):
+                filename = yt_list.get_filename_for_download(index)
+                while filename in listdir():
+                    filename += "_d"
+                ydl_opts["outtmpl"] = filename
+
             pass
 
         elif asker == "exit":
             return "exit"
 
 
-
     for index in range(0, len(plist_urls)):
-        final_filename = (
-            plist_el_titles_legal[index]
-            if not is_numbered
-            else plist_indexes_zeros[index] + plist_el_titles_legal[index])
-
-        while final_filename in listdir():
-            final_filename += "_d"
-        ydl_opts["outtmpl"] = final_filename
-
         try:
             with YoutubeDL(ydl_opts) as ydl:
                 ydl.download([plist_urls[index]])
