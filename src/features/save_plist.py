@@ -8,7 +8,6 @@ from src.helpers_save_plist.plist_askers  import Plist_Askers
 from src.helpers_save_plist.plist_utils   import Plist_Utils
 from src.helpers_save_plist.elements_list import Elements_List
 import src.common.ydl_support as ydl_support
-import src.helpers_save_plist.loops.numbering as numbering
 
 
 
@@ -256,8 +255,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 elif asker == "return":
                     break
 
-            pass
-
         elif asker == "change_save_path":
             save_path = Askers.ask_save_path()
             print()
@@ -289,15 +286,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         elif asker == "exit":
             return "exit"
 
-
-    # Get indexing style from user
-    # Without zeros (for metadata later)
-    plist_indexes = numbering.numbering_loop(
-        [el[0] for el in plist_list], plist_el_titles)
-    # With zeros    (for file naming)
-    plist_indexes_zeros = [Plist_Utils.zeros_at_beginning(el, max(plist_indexes)) for el in plist_indexes]
-    is_numbered: bool = True if plist_indexes else False
-    print()
 
     # Get dir name and create it
     chdir(save_path)
