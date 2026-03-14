@@ -238,47 +238,6 @@ class Plist_Askers():
             return len(asker)
 
 
-    @staticmethod
-    def ask_multiple_name_trim(plist_numbers: list) -> list[int,int] | None:
-        while True:
-            print("Input number of the first element to trim name:\n"
-                  "(input 'r' to return)\n>> ", end="")
-            asker = input().strip().lower()
-
-            if asker == "r":
-                return
-            elif not asker.isdigit():
-                print("Incorrect input.\n\n")
-                continue
-
-            start_el = int(asker)
-            if start_el not in plist_numbers:
-                print("Number is not an element on videos list.\n")
-            else:
-                break
-
-        print()
-
-        while True:
-            print("Input number of the last element to trim name:\n"
-                "(input 'exit' to exit)\n>> ", end="")
-            asker2 = input().strip()
-
-            if asker2 == "exit":
-                return
-            elif not asker2.isdigit():
-                print("Incorrect input.\n\n")
-                continue
-
-            end_el = int(asker2)
-            if end_el not in plist_numbers:
-                print("Number is not an element on videos list.\n")
-            elif end_el < start_el:
-                print("End number can't be smaller than the start number.\n")
-            else:
-                return [start_el, end_el]
-
-
     # =============================== NUMBERING ===============================
     @staticmethod
     def ask_numbering_main_menu() -> str:
