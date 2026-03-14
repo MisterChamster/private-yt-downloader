@@ -123,11 +123,11 @@ class Plist_Askers():
     @staticmethod
     def ask_remove_first_index(plist_len: int) -> int | None:
         while True:
-            print("Input number of the first element to trim:\n"
+            print("Input number of the first element to remove:\n"
                   "(input 'r' to return)\n>> ", end="")
             asker = input().strip().lower()
 
-            if asker == "return":
+            if asker == "r":
                 return
             elif not asker.isdigit():
                 print("Incorrect input.\n")
@@ -144,7 +144,7 @@ class Plist_Askers():
     @staticmethod
     def ask_remove_second_index(plist_len: int, start_el_index: int) -> int | None:
         while True:
-            print("Input number of the first element to trim:\n"
+            print("Input number of the first element to remove:\n"
                   "(input 'l' to select last element of the playlist)\n"
                   "(input 'r' to return)\n>> ", end="")
             asker = input().strip().lower()
