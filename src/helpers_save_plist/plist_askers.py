@@ -241,44 +241,7 @@ class Plist_Askers():
             if action in returns_dict:
                 return returns_dict[action]
             else:
-                print("Incorrect input.\n")
-
-
-    @staticmethod
-    def ask_first_number() -> int | None:
-        while True:
-            print("Input the number of the first element:\n"
-                "(input 'exit' to exit)\n>> ", end="")
-            asker = input().strip()
-
-            if asker == "exit":
-                return
-            elif not asker.isdigit():
-                print("Incorrect input.\n")
-            else:
-                first_el_num = int(asker)
-                return first_el_num
-
-
-    @staticmethod
-    def ask_last_number(plist_len: int) -> int | None:
-        lowest_possible = plist_len - 1
-        while True:
-            print(f"Input the number of the last element ({lowest_possible} or higher):\n"
-                "(input 'exit' to exit)\n>> ", end="")
-            asker = input().strip()
-
-            if asker == "exit":
-                return
-            elif not asker.isdigit():
-                print("Incorrect input.\n")
-                continue
-
-            last_el_num = int(asker)
-            if last_el_num < lowest_possible:
-                print("Given number is too small.\n\n")
-            else:
-                return last_el_num
+                print("Incorrect input\n\n")
 
 
     # ================================ GENERIC ================================
