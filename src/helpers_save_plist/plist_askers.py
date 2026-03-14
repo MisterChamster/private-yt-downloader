@@ -9,7 +9,7 @@ class Plist_Askers():
             "f": "change_format",
             "r": "remove_elements",
             "n": "trim_names",
-            "u": "change_numbering",
+            "b": "change_numbering",
             "p": "change_save_path",
             "l": "change_link",
             "o": "rev_to_original",
@@ -24,7 +24,7 @@ class Plist_Askers():
             print("f - Change saving format\n"
                   "r - Remove elements to download\n"
                   "n - Trim elements' names\n"
-                  "u - Edit elements' numbering\n"
+                  "b - Edit elements' numbering\n"
                   "p - Change save path\n"
                   "l - Change link\n"
                   "o - Revert to original playlist\n"

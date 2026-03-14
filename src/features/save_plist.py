@@ -295,7 +295,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         dir_name += "_d"
     mkdir(dir_name)
     chdir(dir_name)
-    ydl_opts["paths"] = {"home": str(Path(save_path) + "/" + dir_name)}
+    ydl_opts["paths"] = {"home": str(Path(save_path) / dir_name)}
 
     total_errors = 0
     print(f"Downloading {plist_title}...")
