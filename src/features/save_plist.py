@@ -155,6 +155,10 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
                 action = Plist_Askers.ask_trim_names_option()
                 print()
+                print("Current names:")
+                Utils.print_list(yt_list.new_names_list, True)
+                print()
+
                 if action == "trim_single":
                     pass
 

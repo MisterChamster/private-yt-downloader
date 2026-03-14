@@ -13,22 +13,7 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
         action = Plist_Askers.ask_trim_names_option()
         print()
 
-        if action == "trim_all_elements":
-            trim_len = get_trim_length_loop()
-            print()
-            if not trim_len:
-                continue
-
-            trim_side = Plist_Askers.ask_trim_front_back()
-            print()
-            if not trim_side:
-                continue
-            elif trim_side == "start":
-                final_names = [el[trim_len:] for el in final_names]
-            elif trim_side == "end":
-                final_names = [el[:-trim_len] for el in final_names]
-
-        elif action == "trim_single":
+        if action == "trim_single":
             trim_len = get_trim_length_loop()
             print()
             if not trim_len:
@@ -86,8 +71,21 @@ def trim_names_loop(plist_numbers: list, og_names: list) -> list:
                 if plist_numbers[i] == range_to_trim[1]:
                     break
                 i += 1
-            # START WORK HERE
-            # trim in a loop
+
+        elif action == "trim_all_elements":
+            trim_len = get_trim_length_loop()
+            print()
+            if not trim_len:
+                continue
+
+            trim_side = Plist_Askers.ask_trim_front_back()
+            print()
+            if not trim_side:
+                continue
+            elif trim_side == "start":
+                final_names = [el[trim_len:] for el in final_names]
+            elif trim_side == "end":
+                final_names = [el[:-trim_len] for el in final_names]
 
         elif action == "original_names":
             final_names = og_names
