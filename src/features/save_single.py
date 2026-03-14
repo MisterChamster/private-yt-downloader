@@ -24,10 +24,27 @@ def save_single(url: str) -> str:
         print("\n")
 
         if asker == "change_format":
-            pass
+            extension = Askers.ask_save_ext()
+            print("\n")
+            if extension in (save_format, "return"):
+                continue
+
+            ydl_opts = Utils.get_ydl_options(extension)
+            save_format = extension
+            Utils.save_value_to_settings("PLIST_SAVE_FORMAT", extension)
 
         elif asker == "change_save_path":
-            pass
+            save_path = Askers.ask_save_path()
+            print("\n")
+
+            if save_path == "":
+                print("Empty path was chosen.\n\n")
+                continue
+            if not path.exists(save_path):
+                print("Invalid path.\n\n")
+                continue
+
+            Utils.save_value_to_settings("SAVE_PATH", save_path)
 
         elif asker == "change_link":
             return "repeat"

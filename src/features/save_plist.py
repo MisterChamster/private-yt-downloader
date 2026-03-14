@@ -87,9 +87,8 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
         elif asker == "change_format":
             extension = Askers.ask_save_ext()
-            print()
+            print("\n")
             if extension in (save_format, "return"):
-                print()
                 continue
 
             ydl_opts = Utils.get_ydl_options(extension)
@@ -265,13 +264,15 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
         elif asker == "change_save_path":
             save_path = Askers.ask_save_path()
-            print()
+            print("\n")
+
             if save_path == "":
                 print("Empty path was chosen.\n\n")
                 continue
             if not path.exists(save_path):
                 print("Invalid path.\n\n")
                 continue
+
             Utils.save_value_to_settings("SAVE_PATH", save_path)
 
         elif asker == "change_link":
