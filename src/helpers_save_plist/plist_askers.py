@@ -171,16 +171,16 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_length_type() -> str:
+    def ask_length_type() -> Literal['input_integer', 'input_string', 'return']:
         returns_dict = {
-            "i": "input_integer",
+            "v": "input_integer",
             "s": "input_string",
             "r": "return"}
 
         while True:
             print("Choose trim length value type:\n"
-                  "i - Input integer value...\n"
-                  "s - Input string and calculate it's length...\n"
+                  "v - Input integer value\n"
+                  "s - Input string to get its length\n"
                   "r - Return\n>> ", end="")
             asker = input().strip().lower()
 

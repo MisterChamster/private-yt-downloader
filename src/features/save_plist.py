@@ -163,6 +163,19 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
                 if action == "trim_single":
                     trim_index = Plist_Askers.ask_trim_single_index(yt_list.new_len)
+                    if not trim_index:
+                        print()
+                        continue
+
+                    len_type = Plist_Askers.ask_length_type()
+                    print()
+                    if len_type == 'input_integer':
+                        pass
+                    elif len_type == 'input_string':
+                        pass
+                    elif len_type == 'return':
+                        continue
+
                     pass
 
                 elif action == "trim_range":
@@ -180,9 +193,28 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     if not ending_el_index:
                         print()
                         continue
+
+                    len_type = Plist_Askers.ask_length_type()
+                    print()
+                    if len_type == 'input_integer':
+                        pass
+                    elif len_type == 'input_string':
+                        pass
+                    elif len_type == 'return':
+                        continue
+
                     pass
 
                 elif action == "trim_all_names":
+                    len_type = Plist_Askers.ask_length_type()
+                    print()
+                    if len_type == 'input_integer':
+                        pass
+                    elif len_type == 'input_string':
+                        pass
+                    elif len_type == 'return':
+                        continue
+
                     pass
 
                 elif action == "original_names":
