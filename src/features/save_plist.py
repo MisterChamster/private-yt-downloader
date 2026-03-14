@@ -282,23 +282,25 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             if not path.exists(setts_path):
                 print("Save path does not exist on your device.")
                 continue
+
+            # Get dir name and create it
+            chdir(save_path)
+            dir_name = Utils.illegal_char_remover(plist_title)
+            while (Path(save_path) / dir_name).exists():
+                dir_name += "_d"
+            mkdir(dir_name)
+            chdir(dir_name)
+            ydl_opts["paths"] = {"home": str(Path(save_path) / dir_name)}
+
+            total_errors = 0
+            print(f"Downloading {plist_title}...")
+
             pass
 
         elif asker == "exit":
             return "exit"
 
 
-    # Get dir name and create it
-    chdir(save_path)
-    dir_name = Utils.illegal_char_remover(plist_title)
-    while (Path(save_path) / dir_name).exists():
-        dir_name += "_d"
-    mkdir(dir_name)
-    chdir(dir_name)
-    ydl_opts["paths"] = {"home": str(Path(save_path) / dir_name)}
-
-    total_errors = 0
-    print(f"Downloading {plist_title}...")
 
     for index in range(0, len(plist_urls)):
         final_filename = (
