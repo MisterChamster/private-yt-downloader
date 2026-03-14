@@ -191,6 +191,23 @@ class Plist_Askers():
 
 
     @staticmethod
+    def ask_trim_length() -> int | None:
+        len_type = Plist_Askers.ask_length_type()
+        print()
+
+        if len_type == 'input_integer':
+            trim_len = Plist_Askers.ask_length_int()
+            print()
+            return trim_len
+        elif len_type == 'input_string':
+            trim_len = Plist_Askers.ask_length_str()
+            print()
+            return trim_len
+        elif len_type == 'return':
+            return
+
+
+    @staticmethod
     def ask_length_type() -> Literal['input_integer', 'input_string', 'return']:
         returns_dict = {
             "v": "input_integer",

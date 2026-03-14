@@ -172,14 +172,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     if trim_front_back == 'return':
                         continue
 
-                    len_type = Plist_Askers.ask_length_type()
-                    print()
-                    if len_type == 'input_integer':
-                        trim_len = Plist_Askers.ask_length_int()
-                    elif len_type == 'input_string':
-                        trim_len = Plist_Askers.ask_length_str()
-                    elif len_type == 'return':
+                    trim_len = Plist_Askers.ask_trim_length()
+                    if not trim_len:
                         continue
+
+                    # Vars: trim_index, trim_front_back, trim_len
 
                     pass
 
@@ -204,14 +201,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     if trim_front_back == 'return':
                         continue
 
-                    len_type = Plist_Askers.ask_length_type()
-                    print()
-                    if len_type == 'input_integer':
-                        trim_len = Plist_Askers.ask_length_int()
-                    elif len_type == 'input_string':
-                        trim_len = Plist_Askers.ask_length_str()
-                    elif len_type == 'return':
+                    trim_len = Plist_Askers.ask_trim_length()
+                    if not trim_len:
                         continue
+
+                    # Vars: start_el_index, ending_el_index, trim_front_back, trim_len
 
                     pass
 
@@ -221,14 +215,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     if trim_front_back == 'return':
                         continue
 
-                    len_type = Plist_Askers.ask_length_type()
-                    print()
-                    if len_type == 'input_integer':
-                        trim_len = Plist_Askers.ask_length_int()
-                    elif len_type == 'input_string':
-                        trim_len = Plist_Askers.ask_length_str()
-                    elif len_type == 'return':
+                    trim_len = Plist_Askers.ask_trim_length()
+                    if not trim_len:
                         continue
+
+                    # Vars: trim_front_back, trim_len
 
                     pass
 
