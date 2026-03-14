@@ -176,9 +176,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     if not trim_len:
                         continue
 
-                    # Vars: trim_index, trim_front_back, trim_len
-
-                    pass
+                    old_name = yt_list.new_names_list[trim_index]
+                    if trim_front_back == 'start':
+                        yt_list.new_names_list[trim_index] = old_name[trim_len:]
+                    elif trim_front_back == 'end':
+                        yt_list.new_names_list[trim_index] = old_name[:trim_len]
 
                 elif action == "trim_range":
                     start_el_index: int = Plist_Askers.ask_first_index(
@@ -205,9 +207,12 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     if not trim_len:
                         continue
 
-                    # Vars: start_el_index, ending_el_index, trim_front_back, trim_len
-
-                    pass
+                    for i, name in enumerate(
+                    yt_list.new_names_list[start_el_index:ending_el_index+1]):
+                        if trim_front_back == 'start':
+                            yt_list.new_names_list[i] = name[trim_len:]
+                        elif trim_front_back == 'end':
+                            yt_list.new_names_list[i] = name[:trim_len]
 
                 elif action == "trim_all_names":
                     trim_front_back = Plist_Askers.ask_trim_front_back()
@@ -219,9 +224,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     if not trim_len:
                         continue
 
-                    # Vars: trim_front_back, trim_len
-
-                    pass
+                    for i, name in enumerate(yt_list.new_names_list):
+                        if trim_front_back == 'start':
+                            yt_list.new_names_list[i] = name[trim_len:]
+                        elif trim_front_back == 'end':
+                            yt_list.new_names_list[i] = name[:trim_len]
 
                 elif action == "original_names":
                     yt_list.restore_names_to_og()
