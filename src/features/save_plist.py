@@ -301,44 +301,26 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     filename += "_d"
                 ydl_opts["outtmpl"] = filename
 
-            pass
+                url = yt_list.new_urls_list[index]
+                try:
+                    with YoutubeDL(ydl_opts) as ydl:
+                        ydl.download([url])
+                    print(filename)
+                except:
+                    if not Utils.is_internet_available():
+                        print("Internet connection failed.\n\n")
+                        return
+                    else:
+                        total_errors += 1
+                        print(f"{filename} could not be downloaded. Here's link to it: {url}")
+
+            print()
+            if total_errors == 0:
+                print(f"{plist_title} playlist has been successfully downloaded.\n\n")
+            elif total_errors == 1:
+                print(f"Downloading {plist_title} didn't go smooth. There has been 1 exception.\n\n")
+            else:
+                print(f"Downloading {plist_title} didn't go smooth. There have been {total_errors} exceptions.\n\n")
 
         elif asker == "exit":
             return "exit"
-
-
-    for index in range(0, len(plist_urls)):
-        try:
-            with YoutubeDL(ydl_opts) as ydl:
-                ydl.download([plist_urls[index]])
-            print(final_filename)
-        except:
-            if not Utils.is_internet_available():
-                print("Internet connection failed.\n\n")
-                return
-            else:
-                total_errors += 1
-                print(f"{final_filename} could not be downloaded. Here's link to this video: {plist_urls[index]}")
-
-    print()
-    if total_errors == 0:
-        print(f"{plist_title} playlist has been successfully downloaded.\n\n")
-    elif total_errors == 1:
-        print(f"Downloading {plist_title} didn't go smooth. There has been 1 exception.\n\n")
-    else:
-        print(f"Downloading {plist_title} didn't go smooth. There have been {total_errors} exceptions.\n\n")
-
-
-    # Now we have:
-    # - plist_title
-    # - dir_name
-    # - extension
-    # - ydl_opts
-    # - plist_list
-    # - og_names
-
-    # - plist_urls
-    # - plist_el_titles (for metadata later)
-    # - plist_el_titles_legal
-    # - plist_indexes (for metadata later)
-    # - plist_indexes_zeros
