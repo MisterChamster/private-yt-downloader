@@ -126,22 +126,22 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         print("\n")
 
                 elif action == 'remove_range':
-                    start_el: int = Plist_Askers.ask_first_index(
+                    start_el_index: int = Plist_Askers.ask_first_index(
                         yt_list.new_len,
                         'remove')
-                    if not start_el:
+                    if not start_el_index:
                         print()
                         continue
 
-                    ending_el = Plist_Askers.ask_second_index(
+                    ending_el_index = Plist_Askers.ask_second_index(
                         yt_list.new_len,
                         'remove',
-                        start_el)
-                    if not ending_el:
+                        start_el_index)
+                    if not ending_el_index:
                         print()
                         continue
 
-                    yt_list.pop_new_range(start_el, ending_el)
+                    yt_list.pop_new_range(start_el_index, ending_el_index)
                     if yt_list.new_len == 0:
                         print("There are no elements left in the playlist!\n\n")
                         return
@@ -166,6 +166,20 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     pass
 
                 elif action == "trim_range":
+                    start_el_index: int = Plist_Askers.ask_first_index(
+                        yt_list.new_len,
+                        'trim')
+                    if not start_el_index:
+                        print()
+                        continue
+
+                    ending_el_index = Plist_Askers.ask_second_index(
+                        yt_list.new_len,
+                        'trim',
+                        start_el_index)
+                    if not ending_el_index:
+                        print()
+                        continue
                     pass
 
                 elif action == "trim_all_names":
