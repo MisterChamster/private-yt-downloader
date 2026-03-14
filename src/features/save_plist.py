@@ -1,6 +1,7 @@
-from yt_dlp import YoutubeDL
-from typing import Literal
-from os     import chdir, mkdir, path, listdir
+from yt_dlp import  YoutubeDL
+from typing import  Literal
+from pathlib import Path
+from os     import  chdir, mkdir, path, listdir
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
@@ -290,11 +291,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     # Get dir name and create it
     chdir(save_path)
     dir_name = Utils.illegal_char_remover(plist_title)
-    while path.exists(save_path + "/" + dir_name):
+    while (Path(save_path) / dir_name).exists():
         dir_name += "_d"
     mkdir(dir_name)
     chdir(dir_name)
-    ydl_opts["paths"] = {"home": save_path + "/" + dir_name}
+    ydl_opts["paths"] = {"home": str(Path(save_path) + "/" + dir_name)}
 
     total_errors = 0
     print(f"Downloading {plist_title}...")

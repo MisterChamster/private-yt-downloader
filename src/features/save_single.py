@@ -1,8 +1,9 @@
-from yt_dlp import YoutubeDL
+from yt_dlp import  YoutubeDL
+from pathlib import Path
 
 from os import path
 from src.common.askers import Askers
-from src.common.utils import Utils
+from src.common.utils  import Utils
 from src.common.ydl_support import get_video_title
 
 
@@ -22,7 +23,7 @@ def save_single(url: str) -> None:
 
     finalname = Utils.illegal_char_remover(og_title)
     i = 1
-    while path.exists(save_path + "/" + finalname):
+    while path.exists(str(Path(save_path) / finalname)):
         finalname += "_d"*i
         i += 1
     ydl_opts["outtmpl"] = finalname

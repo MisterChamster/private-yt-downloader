@@ -9,10 +9,10 @@ import src.features.save_plist  as save_plist
 
 
 proj_path = Path(__file__).resolve().parent.parent.parent
-settings_path = proj_path / "settings.json"
+settings_path = str(Path(proj_path) / "settings.json")
 Utils.settings_path = settings_path
 
-downloads_path = str(proj_path / "downloads")
+downloads_path = str(Path(proj_path) / "downloads")
 Askers.downloads_path = downloads_path
 path_in_setts = Utils.get_val_from_settings("SAVE_PATH")
 if path_in_setts == "None":
