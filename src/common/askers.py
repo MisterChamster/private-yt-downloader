@@ -9,7 +9,7 @@ class Askers():
     @staticmethod
     def ask_url() -> str:
         print("Enter URL of YouTube video or playlist:\n"
-              "(input 'exit' to exit program)\n>> ", end="")
+              "(input 'e' to exit program)\n>> ", end="")
         asker = input().strip()
         return asker
 

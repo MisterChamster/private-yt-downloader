@@ -28,7 +28,7 @@ def main_loop() -> None:
               "=============================================================\n")
         # Get url from user and clean it
         url = Askers.ask_url()
-        if url == "exit":
+        if url == "e":
             return
         cleaned_url = Utils.clean_url(url)
         if cleaned_url != url:
