@@ -142,7 +142,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_multiple_second_index(plist_len: int, start_el: int) -> int | None:
+    def ask_multiple_second_index(plist_len: int, start_el_index: int) -> int | None:
         while True:
             print("Input number of the first element to trim:\n"
                   "(input 'l' to select last element of the playlist)\n"
@@ -158,7 +158,8 @@ class Plist_Askers():
                 continue
 
             ending_el = int(asker)
-            if ending_el > plist_len or ending_el >= start_el:
+            if (ending_el <= start_el_index+1 or
+                ending_el > plist_len):
                 print("Number is unavailable.\n")
             else:
                 if ending_el == plist_len:
