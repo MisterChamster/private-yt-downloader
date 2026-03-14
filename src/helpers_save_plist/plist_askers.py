@@ -168,23 +168,23 @@ class Plist_Askers():
     # ============================= NAME TRIMMING =============================
     @staticmethod
     def ask_trim_names_option() -> Literal[
-        "trim_all_names",
         "trim_single",
         "trim_range",
+        "trim_all_names",
         "original_names",
         "return"]:
         returns_dict = {
-            "a": "trim_all_names",
             "s": "trim_single",
             "g": "trim_range",
+            "a": "trim_all_names",
             "o": "original_names",
             "r": "return"}
 
         while True:
             print("Choose element name trimming option:\n"
-                  "a - Trim all names...\n"
                   "s - Trim name of a single element...\n"
                   "g - Trim name of elements in range... \n"
+                  "a - Trim all names...\n"
                   "o - Return all elements to original names\n"
                   "r - Return\n>> ", end="")
             asker = input().strip().lower()
