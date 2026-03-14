@@ -48,7 +48,11 @@ def main_loop() -> None:
         # Single stuff
         if url_type == "single":
             print()
-            save_single.save_single(url)
+            ret_flag = save_single.save_single(url)
+            if ret_flag == "exit":
+                return
+            elif ret_flag == "repeat":
+                continue
 
         # Playlist stuff
         elif url_type == 'plist':
