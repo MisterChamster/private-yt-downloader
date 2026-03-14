@@ -121,7 +121,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_multiple_first_index(plist_len: int) -> int | None:
+    def ask_remove_first_index(plist_len: int) -> int | None:
         while True:
             print("Input number of the first element to trim:\n"
                   "(input 'r' to return)\n>> ", end="")
@@ -142,7 +142,7 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_multiple_second_index(plist_len: int, start_el_index: int) -> int | None:
+    def ask_remove_second_index(plist_len: int, start_el_index: int) -> int | None:
         while True:
             print("Input number of the first element to trim:\n"
                   "(input 'l' to select last element of the playlist)\n"
