@@ -163,8 +163,13 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
                 if action == "trim_single":
                     trim_index = Plist_Askers.ask_trim_single_index(yt_list.new_len)
+                    print()
                     if not trim_index:
-                        print()
+                        continue
+
+                    trim_front_back = Plist_Askers.ask_trim_front_back()
+                    print()
+                    if trim_front_back == 'return':
                         continue
 
                     len_type = Plist_Askers.ask_length_type()
@@ -182,16 +187,21 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     start_el_index: int = Plist_Askers.ask_first_index(
                         yt_list.new_len,
                         'trim')
+                    print()
                     if not start_el_index:
-                        print()
                         continue
 
                     ending_el_index = Plist_Askers.ask_second_index(
                         yt_list.new_len,
                         'trim',
                         start_el_index)
+                    print()
                     if not ending_el_index:
-                        print()
+                        continue
+
+                    trim_front_back = Plist_Askers.ask_trim_front_back()
+                    print()
+                    if trim_front_back == 'return':
                         continue
 
                     len_type = Plist_Askers.ask_length_type()
@@ -206,6 +216,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     pass
 
                 elif action == "trim_all_names":
+                    trim_front_back = Plist_Askers.ask_trim_front_back()
+                    print()
+                    if trim_front_back == 'return':
+                        continue
+
                     len_type = Plist_Askers.ask_length_type()
                     print()
                     if len_type == 'input_integer':

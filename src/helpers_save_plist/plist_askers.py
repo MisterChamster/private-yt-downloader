@@ -171,6 +171,26 @@ class Plist_Askers():
 
 
     @staticmethod
+    def ask_trim_front_back() -> Literal['start', 'end', 'return']:
+        returns_dict = {
+            "s": "start",
+            "e": "end",
+            "r": "return"}
+
+        while True:
+            print("Cut characters from:\n"
+                  "s - Start\n"
+                  "e - End\n"
+                  "e - Return\n>> ", end="")
+            asker = input().strip().lower()
+
+            if asker in returns_dict:
+                return returns_dict[asker]
+            else:
+                print("Incorrect input.\n\n")
+
+
+    @staticmethod
     def ask_length_type() -> Literal['input_integer', 'input_string', 'return']:
         returns_dict = {
             "v": "input_integer",
@@ -193,7 +213,7 @@ class Plist_Askers():
     @staticmethod
     def ask_length_int() -> int | None:
         while True:
-            print("Input a number of characters to cut:\n"
+            print("Input a number of characters to trim:\n"
                   "(input 'r' to return)\n>> ", end="")
             asker = input().strip().lower()
 
@@ -219,25 +239,6 @@ class Plist_Askers():
             if asker == "r" or asker == "":
                 return
             return len(asker)
-
-
-    @staticmethod
-    def ask_trim_front_back() -> str | None:
-        returns_dict = {
-            "s": "start",
-            "e": "end",
-            "r": "return"}
-
-        while True:
-            print("Cut characters from (input 'r' to return):\n"
-                  "s - start\n"
-                  "e - end\n>> ", end="")
-            asker = input().strip().lower()
-
-            if asker in returns_dict:
-                return returns_dict[asker]
-            else:
-                print("Incorrect input.\n\n")
 
 
     @staticmethod
