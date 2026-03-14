@@ -1,6 +1,6 @@
 from yt_dlp import YoutubeDL
-from os import chdir, mkdir, path, listdir
 from typing import Literal
+from os     import chdir, mkdir, path, listdir
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
@@ -8,8 +8,7 @@ from src.helpers_save_plist.plist_askers  import Plist_Askers
 from src.helpers_save_plist.plist_utils   import Plist_Utils
 from src.helpers_save_plist.elements_list import Elements_List
 import src.common.ydl_support as ydl_support
-import src.helpers_save_plist.loops.numbering  as numbering
-import src.helpers_save_plist.loops.trim_names as trim_names
+import src.helpers_save_plist.loops.numbering as numbering
 
 
 
@@ -19,8 +18,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     if not plist_dict:
         return
 
-    # Get playlist title
+    # Get playlist title and lists with videos data
     plist_title = plist_dict['title']
+    plist_urls      = [el['url']   for el in plist_dict['entries']]
+    plist_el_titles = [el['title'] for el in plist_dict['entries']]
+    del(plist_dict)
 
     setts_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
     setts_path   = Utils.get_val_from_settings("SAVE_PATH")
@@ -28,11 +30,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     setts_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
     setts_del_duplicates      = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
     ydl_opts = Utils.get_ydl_options(setts_format)
-
-    # Get lists with videos data
-    plist_urls      = [el['url'] for el in plist_dict['entries']]
-    plist_el_titles = [el['title'] for el in plist_dict['entries']]
-    del(plist_dict)
     duplis_flag = Plist_Utils.has_duplicates(plist_urls)
     yt_list = Elements_List(plist_urls,
                             plist_el_titles,
@@ -58,8 +55,8 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         print(f"Save path: {setts_path}")
         print(f"Numbering: {numbering_string}")
         if duplis_flag:
-            del_msg = f"Duplicates deleting: {setts_del_duplicates}\n"
-            print(del_msg, end="")
+            duplis_del_msg = f"Duplicates deleting: {setts_del_duplicates}\n"
+            print(duplis_del_msg, end="")
         print()
         asker = Plist_Askers.ask_plist_menu(duplis_flag)
         print("\n")
@@ -259,7 +256,12 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             return "repeat"
 
         elif asker == "rev_to_original":
-            pass
+            yt_list = Elements_List(
+                plist_urls,
+                plist_el_titles,
+                setts_numbering,
+                setts_numbering_has_zeros,
+                setts_del_duplicates)
 
         elif asker == "download":
             if not path.exists(setts_path):
