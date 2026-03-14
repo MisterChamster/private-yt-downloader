@@ -239,6 +239,13 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     break
 
         elif asker == "change_numbering":
+            while True:
+                print("Current numbering:")
+                yt_list.print_newnames_numbering()
+                print()
+
+                break
+
             pass
 
         elif asker == "change_save_path":

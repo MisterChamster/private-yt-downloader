@@ -120,3 +120,22 @@ class Elements_List():
         del(self.new_numbers_list[index_s:index_e])
         del(self.new_index_in_og[index_s:index_e])
         self.update_newlen()
+
+
+    # ================================ PRINTERS ================================
+    def print_newnames_numbering(self) -> None:
+        if not self.numbering:
+            for name in self.new_names_list:
+                print(name)
+            return
+
+        if not self.numbering_has_zeros:
+            for i, name in enumerate(self.new_names_list):
+                print(f"{i+1}. {name}")
+            return
+
+        if self.numbering_has_zeros:
+            for i, name in enumerate(self.new_names_list):
+                number = Plist_Utils.zeros_at_beginning(i+1, self.new_len)
+                print(f"{number}. {name}")
+            return
