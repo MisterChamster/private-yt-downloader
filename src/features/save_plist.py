@@ -24,18 +24,19 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
     del(plist_dict)
 
-    save_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
-    save_path   = Utils.get_val_from_settings("SAVE_PATH")
+    save_format              = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
+    save_path                = Utils.get_val_from_settings("SAVE_PATH")
     save_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
     save_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
     del_duplicates           = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
-    ydl_opts = Utils.get_ydl_options(save_format)
+    ydl_opts    = Utils.get_ydl_options(save_format)
     duplis_flag = Plist_Utils.has_duplicates(plist_urls)
-    yt_list = Elements_List(plist_urls,
-                            plist_el_titles,
-                            save_numbering,
-                            save_numbering_has_zeros,
-                            del_duplicates)
+    yt_list     = Elements_List(
+        plist_urls,
+        plist_el_titles,
+        save_numbering,
+        save_numbering_has_zeros,
+        del_duplicates)
 
     while True:
         if yt_list.new_len == 0:
