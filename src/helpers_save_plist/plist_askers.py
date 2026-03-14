@@ -140,7 +140,7 @@ class Plist_Askers():
             print("Cut characters from:\n"
                   "s - Start\n"
                   "e - End\n"
-                  "e - Return\n>> ", end="")
+                  "r - Return\n>> ", end="")
             asker = input().strip().lower()
 
             if asker in returns_dict:
@@ -152,15 +152,15 @@ class Plist_Askers():
     @staticmethod
     def ask_trim_length() -> int | None:
         len_type = Plist_Askers.ask_length_type()
-        print()
+        print("\n")
 
         if len_type == 'input_integer':
             trim_len = Plist_Askers.ask_length_int()
-            print()
+            print("\n")
             return trim_len
         elif len_type == 'input_string':
             trim_len = Plist_Askers.ask_length_str()
-            print()
+            print("\n")
             return trim_len
         elif len_type == 'return':
             return
@@ -304,7 +304,8 @@ class Plist_Askers():
             if el_number > plist_len or el_number <= 0:
                 print("Number is not an element on videos list.\n")
             else:
-                return el_number-1
+                el_index = el_number-1
+                return el_index
 
 
     @staticmethod

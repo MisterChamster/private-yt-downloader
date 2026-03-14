@@ -166,7 +166,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 if action == "trim_single":
                     trim_index = Plist_Askers.ask_single_index(yt_list.new_len, 'trim')
                     print("\n")
-                    if not trim_index:
+                    if not isinstance(trim_index, int):
                         continue
 
                     trim_front_back = Plist_Askers.ask_trim_front_back()
