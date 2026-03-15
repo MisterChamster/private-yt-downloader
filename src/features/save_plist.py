@@ -208,8 +208,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     if not trim_len:
                         continue
 
-                    for i, name in enumerate(
-                    yt_list.new_names_list[start_el_index:ending_el_index+1]):
+                    for i in range(len(yt_list.new_names_list)):
+                        if i < start_el_index or i > ending_el_index:
+                            continue
+
+                        name = yt_list.new_names_list[i]
                         if trim_front_back == 'start':
                             yt_list.new_names_list[i] = name[trim_len:]
                         elif trim_front_back == 'end':
