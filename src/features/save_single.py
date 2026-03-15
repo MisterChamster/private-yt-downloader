@@ -54,7 +54,7 @@ def save_single(url: str) -> str:
 
             filename = Utils.illegal_char_remover(video_title)
             i = 1
-            while path.exists(str(Path(save_path) / filename)):
+            while path.exists(filename + f".{save_format}"):
                 filename += "_d"*i
                 i += 1
             ydl_opts["outtmpl"] = filename
