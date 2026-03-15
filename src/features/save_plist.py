@@ -180,7 +180,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     if trim_front_back == 'start':
                         yt_list.new_names_list[trim_index] = old_name[trim_len:]
                     elif trim_front_back == 'end':
-                        yt_list.new_names_list[trim_index] = old_name[:trim_len]
+                        yt_list.new_names_list[trim_index] = old_name[:-trim_len]
 
                 elif action == "trim_range":
                     start_el_index: int = Plist_Askers.ask_first_index(
@@ -213,7 +213,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         if trim_front_back == 'start':
                             yt_list.new_names_list[i] = name[trim_len:]
                         elif trim_front_back == 'end':
-                            yt_list.new_names_list[i] = name[:trim_len]
+                            yt_list.new_names_list[i] = name[:-trim_len]
 
                 elif action == "trim_all_names":
                     trim_front_back = Plist_Askers.ask_trim_front_back()
@@ -230,7 +230,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         if trim_front_back == 'start':
                             yt_list.new_names_list[i] = name[trim_len:]
                         elif trim_front_back == 'end':
-                            yt_list.new_names_list[i] = name[:trim_len]
+                            yt_list.new_names_list[i] = name[:-trim_len]
 
                 elif action == "original_names":
                     yt_list.restore_names_to_og()
