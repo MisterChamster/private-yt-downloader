@@ -187,7 +187,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         yt_list.new_len,
                         'trim')
                     print("\n")
-                    if not start_el_index:
+                    if start_el_index is None:
                         continue
 
                     ending_el_index = Plist_Askers.ask_second_index(
@@ -195,7 +195,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         'trim',
                         start_el_index)
                     print("\n")
-                    if not ending_el_index:
+                    if ending_el_index is None:
                         continue
 
                     trim_front_back = Plist_Askers.ask_trim_front_back()
