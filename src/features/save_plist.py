@@ -308,6 +308,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
             for index in range(yt_list.new_len):
                 filename = yt_list.get_filename_for_download(index)
+                filename = Utils.illegal_char_remover(filename)
                 while filename in listdir():
                     filename += "_d"
                 ydl_opts["outtmpl"] = filename
