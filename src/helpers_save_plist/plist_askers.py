@@ -311,7 +311,7 @@ class Plist_Askers():
             if asker == "r":
                 return
             elif asker in ["l", "-1"]:
-                return -1
+                return plist_len
             elif not asker.isdigit():
                 print("Incorrect input.\n")
                 continue
@@ -322,6 +322,6 @@ class Plist_Askers():
                 print("Number is unavailable.\n")
             else:
                 if ending_el == plist_len:
-                    return -1
+                    return plist_len
                 end_index = ending_el - 1
                 return end_index

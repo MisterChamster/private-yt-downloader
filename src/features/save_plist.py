@@ -102,7 +102,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     return
 
                 print("Current elements in playlist:")
-                Utils.print_list(yt_list.new_names_list)
+                Utils.print_list(yt_list.new_names_list, True)
                 print()
                 action = Plist_Askers.ask_el_removal_menu()
                 print("\n")
