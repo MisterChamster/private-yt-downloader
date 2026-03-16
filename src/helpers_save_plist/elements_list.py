@@ -10,6 +10,7 @@ class Elements_List():
     og_len: int
 
     #mutable
+    new_plist_title:  str
     new_urls_list:    list[str]
     new_names_list:   list[str]
     new_numbers_list: list[str]
@@ -36,9 +37,10 @@ class Elements_List():
         self.og_names_list  = names_list.copy()
         self.og_len         = len(urls_list)
 
-        self.new_urls_list  = urls_list.copy()
-        self.new_names_list = names_list.copy()
-        self.numbering      = numbering
+        self.new_plist_title = plist_title
+        self.new_urls_list   = urls_list.copy()
+        self.new_names_list  = names_list.copy()
+        self.numbering       = numbering
         self.numbering_has_zeros = numbering_has_zeros
         self.del_duplicates = del_duplicates
 
@@ -81,7 +83,6 @@ class Elements_List():
 
 
     def restore_elements_to_og(self) -> None:
-        self.new_urls_list = self.og_urls_list.copy()
         temp_names_list = self.og_names_list.copy()
         for index in range(self.new_len):
             changed_name = self.new_names_list[index]
@@ -89,8 +90,9 @@ class Elements_List():
             temp_names_list[index_to_change] = changed_name
         self.new_names_list = temp_names_list.copy()
 
-        self.update_newlen()
+        self.new_urls_list  = self.og_urls_list.copy()
         self.del_duplicates = False
+        self.update_newlen()
 
 
     def restore_names_to_og(self) -> None:
@@ -104,6 +106,7 @@ class Elements_List():
         self.new_urls_list   = self.og_urls_list
         self.new_names_list  = self.og_names_list
         self.new_index_in_og = [i for i in range(len(self.og_urls_list))]
+        self.new_plist_title = self.og_plist_title
         self.update_newlen()
         self.calc_numbering_list()
 

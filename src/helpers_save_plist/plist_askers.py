@@ -104,14 +104,15 @@ class Plist_Askers():
     @staticmethod
     def ask_plist_name() -> str:
         while True:
-            print("Input new playlist name ('r' to return):\n>> ", end="")
+            print("Input new playlist name\n"
+                  "('r' to return, 'o' to original):\n>> ", end="")
             asker = input()
 
             if not asker:
                 print("Input can't be empty.\n\n")
                 continue
-            if asker == 'r':
-                return "return"
+            if asker in ('r', 'o'):
+                return asker
             return asker
 
 

@@ -44,14 +44,14 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             return
 
         numbering_string = ("None"
-                            if not save_numbering else
+                            if not yt_list.numbering else
                             "Yes, with zeros"
-                            if save_numbering_has_zeros else
+                            if yt_list.numbering_has_zeros else
                             "Yes, without zeros")
 
         Utils.print_list(yt_list.new_names_list)
         print()
-        print(f"Playlist:  {plist_title}")
+        print(f"Playlist:  {yt_list.new_plist_title}")
         print(f"Format:    {save_format}")
         print(f"Save path: {save_path}")
         print(f"Numbering: {numbering_string}")
@@ -149,137 +149,139 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     break
 
         elif asker == "edit_captions":
-            asker = Plist_Askers.ask_edit_captions()
-            print("\n")
+            while True:
+                asker = Plist_Askers.ask_edit_captions()
+                print("\n")
 
-            if asker == 'trim_names':
-                while True:
-                    print("Current names:")
-                    Utils.print_list(yt_list.new_names_list)
-                    print()
+                if asker == 'trim_names':
+                    while True:
+                        print("Current names:")
+                        Utils.print_list(yt_list.new_names_list)
+                        print()
 
-                    action = Plist_Askers.ask_trim_names_option()
-                    print("\n")
-                    print("Current names:")
-                    Utils.print_list(yt_list.new_names_list, True)
-                    print()
-
-                    if action == "trim_single":
-                        trim_index = Plist_Askers.ask_single_index(yt_list.new_len, 'trim')
+                        action = Plist_Askers.ask_trim_names_option()
                         print("\n")
-                        if not isinstance(trim_index, int):
-                            continue
+                        print("Current names:")
+                        Utils.print_list(yt_list.new_names_list, True)
+                        print()
 
-                        trim_front_back = Plist_Askers.ask_trim_front_back()
-                        print("\n")
-                        if trim_front_back == 'return':
-                            continue
-
-                        trim_len = Plist_Askers.ask_trim_length()
-                        print("\n")
-                        if not trim_len:
-                            continue
-
-                        old_name = yt_list.new_names_list[trim_index]
-                        if trim_front_back == 'start':
-                            yt_list.new_names_list[trim_index] = old_name[trim_len:]
-                        elif trim_front_back == 'end':
-                            yt_list.new_names_list[trim_index] = old_name[:-trim_len]
-
-                    elif action == "trim_range":
-                        start_el_index: int = Plist_Askers.ask_first_index(
-                            yt_list.new_len,
-                            'trim')
-                        print("\n")
-                        if start_el_index is None:
-                            continue
-
-                        ending_el_index = Plist_Askers.ask_second_index(
-                            yt_list.new_len,
-                            'trim',
-                            start_el_index)
-                        print("\n")
-                        if ending_el_index is None:
-                            continue
-
-                        trim_front_back = Plist_Askers.ask_trim_front_back()
-                        print("\n")
-                        if trim_front_back == 'return':
-                            continue
-
-                        trim_len = Plist_Askers.ask_trim_length()
-                        print("\n")
-                        if not trim_len:
-                            continue
-
-                        for i in range(len(yt_list.new_names_list)):
-                            if i < start_el_index or i > ending_el_index:
+                        if action == "trim_single":
+                            trim_index = Plist_Askers.ask_single_index(yt_list.new_len, 'trim')
+                            print("\n")
+                            if not isinstance(trim_index, int):
                                 continue
 
-                            name = yt_list.new_names_list[i]
+                            trim_front_back = Plist_Askers.ask_trim_front_back()
+                            print("\n")
+                            if trim_front_back == 'return':
+                                continue
+
+                            trim_len = Plist_Askers.ask_trim_length()
+                            print("\n")
+                            if not trim_len:
+                                continue
+
+                            old_name = yt_list.new_names_list[trim_index]
                             if trim_front_back == 'start':
-                                yt_list.new_names_list[i] = name[trim_len:]
+                                yt_list.new_names_list[trim_index] = old_name[trim_len:]
                             elif trim_front_back == 'end':
-                                yt_list.new_names_list[i] = name[:-trim_len]
+                                yt_list.new_names_list[trim_index] = old_name[:-trim_len]
 
-                    elif action == "trim_all_names":
-                        trim_front_back = Plist_Askers.ask_trim_front_back()
-                        print("\n")
-                        if trim_front_back == 'return':
-                            continue
+                        elif action == "trim_range":
+                            start_el_index: int = Plist_Askers.ask_first_index(
+                                yt_list.new_len,
+                                'trim')
+                            print("\n")
+                            if start_el_index is None:
+                                continue
 
-                        trim_len = Plist_Askers.ask_trim_length()
-                        print("\n")
-                        if not trim_len:
-                            continue
+                            ending_el_index = Plist_Askers.ask_second_index(
+                                yt_list.new_len,
+                                'trim',
+                                start_el_index)
+                            print("\n")
+                            if ending_el_index is None:
+                                continue
 
-                        for i, name in enumerate(yt_list.new_names_list):
-                            if trim_front_back == 'start':
-                                yt_list.new_names_list[i] = name[trim_len:]
-                            elif trim_front_back == 'end':
-                                yt_list.new_names_list[i] = name[:-trim_len]
+                            trim_front_back = Plist_Askers.ask_trim_front_back()
+                            print("\n")
+                            if trim_front_back == 'return':
+                                continue
 
-                    elif action == "original_names":
-                        yt_list.restore_names_to_og()
+                            trim_len = Plist_Askers.ask_trim_length()
+                            print("\n")
+                            if not trim_len:
+                                continue
 
-                    elif action == "return":
-                        break
+                            for i in range(len(yt_list.new_names_list)):
+                                if i < start_el_index or i > ending_el_index:
+                                    continue
 
-            elif asker == 'edit_numbering':
-                while True:
-                    print("Current numbering:")
-                    yt_list.print_newnames_numbering()
-                    print()
+                                name = yt_list.new_names_list[i]
+                                if trim_front_back == 'start':
+                                    yt_list.new_names_list[i] = name[trim_len:]
+                                elif trim_front_back == 'end':
+                                    yt_list.new_names_list[i] = name[:-trim_len]
 
-                    asker = Plist_Askers.ask_numbering_menu(
-                        yt_list.numbering,
-                        yt_list.numbering_has_zeros)
-                    print("\n")
+                        elif action == "trim_all_names":
+                            trim_front_back = Plist_Askers.ask_trim_front_back()
+                            print("\n")
+                            if trim_front_back == 'return':
+                                continue
 
-                    if asker == "change_numbering":
-                        yt_list.numbering = not yt_list.numbering
-                        Utils.save_value_to_settings(
-                            'PLIST_NUMBERING',
-                            yt_list.numbering)
-                    elif asker == "change_zeros":
-                        yt_list.numbering_has_zeros = not yt_list.numbering_has_zeros
-                        Utils.save_value_to_settings(
-                            'PLIST_NUMBERING_HAS_ZEROS',
+                            trim_len = Plist_Askers.ask_trim_length()
+                            print("\n")
+                            if not trim_len:
+                                continue
+
+                            for i, name in enumerate(yt_list.new_names_list):
+                                if trim_front_back == 'start':
+                                    yt_list.new_names_list[i] = name[trim_len:]
+                                elif trim_front_back == 'end':
+                                    yt_list.new_names_list[i] = name[:-trim_len]
+
+                        elif action == "original_names":
+                            yt_list.restore_names_to_og()
+
+                        elif action == "return":
+                            break
+
+                elif asker == 'edit_numbering':
+                    while True:
+                        print("Current numbering:")
+                        yt_list.print_newnames_numbering()
+                        print()
+
+                        asker = Plist_Askers.ask_numbering_menu(
+                            yt_list.numbering,
                             yt_list.numbering_has_zeros)
-                    elif asker == "return":
-                        break
+                        print("\n")
 
-            elif asker == 'edit_plist_name':
-                new_plist_name = Plist_Askers.ask_plist_name()
-                print("\n")
-                if new_plist_name == 'return':
-                    continue
+                        if asker == "change_numbering":
+                            yt_list.numbering = not yt_list.numbering
+                            Utils.save_value_to_settings(
+                                'PLIST_NUMBERING',
+                                yt_list.numbering)
+                        elif asker == "change_zeros":
+                            yt_list.numbering_has_zeros = not yt_list.numbering_has_zeros
+                            Utils.save_value_to_settings(
+                                'PLIST_NUMBERING_HAS_ZEROS',
+                                yt_list.numbering_has_zeros)
+                        elif asker == "return":
+                            break
 
-                pass
+                elif asker == 'edit_plist_name':
+                    new_plist_name = Plist_Askers.ask_plist_name()
+                    print("\n")
+                    if new_plist_name == 'r':
+                        continue
+                    if new_plist_name == 'o':
+                        yt_list.new_plist_title = yt_list.og_plist_title
+                    else:
+                        yt_list.new_plist_title = new_plist_name
 
-            elif asker == 'return':
-                continue
-            pass
+                elif asker == 'return':
+                    break
 
         elif asker == "change_save_path":
             save_path = Askers.ask_save_path()
@@ -312,7 +314,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
             # Get dir name and create it
             chdir(save_path)
-            dir_name = Utils.illegal_char_remover(plist_title)
+            dir_name = Utils.illegal_char_remover(yt_list.new_plist_title)
             while (Path(save_path) / dir_name).exists():
                 dir_name += "_d"
             mkdir(dir_name)
@@ -320,7 +322,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             ydl_opts["paths"] = {"home": str(Path(save_path) / dir_name)}
 
             total_errors = 0
-            print(f"Downloading {plist_title}...")
+            print(f"Downloading {yt_list.new_plist_title}...")
 
             for index in range(yt_list.new_len):
                 filename = yt_list.get_filename_for_download(index)
@@ -340,11 +342,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
             print()
             if total_errors == 0:
-                print(f"{plist_title} playlist has been successfully downloaded.\n\n")
+                print(f"{yt_list.new_plist_title} playlist has been successfully downloaded.\n\n")
             elif total_errors == 1:
-                print(f"Downloading {plist_title} didn't go smooth. There has been 1 exception.\n\n")
+                print(f"Downloading {yt_list.new_plist_title} didn't go smooth. There has been 1 exception.\n\n")
             else:
-                print(f"Downloading {plist_title} didn't go smooth. There have been {total_errors} exceptions.\n\n")
+                print(f"Downloading {yt_list.new_plist_title} didn't go smooth. There have been {total_errors} exceptions.\n\n")
 
         elif asker == "exit":
             return "exit"
