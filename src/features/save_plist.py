@@ -31,6 +31,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     ydl_opts    = Utils.get_ydl_options(save_format)
     duplis_flag = Plist_Utils.has_duplicates(plist_urls)
     yt_list     = Elements_List(
+        plist_title,
         plist_urls,
         plist_el_titles,
         save_numbering,
