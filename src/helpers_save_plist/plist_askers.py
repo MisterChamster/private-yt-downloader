@@ -101,6 +101,20 @@ class Plist_Askers():
                 print("Incorrect input.\n\n")
 
 
+    @staticmethod
+    def ask_plist_name() -> str:
+        while True:
+            print("Input new playlist name ('r' to return):\n>> ", end="")
+            asker = input()
+
+            if not asker:
+                print("Input can't be empty.\n\n")
+                continue
+            if asker == 'r':
+                return "return"
+            return asker
+
+
     # ============================ ELEMENT REMOVAL ============================
     @staticmethod
     def ask_el_removal_menu() -> Literal[

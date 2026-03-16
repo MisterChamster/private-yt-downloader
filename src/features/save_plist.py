@@ -150,6 +150,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
         elif asker == "edit_captions":
             asker = Plist_Askers.ask_edit_captions()
+            print("\n")
 
             if asker == 'trim_names':
                 while True:
@@ -268,12 +269,17 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     elif asker == "return":
                         break
 
-            # elif asker == 'edit_plist_name':
-            #     pass
+            elif asker == 'edit_plist_name':
+                new_plist_name = Plist_Askers.ask_plist_name()
+                print("\n")
+                if new_plist_name == 'return':
+                    continue
+
+                pass
 
             elif asker == 'return':
                 continue
-            # pass
+            pass
 
         elif asker == "change_save_path":
             save_path = Askers.ask_save_path()
