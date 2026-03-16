@@ -1,7 +1,6 @@
-from yt_dlp import  YoutubeDL
-from typing import  Literal
+from typing  import Literal
 from pathlib import Path
-from os     import  chdir, mkdir, path, listdir
+from os      import chdir, mkdir, path, listdir
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
@@ -314,17 +313,13 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 ydl_opts["outtmpl"] = filename
 
                 url = yt_list.new_urls_list[index]
-                try:
-                    with YoutubeDL(ydl_opts) as ydl:
-                        ydl.download([url])
+
+                download_flag = ydl_support.download_fromyt(ydl_opts, url)
+                if download_flag:
                     print(filename)
-                except:
-                    if not Utils.is_internet_available():
-                        print("Internet connection failed.\n\n")
-                        return
-                    else:
-                        total_errors += 1
-                        print(f"{filename} could not be downloaded. Here's link to it: {url}")
+                else:
+                    total_errors += 1
+                    print(f"Downloading {filename} failed. Link: {url}")
 
             print()
             if total_errors == 0:

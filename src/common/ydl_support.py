@@ -37,3 +37,18 @@ def get_plist_dict(url) -> dict | None:
         else:
             print("Something went wrong.\n\n")
         return
+
+
+def download_fromyt(ydl_opts: dict, url: str, retry: int = 5) -> bool:
+    for _ in range(retry):
+        try:
+            with YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+            return True
+
+        except:
+            if not Utils.is_internet_available():
+                print("Internet connection failed.\n\n")
+
+    print("Something went wrong.\n\n")
+    return False

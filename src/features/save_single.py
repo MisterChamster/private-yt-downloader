@@ -1,10 +1,8 @@
-from yt_dlp import  YoutubeDL
-from pathlib import Path
-
 from os import path
+
 from src.common.askers import Askers
 from src.common.utils  import Utils
-from src.common.ydl_support import get_video_title
+import src.common.ydl_support as ydl_support
 
 
 
@@ -12,7 +10,7 @@ def save_single(url: str) -> str:
     save_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
     save_path   = Utils.get_val_from_settings("SAVE_PATH")
     ydl_opts    = Utils.get_ydl_options(save_format)
-    video_title = get_video_title(url)
+    video_title = ydl_support.get_video_title(url)
 
     while True:
         print()
@@ -60,16 +58,9 @@ def save_single(url: str) -> str:
             ydl_opts["outtmpl"] = filename
 
             print("Downloading...")
-            try:
-                with YoutubeDL(ydl_opts) as ydl:
-                    ydl.download([url])
+            download_flag = ydl_support.download_fromyt(ydl_opts, url)
+            if download_flag:
                 print(f"{filename} has been successfully downloaded.\n\n")
-
-            except:
-                if not Utils.is_internet_available():
-                    print("Internet connection failed.\n\n")
-                else:
-                    print("Something went wrong.\n\n")
 
         elif asker == "exit":
             return "exit"
