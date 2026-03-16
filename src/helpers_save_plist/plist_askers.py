@@ -36,31 +36,6 @@ class Plist_Askers():
                 print("Incorrect input.\n\n")
 
 
-    @staticmethod
-    def ask_edit_captions() -> Literal[
-        'trim_names',
-        'edit_numbering',
-        # 'edit_plist_name',
-        'return']:
-        returns_dict = {
-            'n': 'trim_names',
-            'b': 'edit_numbering',
-            # 'p': 'edit_plist_name',
-            'r': 'return'}
-
-        while True:
-            print("n - Trim elements' names\n"
-                  "b - Edit elements' numbering\n"
-                #   "p - Edit playlist name"
-                  "r - Return\n>> ", end="")
-            action = input().strip().lower()
-
-            if action in returns_dict:
-                return returns_dict[action]
-            else:
-                print("Incorrect input.\n\n")
-
-
     # =============================== DUPLICATES ===============================
     @staticmethod
     def ask_delete_duplis() -> bool:
@@ -94,6 +69,34 @@ class Plist_Askers():
 
             if asker in returns_dict:
                 return returns_dict[asker]
+            else:
+                print("Incorrect input.\n\n")
+
+
+    # ==========================================================================
+    # ================================== EDIT ==================================
+    # ==========================================================================
+    @staticmethod
+    def ask_edit_captions() -> Literal[
+        'trim_names',
+        'edit_numbering',
+        'edit_plist_name',
+        'return']:
+        returns_dict = {
+            'n': 'trim_names',
+            'b': 'edit_numbering',
+            'p': 'edit_plist_name',
+            'r': 'return'}
+
+        while True:
+            print("n - Trim elements' names\n"
+                  "b - Edit elements' numbering\n"
+                  "p - Edit playlist name"
+                  "r - Return\n>> ", end="")
+            action = input().strip().lower()
+
+            if action in returns_dict:
+                return returns_dict[action]
             else:
                 print("Incorrect input.\n\n")
 
