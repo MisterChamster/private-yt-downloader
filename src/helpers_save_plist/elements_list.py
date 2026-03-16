@@ -24,7 +24,7 @@ class Elements_List():
                  plist_title: str,
                  urls_list:   list[str],
                  names_list:  list[str],
-                 numbering:  bool,
+                 numbering:   bool,
                  numbering_has_zeros: bool,
                  del_duplicates: bool
     ) -> None:

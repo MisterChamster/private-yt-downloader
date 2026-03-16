@@ -8,13 +8,12 @@ class Plist_Askers():
         returns_dict = {
             "f": "change_format",
             "r": "remove_elements",
-            "n": "trim_names",
-            "b": "change_numbering",
+            "e": "edit_captions",
             "p": "change_save_path",
             "l": "change_link",
             "o": "rev_to_original",
             "d": "download",
-            "e": "exit"}
+            "x": "exit"}
         if duplicates_problem:
             returns_dict["c"] = "handle_duplicates"
 
@@ -23,19 +22,43 @@ class Plist_Askers():
                 print("c - Handle duplicates")
             print("f - Change saving format\n"
                   "r - Remove elements to download\n"
-                  "n - Trim elements' names\n"
-                  "b - Edit elements' numbering\n"
+                  "e - Edit captions...\n"
                   "p - Change save path\n"
                   "l - Change link\n"
                   "o - Revert to original playlist\n"
                   "d - Download\n"
-                  "e - Exit program\n>> ", end="")
+                  "x - Exit program\n>> ", end="")
             action = input().strip().lower()
 
             if action in returns_dict:
                 return returns_dict[action]
             else:
-                print("Incorrect input.\n")
+                print("Incorrect input.\n\n")
+
+
+    @staticmethod
+    def ask_edit_captions() -> Literal[
+        'trim_names',
+        'edit_numbering',
+        # 'edit_plist_name',
+        'return']:
+        returns_dict = {
+            'n': 'trim_names',
+            'b': 'edit_numbering',
+            # 'p': 'edit_plist_name',
+            'r': 'return'}
+
+        while True:
+            print("n - Trim elements' names\n"
+                  "b - Edit elements' numbering\n"
+                #   "p - Edit playlist name"
+                  "r - Return\n>> ", end="")
+            action = input().strip().lower()
+
+            if action in returns_dict:
+                return returns_dict[action]
+            else:
+                print("Incorrect input.\n\n")
 
 
     # =============================== DUPLICATES ===============================
