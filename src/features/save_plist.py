@@ -59,10 +59,10 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             duplis_del_msg = f"Duplicates deleting: {del_duplicates}\n"
             print(duplis_del_msg, end="")
         print()
-        asker = Plist_Askers.ask_plist_menu(duplis_flag)
+        asker_menu = Plist_Askers.ask_plist_menu(duplis_flag)
         print("\n")
 
-        if asker == "handle_duplicates" and duplis_flag:
+        if asker_menu == "handle_duplicates" and duplis_flag:
             if not del_duplicates:
                 asker = Plist_Askers.ask_delete_duplis()
                 print("\n")
@@ -85,7 +85,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                     del_duplicates)
                 yt_list.restore_elements_to_og()
 
-        elif asker == "change_format":
+        elif asker_menu == "change_format":
             extension = Askers.ask_save_ext()
             print("\n")
             if extension in (save_format, "return"):
@@ -95,7 +95,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             save_format = extension
             Utils.save_value_to_settings("SAVE_FORMAT", extension)
 
-        elif asker == "remove_elements":
+        elif asker_menu == "remove_elements":
             while True:
                 if yt_list.new_len == 0:
                     print("There are no elements left in the playlist!\n\n")
@@ -148,7 +148,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 elif action == 'return':
                     break
 
-        elif asker == "edit_captions":
+        elif asker_menu == "edit_captions":
             while True:
                 asker = Plist_Askers.ask_edit_captions()
                 print("\n")
@@ -283,7 +283,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 elif asker == 'return':
                     break
 
-        elif asker == "change_save_path":
+        elif asker_menu == "change_save_path":
             save_path = Askers.ask_save_path()
             print("\n")
 
@@ -296,10 +296,10 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
             Utils.save_value_to_settings("SAVE_PATH", save_path)
 
-        elif asker == "change_link":
+        elif asker_menu == "change_link":
             return "repeat"
 
-        elif asker == "rev_to_original":
+        elif asker_menu == "rev_to_original":
             yt_list = Elements_List(
                 plist_urls,
                 plist_el_titles,
@@ -307,7 +307,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 save_numbering_has_zeros,
                 del_duplicates)
 
-        elif asker == "download":
+        elif asker_menu == "download":
             if not path.exists(save_path):
                 print("Save path does not exist on your device.")
                 continue
@@ -348,5 +348,5 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             else:
                 print(f"Downloading {yt_list.new_plist_title} didn't go smooth. There have been {total_errors} exceptions.\n\n")
 
-        elif asker == "exit":
+        elif asker_menu == "exit":
             return "exit"
