@@ -23,7 +23,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
     del(plist_dict)
 
-    save_format              = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
+    save_format              = Utils.get_val_from_settings("SAVE_FORMAT")
     save_path                = Utils.get_val_from_settings("SAVE_PATH")
     save_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
     save_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
@@ -93,7 +93,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
             ydl_opts = Utils.get_ydl_options(extension)
             save_format = extension
-            Utils.save_value_to_settings("PLIST_SAVE_FORMAT", extension)
+            Utils.save_value_to_settings("SAVE_FORMAT", extension)
 
         elif asker == "remove_elements":
             while True:

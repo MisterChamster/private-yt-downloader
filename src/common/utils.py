@@ -47,7 +47,7 @@ class Utils():
     def save_value_to_settings(
         json_key: Literal[
             "SAVE_PATH",
-            "PLIST_SAVE_FORMAT",
+            "SAVE_FORMAT",
             "PLIST_DEFAULT_SAVE_PATH",
             "PLIST_NUMBERING",
             "PLIST_NUMBERING_HAS_ZEROS",
