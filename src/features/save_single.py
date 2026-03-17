@@ -17,21 +17,21 @@ def save_single(url: str) -> str:
         print(f"Format:    {opts.save_format}")
         print(f"Save path: {opts.save_path}")
         print()
-        asker = Askers.ask_single_menu()
+        asker_single = Askers.ask_single_menu()
         print("\n")
 
-        if asker == "change_format":
+        if asker_single == "change_format":
             asker = Askers.ask_save_ext()
             print("\n")
             if asker in (opts.save_format, "return"):
                 continue
 
-            opts.save_format = asker
+            opts.set_save_format(asker)
             opts.reset_ydl()
-            Utils.save_value_to_settings("PLIST_SAVE_FORMAT", asker)
 
-        elif asker == "change_save_path":
-            opts.save_path = Askers.ask_save_path()
+        elif asker_single == "change_save_path":
+            asker = Askers.ask_save_path()
+            opts.set_save_path(asker)
             print("\n")
 
             if opts.save_path == "":
@@ -41,12 +41,10 @@ def save_single(url: str) -> str:
                 print("Invalid path.\n\n")
                 continue
 
-            Utils.save_value_to_settings("SAVE_PATH", opts.save_path)
-
-        elif asker == "change_link":
+        elif asker_single == "change_link":
             return "repeat"
 
-        elif asker == "download":
+        elif asker_single == "download":
             opts.mutate_ydl("paths", {"home": opts.save_path})
 
             filename = Utils.illegal_char_remover(video_title)
@@ -61,5 +59,5 @@ def save_single(url: str) -> str:
             if download_flag:
                 print(f"{filename} has been successfully downloaded.\n\n")
 
-        elif asker == "exit":
+        elif asker_single == "exit":
             return "exit"
