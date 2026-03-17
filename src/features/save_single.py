@@ -2,63 +2,62 @@ from os import path
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
+from src.common.download_opts import Download_Opts
 import src.common.ydl_support as ydl_support
 
 
 
 def save_single(url: str) -> str:
-    save_format = Utils.get_val_from_settings("PLIST_SAVE_FORMAT")
-    save_path   = Utils.get_val_from_settings("SAVE_PATH")
-    ydl_opts    = Utils.get_ydl_options(save_format)
+    opts = Download_Opts()
     video_title = ydl_support.get_video_title(url)
 
     while True:
         print()
         print(f"Video:     {video_title}")
-        print(f"Format:    {save_format}")
-        print(f"Save path: {save_path}")
+        print(f"Format:    {opts.save_format}")
+        print(f"Save path: {opts.save_path}")
         print()
         asker = Askers.ask_single_menu()
         print("\n")
 
         if asker == "change_format":
-            extension = Askers.ask_save_ext()
+            asker = Askers.ask_save_ext()
             print("\n")
-            if extension in (save_format, "return"):
+            if asker in (opts.save_format, "return"):
                 continue
 
-            ydl_opts = Utils.get_ydl_options(extension)
-            save_format = extension
-            Utils.save_value_to_settings("PLIST_SAVE_FORMAT", extension)
+            opts.save_format = asker
+            opts.reset_ydl()
+            Utils.save_value_to_settings("PLIST_SAVE_FORMAT", asker)
 
         elif asker == "change_save_path":
-            save_path = Askers.ask_save_path()
+            opts.save_path = Askers.ask_save_path()
             print("\n")
 
-            if save_path == "":
+            if opts.save_path == "":
                 print("Empty path was chosen.\n\n")
                 continue
-            if not path.exists(save_path):
+            if not path.exists(opts.save_path):
                 print("Invalid path.\n\n")
                 continue
 
-            Utils.save_value_to_settings("SAVE_PATH", save_path)
+            Utils.save_value_to_settings("SAVE_PATH", opts.save_path)
 
         elif asker == "change_link":
             return "repeat"
 
         elif asker == "download":
-            ydl_opts["paths"] = {"home": save_path}
+            opts.mutate_ydl("paths", {"home": opts.save_path})
 
             filename = Utils.illegal_char_remover(video_title)
             i = 1
-            while path.exists(filename + f".{save_format}"):
+            while path.exists(filename + f".{opts.save_format}"):
                 filename += "_d"*i
                 i += 1
-            ydl_opts["outtmpl"] = filename
+            opts.mutate_ydl("outtmpl", filename)
 
             print("Downloading...")
-            download_flag = ydl_support.download_fromyt(ydl_opts, url)
+            download_flag = ydl_support.download_fromyt(opts.ydl_opts, url)
             if download_flag:
                 print(f"{filename} has been successfully downloaded.\n\n")
 
