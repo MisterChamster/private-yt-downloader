@@ -312,8 +312,10 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             # Get dir name and create it
             chdir(opts.save_path)
             dir_name = Utils.illegal_char_remover(yt_list.new_plist_title)
-            dirpath = Path(opts.save_path) / dir_name
-            while (dirpath).exists():
+            while True:
+                dirpath = Path(opts.save_path) / dir_name
+                if not (dirpath).exists():
+                    break
                 dir_name += "_d"
             mkdir(dir_name)
             chdir(dir_name)
