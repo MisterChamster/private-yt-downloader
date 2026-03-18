@@ -158,14 +158,23 @@ class Utils():
         if extension == "mp4":
             ydl_opts["merge_output_format"] = "mp4"
             ydl_opts["format"] = "bestvideo+bestaudio/best"
+
+        elif extension == "ogg":
+            ydl_opts["postprocessors"] = [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'vorbis',
+                'preferredquality': '192'}]
+            ydl_opts['format'] = 'bestaudio/best'
+
         elif extension == "mp3":
-            ydl_opts["postprocessors"] = [
-                {"key": "FFmpegExtractAudio",
+            ydl_opts["postprocessors"] = [{
+                "key": "FFmpegExtractAudio",
                 "preferredcodec": "mp3"}]
             ydl_opts["format"] = "bestaudio"
+
         elif extension == "flac":
-            ydl_opts["postprocessors"] = [
-                {"key": "FFmpegExtractAudio",
+            ydl_opts["postprocessors"] = [{
+                "key": "FFmpegExtractAudio",
                 "preferredcodec": "flac"}]
             ydl_opts["format"] = "bestaudio"
 
