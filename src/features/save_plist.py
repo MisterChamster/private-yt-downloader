@@ -297,12 +297,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             return "repeat"
 
         elif asker_menu == "rev_to_original":
-            yt_list = Elements_List(
-                plist_urls,
-                plist_el_titles,
-                save_numbering,
-                save_numbering_has_zeros,
-                del_duplicates)
+            yt_list.reset_new_to_og()
 
         elif asker_menu == "download":
             if not path.exists(opts.save_path):

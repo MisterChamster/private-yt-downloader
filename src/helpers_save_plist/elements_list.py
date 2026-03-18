@@ -37,13 +37,17 @@ class Elements_List():
         self.og_names_list  = names_list.copy()
         self.og_len         = len(urls_list)
 
-        self.new_plist_title = plist_title
-        self.new_urls_list   = urls_list.copy()
-        self.new_names_list  = names_list.copy()
-        self.numbering       = numbering
+        self.numbering           = numbering
         self.numbering_has_zeros = numbering_has_zeros
-        self.del_duplicates = del_duplicates
+        self.del_duplicates      = del_duplicates
 
+        self.reset_new_to_og()
+
+
+    def reset_new_to_og(self) -> None:
+        self.new_plist_title = self.og_plist_title
+        self.new_urls_list   = self.og_urls_list.copy()
+        self.new_names_list  = self.og_names_list.copy()
         self.reset_new_index_in_og()
         self.update_newlen()
         self.calc_numbering_list()
@@ -100,15 +104,6 @@ class Elements_List():
             index_in_og = self.new_index_in_og[index]
             og_name = self.og_names_list[index_in_og]
             self.new_names_list[index] = og_name
-
-
-    def set_new_to_og(self) -> None:
-        self.new_urls_list   = self.og_urls_list
-        self.new_names_list  = self.og_names_list
-        self.new_index_in_og = [i for i in range(len(self.og_urls_list))]
-        self.new_plist_title = self.og_plist_title
-        self.update_newlen()
-        self.calc_numbering_list()
 
 
     # ================================== POP ==================================

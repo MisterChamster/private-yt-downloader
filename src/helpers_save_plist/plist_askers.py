@@ -91,7 +91,7 @@ class Plist_Askers():
         while True:
             print("n - Trim elements' names\n"
                   "b - Edit elements' numbering\n"
-                  "p - Edit playlist name"
+                  "p - Edit playlist name\n"
                   "r - Return\n>> ", end="")
             action = input().strip().lower()
 
