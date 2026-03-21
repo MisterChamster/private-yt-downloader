@@ -317,7 +317,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             opts.mutate_ydl("paths", {"home": str(dirpath)})
 
             total_errors = 0
-            print(f"Downloading {yt_list.new_plist_title}...")
+            print(f"Downloading {yt_list.new_plist_title}")
 
             for index in range(yt_list.new_len):
                 filename = yt_list.get_filename_for_download(index)
