@@ -1,5 +1,4 @@
 from typing import Literal
-from os     import chdir, listdir
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
@@ -316,8 +315,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             total_errors = 0
             print(f"Downloading {yt_list.new_plist_title}")
 
-            chdir(dirpath)
-            # COME BACK HERERERERERER
             for index in range(yt_list.new_len):
                 filename = yt_list.get_filename_for_download(index)
                 filename = Utils.illegal_char_remover(filename)
