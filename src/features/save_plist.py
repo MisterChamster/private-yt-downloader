@@ -321,7 +321,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 while True:
                     filename_and_ext = f"{filename}.{opts.save_format}"
                     predicted_path = dirpath / filename_and_ext
-                    if predicted_path.exists():
+                    if not predicted_path.exists():
                         break
                     filename += "_d"
                 opts.mutate_ydl("outtmpl", filename)
