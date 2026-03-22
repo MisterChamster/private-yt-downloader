@@ -1,10 +1,11 @@
 from tkinter import filedialog
-import os
+from pathlib import Path
+from os import chdir
 
 
 
 class Askers():
-    downloads_path: str
+    downloads_path: Path
 
     @staticmethod
     def ask_url() -> str:
@@ -39,14 +40,19 @@ class Askers():
 
 
     @staticmethod
-    def ask_save_path():
-        original_path = os.getcwd()
-        os.chdir(Askers.downloads_path)
+    def ask_save_path() -> Path | None:
+        original_path = Path.cwd()
+        chdir(Askers.downloads_path)
         folder_selected = filedialog.askdirectory(title="Select download folder")
-        os.chdir(original_path)
+        chdir(original_path)
+        if folder_selected == "":
+            return
+
+        folder_selected = Path(folder_selected)
         return folder_selected
 
 
+    @staticmethod
     def ask_single_menu() -> str:
         returns_dict = {
             "f": "change_format",

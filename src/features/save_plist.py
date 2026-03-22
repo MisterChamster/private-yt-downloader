@@ -1,6 +1,4 @@
-from typing  import Literal
-from pathlib import Path
-from os      import chdir, mkdir, path, listdir
+from typing import Literal
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
@@ -284,10 +282,10 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
         elif asker_menu == "change_save_path":
             asker = Askers.ask_save_path()
             print("\n")
-            if asker == "":
+            if asker is None:
                 print("Empty path was chosen.\n\n")
                 continue
-            if not path.exists(asker):
+            if not asker.exists():
                 print("Invalid path.\n\n")
                 continue
 
@@ -300,20 +298,18 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             yt_list.reset_new_to_og()
 
         elif asker_menu == "download":
-            if not path.exists(opts.save_path):
+            if not opts.save_path.exists():
                 print("Save path does not exist on your device.")
                 continue
 
             # Get dir name and create it
-            chdir(opts.save_path)
             dir_name = Utils.illegal_char_remover(yt_list.new_plist_title)
             while True:
-                dirpath = Path(opts.save_path) / dir_name
-                if not (dirpath).exists():
+                dirpath = opts.save_path / dir_name
+                if not dirpath.exists():
+                    dirpath.mkdir()
                     break
                 dir_name += "_d"
-            mkdir(dir_name)
-            chdir(dir_name)
             opts.mutate_ydl("paths", {"home": str(dirpath)})
 
             total_errors = 0
@@ -322,7 +318,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             for index in range(yt_list.new_len):
                 filename = yt_list.get_filename_for_download(index)
                 filename = Utils.illegal_char_remover(filename)
-                while filename in listdir():
+                while True:
+                    filename_and_ext = f"{filename}.{opts.save_format}"
+                    predicted_path = dirpath / filename_and_ext
+                    if not predicted_path.exists():
+                        break
                     filename += "_d"
                 opts.mutate_ydl("outtmpl", filename)
 

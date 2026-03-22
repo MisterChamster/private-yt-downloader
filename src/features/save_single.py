@@ -1,5 +1,3 @@
-from os import path
-
 from src.common.askers import Askers
 from src.common.utils  import Utils
 from src.common.download_opts import Download_Opts
@@ -31,25 +29,29 @@ def save_single(url: str) -> str:
 
         elif asker_single == "change_save_path":
             asker = Askers.ask_save_path()
-            opts.set_save_path(asker)
-            print("\n")
-
-            if opts.save_path == "":
+            if asker is None:
                 print("Empty path was chosen.\n\n")
                 continue
-            if not path.exists(opts.save_path):
+            if not asker.exists():
                 print("Invalid path.\n\n")
                 continue
+
+            opts.set_save_path(asker)
 
         elif asker_single == "change_link":
             return "repeat"
 
         elif asker_single == "download":
-            opts.mutate_ydl("paths", {"home": opts.save_path})
+            save_path_string = str(opts.save_path)
+            opts.mutate_ydl("paths", {"home": save_path_string})
 
             filename = Utils.illegal_char_remover(video_title)
             i = 1
-            while path.exists(filename + f".{opts.save_format}"):
+            while True:
+                file_name_and_ext = f"{filename}.{opts.save_format}"
+                predicted_file_path = opts.save_path / file_name_and_ext
+                if not predicted_file_path.exists():
+                    break
                 filename += "_d"*i
                 i += 1
             opts.mutate_ydl("outtmpl", filename)
