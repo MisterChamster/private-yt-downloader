@@ -52,6 +52,7 @@ class Askers():
         return folder_selected
 
 
+    @staticmethod
     def ask_single_menu() -> str:
         returns_dict = {
             "f": "change_format",

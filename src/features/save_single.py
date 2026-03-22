@@ -29,7 +29,6 @@ def save_single(url: str) -> str:
 
         elif asker_single == "change_save_path":
             asker = Askers.ask_save_path()
-            print("\n")
             if asker is None:
                 print("Empty path was chosen.\n\n")
                 continue
