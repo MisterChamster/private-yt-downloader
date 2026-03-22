@@ -1,10 +1,11 @@
 from tkinter import filedialog
+from pathlib import Path
 import os
 
 
 
 class Askers():
-    downloads_path: str
+    downloads_path: Path
 
     @staticmethod
     def ask_url() -> str:
