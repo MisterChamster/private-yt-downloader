@@ -41,7 +41,7 @@ class Askers():
 
     @staticmethod
     def ask_save_path():
-        original_path = os.getcwd()
+        original_path = Path.cwd()
         os.chdir(Askers.downloads_path)
         folder_selected = filedialog.askdirectory(title="Select download folder")
         os.chdir(original_path)

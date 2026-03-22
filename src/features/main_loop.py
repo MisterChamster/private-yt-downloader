@@ -9,7 +9,7 @@ import src.features.save_plist  as save_plist
 
 
 proj_path = Path(__file__).resolve().parent.parent.parent
-settings_path = str(Path(proj_path) / "settings.json")
+settings_path = Path(proj_path) / "settings.json"
 Utils.settings_path = settings_path
 
 downloads_path = Path(proj_path) / "downloads"
