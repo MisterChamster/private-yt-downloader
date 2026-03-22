@@ -1,5 +1,5 @@
-from typing  import Literal
-from os      import chdir, mkdir, listdir
+from typing import Literal
+from os     import chdir, listdir
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
@@ -305,23 +305,27 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
             # Get dir name and create it
             dir_name = Utils.illegal_char_remover(yt_list.new_plist_title)
-            chdir(opts.save_path)
             while True:
                 dirpath = opts.save_path / dir_name
                 if not dirpath.exists():
+                    dirpath.mkdir()
                     break
                 dir_name += "_d"
-            mkdir(dir_name)
-            chdir(dir_name)
             opts.mutate_ydl("paths", {"home": str(dirpath)})
 
             total_errors = 0
             print(f"Downloading {yt_list.new_plist_title}")
 
+            chdir(dirpath)
+            # COME BACK HERERERERERER
             for index in range(yt_list.new_len):
                 filename = yt_list.get_filename_for_download(index)
                 filename = Utils.illegal_char_remover(filename)
-                while filename in listdir():
+                while True:
+                    filename_and_ext = f"{filename}.{opts.save_format}"
+                    predicted_path = dirpath / filename_and_ext
+                    if predicted_path.exists():
+                        break
                     filename += "_d"
                 opts.mutate_ydl("outtmpl", filename)
 
