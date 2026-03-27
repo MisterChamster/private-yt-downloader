@@ -84,12 +84,14 @@ class Plist_Askers():
         'return']:
         returns_dict = {
             'n': 'trim_names',
+            'e': 'edit_names',
             'b': 'edit_numbering',
             'p': 'edit_plist_name',
             'r': 'return'}
 
         while True:
             print("n - Trim elements' names\n"
+                  "e - Edit elements' names NEW STUFF\n"
                   "b - Edit elements' numbering\n"
                   "p - Edit playlist name\n"
                   "r - Return\n>> ", end="")
@@ -99,6 +101,36 @@ class Plist_Askers():
                 return returns_dict[action]
             else:
                 print("Incorrect input.\n\n")
+
+
+    @staticmethod
+    def ask_edit_names(max_num: int) -> str:
+        returns_dict = {'r': 'return'}
+
+        while True:
+            print("Input a file's number to manually change title ('r' to return)\n>> ", end="")
+            asker = input().strip()
+
+            if asker in returns_dict:
+                return returns_dict[asker]
+
+            elif asker.isdigit():
+                if (int(asker) < 1 or
+                    int(asker) > max_num):
+                    print("Incorrect input\n\n")
+                else:
+                    return asker
+            else:
+                print("Incorrect input\n\n")
+
+
+    @staticmethod
+    def ask_new_title(old_title: str) -> str:
+        print(old_title)
+        print()
+        print("Input new title\n>> ", end="")
+        asker = input()
+        return asker
 
 
     @staticmethod

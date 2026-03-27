@@ -242,6 +242,21 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         elif action == "return":
                             break
 
+                elif asker == 'edit_names':
+                    while True:
+                        print("Current names:")
+                        Utils.print_list(yt_list.new_names_list)
+                        print()
+
+                        asker = Plist_Askers.ask_edit_names(yt_list.new_len)
+                        if asker == 'return':
+                            break
+
+                        el_index = int(asker) - 1
+                        old_title = yt_list.new_names_list[el_index]
+                        new_title = Plist_Askers.ask_new_title(old_title)
+                        yt_list.new_names_list[el_index] = new_title
+
                 elif asker == 'edit_numbering':
                     while True:
                         print("Current numbering:")
