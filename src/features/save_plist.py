@@ -312,6 +312,34 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
             opts.set_save_path(asker)
 
+        elif asker_menu == "metadata_settings":
+            print("Hello! I'm a md menu!!!")
+
+            # Enable/disable md saving
+            # yt_list has a new field - md class
+            # Md class - resettable.
+            # Fields:
+            # - Artist (str)          User has to specify!
+            # - Album (str)           Plist name by default
+            # - Tracknums (list[str]) Just order
+            # - Name (list[str])      Vids names
+            # - Date (str)            User has to specify!
+
+
+            # Askers:
+            # enable/disable md
+            # set artist ()
+            # set album
+            # set tracknums
+            # set names         (has option set to new names!)
+            # set date
+
+            # set stuff (set/not set) (embed/not embed)
+            # set stuff - print if set. Tracknum and names always set
+            # to something.
+            # User can specify which md will be embedded. This
+            # will NOT be in settings, bc yeah
+
         elif asker_menu == "change_link":
             return "repeat"
 

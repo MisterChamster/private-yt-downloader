@@ -12,6 +12,7 @@ class Plist_Askers():
             "r": "remove_elements",
             "e": "edit_captions",
             "p": "change_save_path",
+            "m": "metadata_settings",
             "l": "change_link",
             "o": "rev_to_original",
             "d": "download",
@@ -29,6 +30,7 @@ class Plist_Askers():
                   "r - Remove elements to download\n"
                   "e - Edit captions...\n"
                   "p - Change save path\n"
+                  "m - Metadata settings\n"
                   "l - Change link\n"
                   "o - Revert to original playlist\n"
                  f"d - Download {download_string}\n"
