@@ -4,7 +4,9 @@ from typing import Literal
 
 class Plist_Askers():
     # =============================== PLIST MENU ===============================
-    def ask_plist_menu(duplicates_problem: bool = False) -> str:
+    def ask_plist_menu(
+            duplicates_problem: bool = False,
+            download_md: bool = False) -> str:
         returns_dict = {
             "f": "change_format",
             "r": "remove_elements",
@@ -17,6 +19,9 @@ class Plist_Askers():
         if duplicates_problem:
             returns_dict["c"] = "handle_duplicates"
 
+        download_string = ("(with metadata)"
+                           if download_md
+                           else "(no metadata)")
         while True:
             if duplicates_problem:
                 print("c - Handle duplicates")
@@ -26,7 +31,7 @@ class Plist_Askers():
                   "p - Change save path\n"
                   "l - Change link\n"
                   "o - Revert to original playlist\n"
-                  "d - Download\n"
+                 f"d - Download {download_string}\n"
                   "x - Exit program\n>> ", end="")
             action = input().strip().lower()
 

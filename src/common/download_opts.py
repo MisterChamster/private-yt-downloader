@@ -7,11 +7,13 @@ from src.common.utils import Utils
 class Download_Opts():
     save_format: str
     save_path:   Path
+    include_md:  bool
     ydl_opts:    dict
 
     def __init__(self) -> None:
         self.save_format = Utils.get_val_from_settings("SAVE_FORMAT")
         self.save_path   = Utils.get_val_from_settings("SAVE_PATH")
+        self.include_md  = Utils.get_val_from_settings("INCLUDE_METADATA")
         self.save_path   = Path(self.save_path)
         self.reset_ydl()
 
@@ -29,3 +31,12 @@ class Download_Opts():
     def set_save_path(self, new_path: Path) -> None:
         self.save_path = new_path
         Utils.save_value_to_settings("SAVE_PATH", str(new_path))
+
+    def is_md_saved(self) -> bool:
+        if not self.include_md:
+            return False
+
+        audio_formats = ("mp3", "ogg", "flac")
+        if not self.save_format in audio_formats:
+            return False
+        return True

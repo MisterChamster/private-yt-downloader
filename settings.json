@@ -2,9 +2,10 @@
   "MIMI": "KOKO",
   "PIPI": "POPO",
   "SAVE_PATH": "None",
-  "SAVE_FORMAT": "mp3",
+  "SAVE_FORMAT": "ogg",
   "PLIST_DEFAULT_SAVE_PATH": "",
   "PLIST_NUMBERING": true,
   "PLIST_NUMBERING_HAS_ZEROS": true,
-  "PLIST_DEL_DUPLICATES": true
+  "PLIST_DEL_DUPLICATES": true,
+  "INCLUDE_METADATA": false
 }

@@ -26,6 +26,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     save_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
     save_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
     del_duplicates           = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
+    include_metadata         = Utils.get_val_from_settings("INCLUDE_METADATA")
     duplis_flag = Plist_Utils.has_duplicates(plist_urls)
     yt_list     = Elements_List(
         plist_title,
@@ -40,11 +41,12 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             print("There are no elements left in the playlist!\n\n")
             return
 
-        numbering_string = ("None"
-                            if not yt_list.numbering else
-                            "Yes, with zeros"
-                            if yt_list.numbering_has_zeros else
-                            "Yes, without zeros")
+        numbering_string = (
+            "None"
+            if not yt_list.numbering else
+            "Yes, with zeros"
+            if yt_list.numbering_has_zeros else
+            "Yes, without zeros")
 
         Utils.print_list(yt_list.new_names_list)
         print()
@@ -56,7 +58,9 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             duplis_del_msg = f"Duplicates deleting: {del_duplicates}\n"
             print(duplis_del_msg, end="")
         print()
-        asker_menu = Plist_Askers.ask_plist_menu(duplis_flag)
+
+        download_md = opts.is_md_saved()
+        asker_menu = Plist_Askers.ask_plist_menu(duplis_flag, download_md)
         print("\n")
 
         if asker_menu == "handle_duplicates" and duplis_flag:
