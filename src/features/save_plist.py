@@ -317,7 +317,8 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
             # Enable/disable md saving
             # yt_list has a new field - md class
-            # Md class - resettable.
+            # Method in yt_list to set metadata to current new_vals
+
             # Fields:
             # - Artist (str)          User has to specify!
             # - Album (str)           Plist name by default
@@ -339,6 +340,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             # to something.
             # User can specify which md will be embedded. This
             # will NOT be in settings, bc yeah
+
 
         elif asker_menu == "change_link":
             return "repeat"
