@@ -90,8 +90,9 @@ class Plist_Askers():
             'r': 'return'}
 
         while True:
+            print("Choose action:")
             print("n - Trim elements' names\n"
-                  "e - Edit elements' names NEW STUFF\n"
+                  "e - Edit elements' names\n"
                   "b - Edit elements' numbering\n"
                   "p - Edit playlist name\n"
                   "r - Return\n>> ", end="")
@@ -127,7 +128,6 @@ class Plist_Askers():
     @staticmethod
     def ask_new_title(old_title: str) -> str:
         print(old_title)
-        print()
         print("Input new title\n>> ", end="")
         asker = input()
         return asker

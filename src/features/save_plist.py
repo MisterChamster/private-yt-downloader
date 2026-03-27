@@ -245,10 +245,11 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                 elif asker == 'edit_names':
                     while True:
                         print("Current names:")
-                        Utils.print_list(yt_list.new_names_list)
+                        Utils.print_list(yt_list.new_names_list, True)
                         print()
 
                         asker = Plist_Askers.ask_edit_names(yt_list.new_len)
+                        print("\n")
                         if asker == 'return':
                             break
 
@@ -256,6 +257,7 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
                         old_title = yt_list.new_names_list[el_index]
                         new_title = Plist_Askers.ask_new_title(old_title)
                         yt_list.new_names_list[el_index] = new_title
+                        print("\n")
 
                 elif asker == 'edit_numbering':
                     while True:
