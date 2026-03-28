@@ -4,7 +4,7 @@ from src.common.utils import Utils
 
 
 
-def get_video_title(url):
+def get_video_title(url: str):
     ydl_getdata = {
         'quiet': True,
         'extract_flat': True,
@@ -21,7 +21,7 @@ def get_video_title(url):
         return "Error"
 
 
-def get_plist_dict(url) -> dict | None:
+def get_plist_dict(url: str) -> dict | None:
     ydl_getdata = {
         'quiet': True,
         'extract_flat': True,

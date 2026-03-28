@@ -10,7 +10,7 @@ import src.common.ydl_support as ydl_support
 
 
 
-def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
+def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
     # Get playlist dictionary
     plist_dict = ydl_support.get_plist_dict(plist_url)
     if not plist_dict:
@@ -26,7 +26,6 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
     save_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
     save_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
     del_duplicates           = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
-    include_metadata         = Utils.get_val_from_settings("INCLUDE_METADATA")
     duplis_flag = Plist_Utils.has_duplicates(plist_urls)
     yt_list     = Elements_List(
         plist_title,
@@ -313,41 +312,61 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
             opts.set_save_path(asker)
 
         elif asker_menu == "metadata_settings":
-            print("Hello! I'm a md menu!!!")
-            asker = Plist_Askers.ask_metadata_menu()
+            while True:
+                print("Hello! I'm a md menu!!!")
+                asker = Plist_Askers.ask_metadata_menu()
 
-            if asker == "":
-                pass
-            elif asker == "return":
-                return asker
-            elif asker == "exit":
-                pass
+                if asker == "change_appending":
+                    opts.change_include_md()
 
-            # Enable/disable md saving
-            # yt_list has a new field - md class
-            # Method in yt_list to set metadata to current new_vals
+                elif asker == "set_artist":
+                    pass
+                elif asker == "set_album":
+                    pass
+                elif asker == "set_tracknums":
+                    pass
+                elif asker == "set_names":
+                    pass
+                elif asker == "set_date":
+                    pass
+                elif asker == "":
+                    pass
 
-            # Fields:
-            # - Artist (str)          User has to specify!
-            # - Album (str)           Plist name by default
-            # - Tracknums (list[str]) Just order
-            # - Name (list[str])      Vids names
-            # - Date (str)            User has to specify!
+                elif asker == "return":
+                    break
+                elif asker == "exit":
+                    return "exit"
+
+                # ========== DONE ==========
+                # Enable/disable md saving
+                # yt_list has a new field - md class
+                # Method in yt_list to set metadata to current new_vals
+
+                # Fields:
+                # - Artist (str)          User has to specify!
+                # - Album (str)           Plist name by default
+                # - Tracknums (list[str]) Just order
+                # - Name (list[str])      Vids names
+                # - Date (str)            User has to specify!
 
 
-            # Askers:
-            # enable/disable md
-            # set artist ()
-            # set album
-            # set tracknums
-            # set names         (has option set to new names!)
-            # set date
+                # ========== NOT DONE ==========
+                # Asker:
+                # enable/disable md
+                # make specific md embed
+                # set artist
+                # set album
+                # set tracknums
+                # set names
+                # set date
 
-            # set stuff (set/not set) (embed/not embed)
-            # set stuff - print if set. Tracknum and names always set
-            # to something.
-            # User can specify which md will be embedded. This
-            # will NOT be in settings, bc yeah
+                # names (has option set to new names!)
+                # set stuff (set/not set) (embed/not embed)
+                # set stuff - print if set. Tracknum and names always set
+                # to something.
+                # User can specify which md will be embedded. This
+                # will NOT be in settings, bc yeah
+                # Setting md sets it to embed automatically!
 
 
         elif asker_menu == "change_link":

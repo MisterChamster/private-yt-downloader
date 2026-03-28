@@ -416,26 +416,40 @@ class Plist_Askers():
     # ================================ METADATA ================================
     # ==========================================================================
     @staticmethod
-    def ask_metadata_menu(md_included: bool
-            ) -> Literal["return", "exit", "change_appending"]:
+    def ask_metadata_menu(md_included: bool) -> Literal[
+                "change_appending",
+                "set_artist",
+                "set_album",
+                "set_tracknums",
+                "set_names",
+                "set_date",
+                "return",
+                "exit"]:
         returns_dict = {
-            "a": "change_appending",
-            "r": "return",
-            "x": "exit"}
+            "a":  "change_appending",
+            "sa": "set_artist",
+            "sl": "set_album",
+            "st": "set_tracknums",
+            "sn": "set_names",
+            "sd": "set_date",
+            "r":  "return",
+            "x":  "exit"}
 
         able_msg = ("Disable metadata appending"
                     if md_included
                     else "Enable metadata appending")
         while True:
-            print(f"a - {able_msg}\n"
+            print(f"a  - {able_msg}\n"
+                   "sa - Set artist\n"
+                   "sl - Set album\n"
+                   "st - Set tracknums\n"
+                   "sn - Set names\n"
+                   "sd - Set date\n"
                    "\n"
                    "\n"
                    "\n"
-                   "\n"
-                   "\n"
-                   "\n"
-                   "r - Return\n"
-                   "x - Exit program\n>> ", end="")
+                   "r  - Return\n"
+                   "x  - Exit program\n>> ", end="")
             action = input().strip().lower()
 
             if action in returns_dict:

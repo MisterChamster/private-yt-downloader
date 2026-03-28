@@ -32,6 +32,10 @@ class Download_Opts():
         self.save_path = new_path
         Utils.save_value_to_settings("SAVE_PATH", str(new_path))
 
+    def change_include_md(self) -> None:
+        self.include_md = not self.include_md
+        Utils.save_value_to_settings("INCLUDE_METADATA", self.include_md)
+
     def is_md_saved(self) -> bool:
         if not self.include_md:
             return False
