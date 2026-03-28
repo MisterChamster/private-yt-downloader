@@ -419,8 +419,8 @@ class Plist_Askers():
     def ask_metadata_menu(md_included: bool) -> Literal[
                 "change_appending",
                 "which_md_embedded",
-                "set_artist",
                 "set_album",
+                "set_artist",
                 "set_date",
                 "set_name",
                 "set_tracknum",
@@ -429,8 +429,8 @@ class Plist_Askers():
         returns_dict = {
             "a":  "change_appending",
             "e":  "which_md_embedded",
-            "sa": "set_artist",
             "sl": "set_album",
+            "sa": "set_artist",
             "sd": "set_date",
             "sn": "set_name",
             "st": "set_tracknum",
@@ -444,8 +444,8 @@ class Plist_Askers():
         while True:
             print(f"a  - {able_msg}\n"
                    "e  - Specify which metadata will be embedded\n"
-                   "sa - Set artist\n"
                    "sl - Set album\n"
+                   "sa - Set artist\n"
                    "sd - Set date\n"
                    "sn - Set names\n"
                    "st - Set tracknums\n"

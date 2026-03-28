@@ -320,26 +320,31 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     opts.change_include_md()
 
                 elif asker == "which_md_embedded":
+                    # opts.change_md_to_embed("album")
+                    # opts.change_md_to_embed("artist")
+                    # opts.change_md_to_embed("date")
+                    # opts.change_md_to_embed("name")
+                    # opts.change_md_to_embed("tracknum")
                     pass
 
                 elif asker == "set_album":
-                    opts.change_md_to_embed("album")
+                    pass
 
                 elif asker == "set_artist":
-                    opts.change_md_to_embed("artist")
+                    pass
 
                 elif asker == "set_date":
-                    opts.change_md_to_embed("date")
+                    pass
 
                 elif asker == "set_name":
-                    opts.change_md_to_embed("name")
+                    pass
 
                 elif asker == "set_tracknum":
-                    opts.change_md_to_embed("tracknum")
-
+                    pass
 
                 elif asker == "return":
                     break
+
                 elif asker == "exit":
                     return "exit"
 
