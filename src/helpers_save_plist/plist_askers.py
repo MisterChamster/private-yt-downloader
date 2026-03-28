@@ -460,18 +460,42 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_set_album() -> str:
-        return ""
+    def ask_set_album(current_album: str | None) -> str:
+        if current_album == None:
+            current_album = "Not set"
+
+        print(f"Current album: {current_album}"
+                "Input new album or leave empty to return\n>> ", end='')
+        asker = input()
+        return asker
 
 
     @staticmethod
-    def ask_set_artist() -> str:
-        return ""
+    def ask_set_artist(current_artist: str | None) -> str:
+        if current_artist == None:
+            current_artist = "Not set"
+
+        print(f"Current artist: {current_artist}"
+                "Input new artist or leave empty to return\n>> ", end='')
+        asker = input()
+        return asker
 
 
     @staticmethod
-    def ask_set_date() -> str:
-        return ""
+    def ask_set_date(current_date: str | None) -> str:
+        if current_date == None:
+            current_date = "Not set"
+
+        while True:
+            print(f"Current date: {current_date}"
+                   "Input new date or leave empty to return\n>> ", end='')
+            asker = input()
+
+            if (asker.isdigit() and
+                len(asker) == 4):
+                return asker
+            else:
+                print("Invalid input\n\n")
 
 
     @staticmethod

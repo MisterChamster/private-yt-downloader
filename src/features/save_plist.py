@@ -328,23 +328,39 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     pass
 
                 elif asker == "set_album":
-                    asker = Plist_Askers.ask_set_album()
-                    pass
+                    current_album = yt_list.md_vars.md_album
+                    asker = Plist_Askers.ask_set_album(current_album)
+                    print()
+                    if asker == "":
+                        continue
+                    yt_list.md_vars.md_album = asker
 
                 elif asker == "set_artist":
-                    asker = Plist_Askers.ask_set_artist()
-                    pass
+                    current_artist = yt_list.md_vars.md_artist
+                    asker = Plist_Askers.ask_set_artist(current_artist)
+                    if asker == "":
+                        continue
+                    print()
+                    yt_list.md_vars.md_artist = asker
 
                 elif asker == "set_date":
-                    asker = Plist_Askers.ask_set_date()
-                    pass
+                    current_date = yt_list.md_vars.md_date
+                    asker = Plist_Askers.ask_set_date(current_date)
+                    if asker == "":
+                        continue
+                    print()
+                    yt_list.md_vars.md_date = asker
 
                 elif asker == "set_name":
-                    asker = Plist_Askers.ask_set_names()
+                    while True:
+                        asker = Plist_Askers.ask_set_names()
+                        break
                     pass
 
                 elif asker == "set_tracknum":
-                    asker = Plist_Askers.ask_set_tracknums()
+                    while True:
+                        asker = Plist_Askers.ask_set_tracknums()
+                        break
                     pass
 
                 elif asker == "return":
