@@ -319,6 +319,8 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 if asker == "change_appending":
                     opts.change_include_md()
 
+                elif asker == "which_md_embedded":
+                    pass
                 elif asker == "set_artist":
                     pass
                 elif asker == "set_album":
@@ -328,8 +330,6 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 elif asker == "set_names":
                     pass
                 elif asker == "set_date":
-                    pass
-                elif asker == "":
                     pass
 
                 elif asker == "return":
@@ -349,8 +349,6 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # - Name (list[str])      Vids names
                 # - Date (str)            User has to specify!
 
-
-                # ========== NOT DONE ==========
                 # Asker:
                 # enable/disable md
                 # make specific md embed
@@ -359,6 +357,9 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # set tracknums
                 # set names
                 # set date
+
+
+                # ========== NOT DONE ==========
 
                 # names (has option set to new names!)
                 # set stuff (set/not set) (embed/not embed)

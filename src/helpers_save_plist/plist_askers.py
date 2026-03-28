@@ -418,6 +418,7 @@ class Plist_Askers():
     @staticmethod
     def ask_metadata_menu(md_included: bool) -> Literal[
                 "change_appending",
+                "which_md_embedded",
                 "set_artist",
                 "set_album",
                 "set_tracknums",
@@ -427,6 +428,7 @@ class Plist_Askers():
                 "exit"]:
         returns_dict = {
             "a":  "change_appending",
+            "e":  "which_md_embedded",
             "sa": "set_artist",
             "sl": "set_album",
             "st": "set_tracknums",
@@ -438,16 +440,15 @@ class Plist_Askers():
         able_msg = ("Disable metadata appending"
                     if md_included
                     else "Enable metadata appending")
+
         while True:
             print(f"a  - {able_msg}\n"
+                   "e  - Specify which metadata will be embedded\n"
                    "sa - Set artist\n"
                    "sl - Set album\n"
                    "st - Set tracknums\n"
                    "sn - Set names\n"
                    "sd - Set date\n"
-                   "\n"
-                   "\n"
-                   "\n"
                    "r  - Return\n"
                    "x  - Exit program\n>> ", end="")
             action = input().strip().lower()
@@ -456,4 +457,3 @@ class Plist_Askers():
                 return returns_dict[action]
             else:
                 print("Incorrect input.\n\n")
-            break
