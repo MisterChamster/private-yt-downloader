@@ -3,7 +3,10 @@ from typing import Literal
 
 
 class Plist_Askers():
+    # ==========================================================================
     # =============================== PLIST MENU ===============================
+    # ==========================================================================
+    @staticmethod
     def ask_plist_menu(
             duplicates_problem: bool = False,
             download_md: bool = False) -> str:
@@ -43,7 +46,9 @@ class Plist_Askers():
                 print("Incorrect input.\n\n")
 
 
+    # ==========================================================================
     # =============================== DUPLICATES ===============================
+    # ==========================================================================
     @staticmethod
     def ask_delete_duplis() -> bool:
         returns_dict = {
@@ -405,3 +410,36 @@ class Plist_Askers():
                     return plist_len
                 end_index = ending_el - 1
                 return end_index
+
+
+    # ==========================================================================
+    # ================================ METADATA ================================
+    # ==========================================================================
+    @staticmethod
+    def ask_metadata_menu(md_included: bool
+            ) -> Literal["return", "exit", "change_appending"]:
+        returns_dict = {
+            "a": "change_appending",
+            "r": "return",
+            "x": "exit"}
+
+        able_msg = ("Disable metadata appending"
+                    if md_included
+                    else "Enable metadata appending")
+        while True:
+            print(f"a - {able_msg}\n"
+                   "\n"
+                   "\n"
+                   "\n"
+                   "\n"
+                   "\n"
+                   "\n"
+                   "r - Return\n"
+                   "x - Exit program\n>> ", end="")
+            action = input().strip().lower()
+
+            if action in returns_dict:
+                return returns_dict[action]
+            else:
+                print("Incorrect input.\n\n")
+            break

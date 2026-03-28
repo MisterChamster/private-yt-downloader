@@ -314,6 +314,14 @@ def save_plist(plist_url: list) -> Literal["repeat", "exit"]:
 
         elif asker_menu == "metadata_settings":
             print("Hello! I'm a md menu!!!")
+            asker = Plist_Askers.ask_metadata_menu()
+
+            if asker == "":
+                pass
+            elif asker == "return":
+                return asker
+            elif asker == "exit":
+                pass
 
             # Enable/disable md saving
             # yt_list has a new field - md class

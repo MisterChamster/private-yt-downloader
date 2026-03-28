@@ -1,4 +1,5 @@
 from src.helpers_save_plist.plist_utils import Plist_Utils
+from src.helpers_save_plist.meta_dator  import Meta_Dator
 
 
 
@@ -19,6 +20,8 @@ class Elements_List():
     numbering: bool
     numbering_has_zeros: bool
     del_duplicates: bool
+
+    md_vars: Meta_Dator
 
 
     def __init__(self,
@@ -62,6 +65,12 @@ class Elements_List():
 
     def update_newlen(self) -> None:
         self.new_len = len(self.new_urls_list)
+
+
+    def set_metadata_to_new(self) -> None:
+        self.md_vars.md_album = self.new_plist_title
+        self.md_vars.md_names = self.new_names_list.copy()
+        self.md_vars.md_tracknums = self.new_numbers_list.copy()
 
 
     def calc_numbering_list(self) -> None:
