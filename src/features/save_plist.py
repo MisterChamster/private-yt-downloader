@@ -321,16 +321,22 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
                 elif asker == "which_md_embedded":
                     pass
-                elif asker == "set_artist":
-                    pass
+
                 elif asker == "set_album":
-                    pass
-                elif asker == "set_tracknums":
-                    pass
-                elif asker == "set_names":
-                    pass
+                    opts.change_md_to_embed("album")
+
+                elif asker == "set_artist":
+                    opts.change_md_to_embed("artist")
+
                 elif asker == "set_date":
-                    pass
+                    opts.change_md_to_embed("date")
+
+                elif asker == "set_name":
+                    opts.change_md_to_embed("name")
+
+                elif asker == "set_tracknum":
+                    opts.change_md_to_embed("tracknum")
+
 
                 elif asker == "return":
                     break
@@ -368,6 +374,8 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # User can specify which md will be embedded. This
                 # will NOT be in settings, bc yeah
                 # Setting md sets it to embed automatically!
+
+                # Reset metadator when needed
 
 
         elif asker_menu == "change_link":

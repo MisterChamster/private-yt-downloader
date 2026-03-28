@@ -1,3 +1,4 @@
+from typing  import Literal
 from pathlib import Path
 
 from src.common.utils import Utils
@@ -16,6 +17,11 @@ class Download_Opts():
         self.save_path   = Utils.get_val_from_settings("SAVE_PATH")
         self.include_md  = Utils.get_val_from_settings("INCLUDE_METADATA")
         self.save_path   = Path(self.save_path)
+        self.md_to_emb   = {"album":    False,
+                            "artist":   False,
+                            "date":     False,
+                            "name":     False,
+                            "tracknum": False}
         self.reset_ydl()
 
 
@@ -45,3 +51,12 @@ class Download_Opts():
         if not self.save_format in audio_formats:
             return False
         return True
+
+    def change_md_to_embed(self, md_key: Literal[
+            "album",
+            "artist",
+            "date",
+            "name",
+            "tracknum"]) -> None:
+        current_val = self.md_to_emb[md_key]
+        self.md_to_emb[md_key] = not current_val

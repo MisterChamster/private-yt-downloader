@@ -421,9 +421,9 @@ class Plist_Askers():
                 "which_md_embedded",
                 "set_artist",
                 "set_album",
-                "set_tracknums",
-                "set_names",
                 "set_date",
+                "set_name",
+                "set_tracknum",
                 "return",
                 "exit"]:
         returns_dict = {
@@ -431,9 +431,9 @@ class Plist_Askers():
             "e":  "which_md_embedded",
             "sa": "set_artist",
             "sl": "set_album",
-            "st": "set_tracknums",
-            "sn": "set_names",
             "sd": "set_date",
+            "sn": "set_name",
+            "st": "set_tracknum",
             "r":  "return",
             "x":  "exit"}
 
@@ -446,9 +446,9 @@ class Plist_Askers():
                    "e  - Specify which metadata will be embedded\n"
                    "sa - Set artist\n"
                    "sl - Set album\n"
-                   "st - Set tracknums\n"
-                   "sn - Set names\n"
                    "sd - Set date\n"
+                   "sn - Set names\n"
+                   "st - Set tracknums\n"
                    "r  - Return\n"
                    "x  - Exit program\n>> ", end="")
             action = input().strip().lower()
