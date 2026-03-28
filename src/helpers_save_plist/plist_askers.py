@@ -457,3 +457,28 @@ class Plist_Askers():
                 return returns_dict[action]
             else:
                 print("Incorrect input.\n\n")
+
+
+    @staticmethod
+    def ask_set_album() -> str:
+        return ""
+
+
+    @staticmethod
+    def ask_set_artist() -> str:
+        return ""
+
+
+    @staticmethod
+    def ask_set_date() -> str:
+        return ""
+
+
+    @staticmethod
+    def ask_set_names() -> str:
+        return ""
+
+
+    @staticmethod
+    def ask_set_tracknums() -> str:
+        return ""

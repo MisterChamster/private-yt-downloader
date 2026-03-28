@@ -328,18 +328,23 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     pass
 
                 elif asker == "set_album":
+                    asker = Plist_Askers.ask_set_album()
                     pass
 
                 elif asker == "set_artist":
+                    asker = Plist_Askers.ask_set_artist()
                     pass
 
                 elif asker == "set_date":
+                    asker = Plist_Askers.ask_set_date()
                     pass
 
                 elif asker == "set_name":
+                    asker = Plist_Askers.ask_set_names()
                     pass
 
                 elif asker == "set_tracknum":
+                    asker = Plist_Askers.ask_set_tracknums()
                     pass
 
                 elif asker == "return":
