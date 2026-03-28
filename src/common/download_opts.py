@@ -8,6 +8,7 @@ class Download_Opts():
     save_format: str
     save_path:   Path
     include_md:  bool
+    md_to_emb:   dict[str: bool]
     ydl_opts:    dict
 
     def __init__(self) -> None:
