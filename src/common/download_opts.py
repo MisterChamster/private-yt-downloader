@@ -17,11 +17,12 @@ class Download_Opts():
         self.save_path   = Utils.get_val_from_settings("SAVE_PATH")
         self.include_md  = Utils.get_val_from_settings("INCLUDE_METADATA")
         self.save_path   = Path(self.save_path)
-        self.md_to_emb   = {"album":    False,
-                            "artist":   False,
-                            "date":     False,
-                            "name":     False,
-                            "tracknum": False}
+        self.md_to_emb   = {"album":       False,
+                            "artist":      False,
+                            "date":        False,
+                            #These will be True bc I want to nye hye hye
+                            "title":       True,
+                            "tracknumber": True}
         self.reset_ydl()
 
 
@@ -56,8 +57,8 @@ class Download_Opts():
             "album",
             "artist",
             "date",
-            "name",
-            "tracknum"]) -> None:
+            "title",
+            "tracknumber"]) -> None:
         current_val = self.md_to_emb[md_key]
         self.md_to_emb[md_key] = not current_val
 
@@ -66,8 +67,8 @@ class Download_Opts():
             "album",
             "artist",
             "date",
-            "name",
-            "tracknum"],
+            "title",
+            "tracknumber"],
             set_val: bool) -> None:
         self.md_to_emb[md_key] = set_val
 

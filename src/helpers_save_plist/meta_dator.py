@@ -1,38 +1,38 @@
 class Meta_Dator():
-    md_names:     list[str]
-    md_tracknums: list[str]
-    md_artist:    str
-    md_date:      str
-    md_album:     str
+    md_titles:       list[str]
+    md_tracknumbers: list[str]
+    md_artist:       str
+    md_date:         str
+    md_album:        str
 
 
     def __init__(
             self,
-            md_names:     list[str],
-            md_tracknums: list[str] = None,
-            md_album:    str | None = None,
-            md_artist:   str | None = None,
-            md_date:     str | None = None):
+            md_titles:       list[str],
+            md_tracknumbers: list[str] = None,
+            md_album:        str | None = None,
+            md_artist:       str | None = None,
+            md_date:         str | None = None):
 
-        self.md_names  = md_names
-        self.md_album  = md_album
-        self.md_artist = md_artist
-        self.md_date   = md_date
+        self.md_titles  = md_titles
+        self.md_album   = md_album
+        self.md_artist  = md_artist
+        self.md_date    = md_date
 
-        if md_tracknums == None:
-            self.md_tracknums = [
+        if md_tracknumbers == None:
+            self.md_tracknumbers = [
                 str(num+1)
                 for num
-                in range(len(md_names))]
+                in range(len(md_titles))]
         else:
-            self.md_tracknums = md_tracknums
+            self.md_tracknumbers = md_tracknumbers
 
 
     def pop_md_lists(self, index: int) -> None:
-        self.md_names.pop(index)
-        self.md_tracknums.pop(index)
+        self.md_titles.pop(index)
+        self.md_tracknumbers.pop(index)
 
 
     def pop_md_list_range(self, index_s: int, index_e: int) -> None:
-        del(self.md_names[index_s:index_e])
-        del(self.md_tracknums[index_s:index_e])
+        del(self.md_titles[index_s:index_e])
+        del(self.md_tracknumbers[index_s:index_e])

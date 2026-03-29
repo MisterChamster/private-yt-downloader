@@ -220,11 +220,11 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                                 if i < start_el_index or i > ending_el_index:
                                     continue
 
-                                name = yt_list.new_names_list[i]
+                                title = yt_list.new_names_list[i]
                                 if trim_front_back == 'start':
-                                    yt_list.new_names_list[i] = name[trim_len:]
+                                    yt_list.new_names_list[i] = title[trim_len:]
                                 elif trim_front_back == 'end':
-                                    yt_list.new_names_list[i] = name[:-trim_len]
+                                    yt_list.new_names_list[i] = title[:-trim_len]
 
                         elif action == "trim_all_names":
                             trim_front_back = Plist_Askers.ask_trim_front_back()
@@ -237,11 +237,11 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                             if not trim_len:
                                 continue
 
-                            for i, name in enumerate(yt_list.new_names_list):
+                            for i, title in enumerate(yt_list.new_names_list):
                                 if trim_front_back == 'start':
-                                    yt_list.new_names_list[i] = name[trim_len:]
+                                    yt_list.new_names_list[i] = title[trim_len:]
                                 elif trim_front_back == 'end':
-                                    yt_list.new_names_list[i] = name[:-trim_len]
+                                    yt_list.new_names_list[i] = title[:-trim_len]
 
                         elif action == "original_names":
                             yt_list.restore_names_to_og()
@@ -347,18 +347,18 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                                 opts.set_md_to_embed("artist", True)
                             if md_date_set:
                                 opts.set_md_to_embed("date", True)
-                            opts.set_md_to_embed("name", True)
-                            opts.set_md_to_embed("tracknum", True)
+                            opts.set_md_to_embed("title", True)
+                            opts.set_md_to_embed("tracknumber", True)
                         elif asker == "change_set_album":
                             opts.change_md_to_embed("album")
                         elif asker == "change_set_artist":
                             opts.change_md_to_embed("artist")
                         elif asker == "change_set_date":
                             opts.change_md_to_embed("date")
-                        elif asker == "change_set_name":
-                            opts.change_md_to_embed("name")
-                        elif asker == "change_set_tracknum":
-                            opts.change_md_to_embed("tracknum")
+                        elif asker == "change_set_title":
+                            opts.change_md_to_embed("title")
+                        elif asker == "change_set_tracknumber":
+                            opts.change_md_to_embed("tracknumber")
                         elif asker == "return":
                             break
                         elif asker == "exit":
@@ -391,55 +391,55 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     opts.set_md_to_embed("date", True)
                     yt_list.md_vars.md_date = asker
 
-                elif asker == "set_name":
+                elif asker == "set_title":
                     while True:
-                        names = yt_list.md_vars.md_names
-                        for i, name in enumerate(names):
-                            if name is None:
-                                name = "Name not set"
-                            print(f"{i+1}. {name}")
+                        titles = yt_list.md_vars.md_titles
+                        for i, title in enumerate(titles):
+                            if title is None:
+                                title = "Name not set"
+                            print(f"{i+1}. {title}")
                         print()
 
-                        name_to_set = Plist_Askers.ask_set_names_num(len(names))
+                        title_to_set = Plist_Askers.ask_set_titles_num(len(titles))
                         print("\n")
-                        if name_to_set == None:
+                        if title_to_set == None:
                             break
-                        elif name_to_set == 0:
-                            yt_list.md_vars.md_names = yt_list.new_names_list.copy()
-                            opts.set_md_to_embed("name", True)
+                        elif title_to_set == 0:
+                            yt_list.md_vars.md_titles = yt_list.new_names_list.copy()
+                            opts.set_md_to_embed("title", True)
                             continue
-                        opts.set_md_to_embed("name", True)
-                        index_to_set = name_to_set - 1
+                        opts.set_md_to_embed("title", True)
+                        index_to_set = title_to_set - 1
 
-                        new_name = Plist_Askers.ask_md_name_string(names[index_to_set])
+                        new_title = Plist_Askers.ask_md_title_string(titles[index_to_set])
                         print("\n")
-                        yt_list.md_vars.md_names[index_to_set] = new_name
+                        yt_list.md_vars.md_titles[index_to_set] = new_title
 
-                elif asker == "set_tracknum":
+                elif asker == "set_tracknumber":
                     while True:
-                        tracknums = yt_list.md_vars.md_tracknums
+                        tracknumbers = yt_list.md_vars.md_tracknumbers
                         files_names = yt_list.new_names_list
-                        for i, tnum in enumerate(tracknums):
+                        for i, tnum in enumerate(tracknumbers):
                             if tnum is None:
                                 tnum = "Not set"
                             print(f"{i+1}. [{tnum}] for {files_names[i]}")
                         print()
 
-                        tnum_to_set = Plist_Askers.ask_set_tracknums_num(len(tracknums))
+                        tnum_to_set = Plist_Askers.ask_set_tracknumbers_num(len(tracknumbers))
                         print("\n")
                         if tnum_to_set == None:
                             break
                         elif tnum_to_set == 0:
-                            yt_list.md_vars.md_tracknums = [
+                            yt_list.md_vars.md_tracknumbers = [
                                 str(el+1) for el in range(len(files_names))]
-                            opts.set_md_to_embed("tracknum", True)
+                            opts.set_md_to_embed("tracknumber", True)
                             continue
-                        opts.set_md_to_embed("tracknum", True)
+                        opts.set_md_to_embed("tracknumber", True)
                         index_to_set = tnum_to_set - 1
 
-                        new_tracknum = Plist_Askers.ask_md_tracknum_string()
+                        new_tracknumber = Plist_Askers.ask_md_tracknumber_string()
                         print("\n")
-                        yt_list.md_vars.md_tracknums[index_to_set] = new_tracknum
+                        yt_list.md_vars.md_tracknumbers[index_to_set] = new_tracknumber
 
                 elif asker == "return":
                     break
@@ -453,23 +453,23 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # Method in yt_list to set metadata to current new_vals
 
                 # Fields:
-                # - Artist (str)          User has to specify!
-                # - Album (str)           Plist name by default
-                # - Tracknums (list[str]) Just order
-                # - Name (list[str])      Vids names
-                # - Date (str)            User has to specify!
+                # - Album (str)              Plist name by default
+                # - Artist (str)             User has to specify!
+                # - Date (str)               User has to specify!
+                # - Title (list[str])        Vids titles
+                # - Tracknumbers (list[str]) Just order
 
                 # Asker:
                 # enable/disable md
                 # make specific md embed
-                # set artist
                 # set album
-                # set tracknums
-                # set names
+                # set artist
                 # set date
+                # set titles
+                # set tracknumbers
 
-                # names (has option set to new names!)
-                # Tracknum and names are set TO VALUES from the beginning.
+                # titles (has option set to new titles!)
+                # Tracknumber and titles are set TO VALUES from the beginning.
                 # Change list of md names and tnums when newlists are changed
                 # Setting md sets it to embed automatically!
                 # set stuff (embed/not embed) (set/not set) - printing
@@ -548,19 +548,17 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                             "date",
                             yt_list.md_vars.md_date)
 
-                    if opts.md_to_emb["name"] == True:
-                        # Works funkily (doesn't)
+                    if opts.md_to_emb["title"] == True:
                         emb.append_metadata_file_universal(
                             file_path,
-                            "name",
-                            yt_list.md_vars.md_names[i])
+                            "title",
+                            yt_list.md_vars.md_titles[i])
 
-                    if opts.md_to_emb["tracknum"] == True:
-                        # Works funkily (doesn't)
+                    if opts.md_to_emb["tracknumber"] == True:
                         emb.append_metadata_file_universal(
                             file_path,
-                            "tracknum",
-                            yt_list.md_vars.md_tracknums[i])
+                            "tracknumber",
+                            yt_list.md_vars.md_tracknumbers[i])
 
             # Error count printing
             print()

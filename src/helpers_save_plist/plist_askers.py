@@ -416,8 +416,8 @@ class Plist_Askers():
     # ================================ METADATA ================================
     # ==========================================================================
     @staticmethod
-    def ask_metadata_menu(md_included: bool,
-                          md_to_emb:   dict[Literal["album", "artist", "date", "name", "tracknum"]:bool],
+    def ask_metadata_menu(md_included:   bool,
+                          md_to_emb:     dict[Literal["album", "artist", "date", "title", "tracknumber"]:bool],
                           md_album_set:  bool,
                           md_artist_set: bool,
                           md_date_set:   bool
@@ -427,8 +427,8 @@ class Plist_Askers():
                 "set_album",
                 "set_artist",
                 "set_date",
-                "set_name",
-                "set_tracknum",
+                "set_title",
+                "set_tracknumber",
                 "return",
                 "exit"]:
         returns_dict = {
@@ -437,28 +437,28 @@ class Plist_Askers():
             "sl": "set_album",
             "sa": "set_artist",
             "sd": "set_date",
-            "sn": "set_name",
-            "st": "set_tracknum",
+            "sn": "set_title",
+            "st": "set_tracknumber",
             "r":  "return",
             "x":  "exit"}
 
         able_msg = ("Disable metadata appending"
                     if md_included
                     else "Enable metadata appending")
-        md_album_set_msg    = str(md_to_emb["album"]   ).replace("True", "True ")
-        md_artist_set_msg   = str(md_to_emb["artist"]  ).replace("True", "True ")
-        md_date_set_msg     = str(md_to_emb["date"]    ).replace("True", "True ")
-        md_name_set_msg     = str(md_to_emb["name"]    ).replace("True", "True ")
-        md_tracknum_set_msg = str(md_to_emb["tracknum"]).replace("True", "True ")
+        md_album_set_msg       = str(md_to_emb["album"]      ).replace("True", "True ")
+        md_artist_set_msg      = str(md_to_emb["artist"]     ).replace("True", "True ")
+        md_date_set_msg        = str(md_to_emb["date"]       ).replace("True", "True ")
+        md_title_set_msg       = str(md_to_emb["title"]      ).replace("True", "True ")
+        md_tracknumber_set_msg = str(md_to_emb["tracknumber"]).replace("True", "True ")
 
         while True:
             print(f"a  - {able_msg}\n"
                    "e  - Specify which metadata will be embedded\n"
-                  f"sl - Set album     (Embed: {md_album_set_msg   }) (Is set: {md_album_set})\n"
-                  f"sa - Set artist    (Embed: {md_artist_set_msg  }) (Is set: {md_artist_set})\n"
-                  f"sd - Set date      (Embed: {md_date_set_msg    }) (Is set: {md_date_set})\n"
-                  f"sn - Set names     (Embed: {md_name_set_msg    }) (Is set: True)\n" #Troll!
-                  f"st - Set tracknums (Embed: {md_tracknum_set_msg}) (Is set: True)\n" #Troll!
+                  f"sl - Set album        (Embed: {md_album_set_msg   }) (Is set: {md_album_set})\n"
+                  f"sa - Set artist       (Embed: {md_artist_set_msg  }) (Is set: {md_artist_set})\n"
+                  f"sd - Set date         (Embed: {md_date_set_msg    }) (Is set: {md_date_set})\n"
+                  f"sn - Set titles       (Embed: {md_title_set_msg    }) (Is set: True)\n" #Troll!
+                  f"st - Set tracknumbers (Embed: {md_tracknumber_set_msg}) (Is set: True)\n" #Troll!
                    "r  - Return\n"
                    "x  - Exit program\n>> ", end="")
             action = input().strip().lower()
@@ -475,8 +475,8 @@ class Plist_Askers():
         "album",
         "artist",
         "date",
-        "name",
-        "tracknum"]:bool],
+        "title",
+        "tracknumber"]:bool],
         md_album_set:  bool,
         md_artist_set: bool,
         md_date_set:   bool) -> Literal[
@@ -484,8 +484,8 @@ class Plist_Askers():
             "change_set_album",
             "change_set_artist",
             "change_set_date",
-            "change_set_name",
-            "change_set_tracknum",
+            "change_set_title",
+            "change_set_tracknumber",
             "return",
             "exit"]:
 
@@ -494,24 +494,24 @@ class Plist_Askers():
             "l": "change_set_album",
             "a": "change_set_artist",
             "d": "change_set_date",
-            "n": "change_set_name",
-            "t": "change_set_tracknum",
+            "n": "change_set_title",
+            "t": "change_set_tracknumber",
             "r": "return",
             "x": "exit"}
 
         # I know I'm lazy
-        md_album_set_msg_1    = str(md_to_emb["album"]   ).replace("True", "Disable").replace("False", "Enable ")
-        md_artist_set_msg_1   = str(md_to_emb["artist"]  ).replace("True", "Disable").replace("False", "Enable ")
-        md_date_set_msg_1     = str(md_to_emb["date"]    ).replace("True", "Disable").replace("False", "Enable ")
-        md_name_set_msg_1     = str(md_to_emb["name"]    ).replace("True", "Disable").replace("False", "Enable ")
-        md_tracknum_set_msg_1 = str(md_to_emb["tracknum"]).replace("True", "Disable").replace("False", "Enable ")
+        md_album_set_msg_1       = str(md_to_emb["album"]      ).replace("True", "Disable").replace("False", "Enable ")
+        md_artist_set_msg_1      = str(md_to_emb["artist"]     ).replace("True", "Disable").replace("False", "Enable ")
+        md_date_set_msg_1        = str(md_to_emb["date"]       ).replace("True", "Disable").replace("False", "Enable ")
+        md_title_set_msg_1       = str(md_to_emb["title"]      ).replace("True", "Disable").replace("False", "Enable ")
+        md_tracknumber_set_msg_1 = str(md_to_emb["tracknumber"]).replace("True", "Disable").replace("False", "Enable ")
 
         # I'm sure You'd do it better <3
-        md_album_set_msg_2    = md_album_set_msg_1.replace(   "Disable", "enabled").replace("Enable ", "disabled")
-        md_artist_set_msg_2   = md_artist_set_msg_1.replace(  "Disable", "enabled").replace("Enable ", "disabled")
-        md_date_set_msg_2     = md_date_set_msg_1.replace(    "Disable", "enabled").replace("Enable ", "disabled")
-        md_name_set_msg_2     = md_name_set_msg_1.replace(    "Disable", "enabled").replace("Enable ", "disabled")
-        md_tracknum_set_msg_2 = md_tracknum_set_msg_1.replace("Disable", "enabled").replace("Enable ", "disabled")
+        md_album_set_msg_2       = md_album_set_msg_1.replace(   "Disable", "enabled").replace("Enable ", "disabled")
+        md_artist_set_msg_2      = md_artist_set_msg_1.replace(  "Disable", "enabled").replace("Enable ", "disabled")
+        md_date_set_msg_2        = md_date_set_msg_1.replace(    "Disable", "enabled").replace("Enable ", "disabled")
+        md_title_set_msg_2       = md_title_set_msg_1.replace(    "Disable", "enabled").replace("Enable ", "disabled")
+        md_tracknumber_set_msg_2 = md_tracknumber_set_msg_1.replace("Disable", "enabled").replace("Enable ", "disabled")
 
         legality_to_set = {
             "l": md_album_set,
@@ -521,11 +521,11 @@ class Plist_Askers():
         while True:
             print("Choose metadata to be embedded:\n"
                   "e - Embed all metadata with value\n"
-                 f"l - {md_album_set_msg_1   } embedding album metadata    (currently {md_album_set_msg_2})\n"
-                 f"a - {md_artist_set_msg_1  } embedding artist metadata   (currently {md_artist_set_msg_2})\n"
-                 f"d - {md_date_set_msg_1    } embedding date metadata     (currently {md_date_set_msg_2})\n"
-                 f"n - {md_name_set_msg_1    } embedding name metadata     (currently {md_name_set_msg_2})\n"
-                 f"t - {md_tracknum_set_msg_1} embedding tracknum metadata (currently {md_tracknum_set_msg_2})\n"
+                 f"l - {md_album_set_msg_1      } embedding album metadata       (currently {md_album_set_msg_2})\n"
+                 f"a - {md_artist_set_msg_1     } embedding artist metadata      (currently {md_artist_set_msg_2})\n"
+                 f"d - {md_date_set_msg_1       } embedding date metadata        (currently {md_date_set_msg_2})\n"
+                 f"n - {md_title_set_msg_1      } embedding title metadata       (currently {md_title_set_msg_2})\n"
+                 f"t - {md_tracknumber_set_msg_1} embedding tracknumber metadata (currently {md_tracknumber_set_msg_2})\n"
                   "r - Return\n"
                   "x - Exit\n"
                   ">> ", end='')
@@ -582,27 +582,27 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_set_names_num(names_count: int) -> int | None:
+    def ask_set_titles_num(titles_count: int) -> int | None:
         while True:
-            print("Input number of the name to change:\n"
+            print("Input number of the title to change:\n"
                   "(leave empty to return)\n"
-                  "(input 0 to revert to files names)\n>> ", end='')
+                  "(input 0 to revert to files titles)\n>> ", end='')
             asker = input().strip()
 
             if asker == "":
                 return
 
             if (asker.isdigit() and
-                int(asker) <= names_count):
+                int(asker) <= titles_count):
                 return int(asker)
             else:
                 print("Invalid input\n\n")
 
 
     @staticmethod
-    def ask_set_tracknums_num(tnums_count: int) -> int | None:
+    def ask_set_tracknumbers_num(tnums_count: int) -> int | None:
         while True:
-            print("Input number of the tracknum to change:\n"
+            print("Input number of the tracknumber to change:\n"
                   "(leave empty to return)\n"
                   "(input 0 to revert to file numbering)\n>> ", end='')
             asker = input().strip()
@@ -618,19 +618,19 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_md_name_string(curr_name: str) -> str:
+    def ask_md_title_string(curr_title: str) -> str:
         while True:
-            print(curr_name)
-            print(f"Input new name metadata:\n>> ", end='')
+            print(curr_title)
+            print(f"Input new title metadata:\n>> ", end='')
             asker = input()
 
             return asker
 
 
     @staticmethod
-    def ask_md_tracknum_string() -> str:
+    def ask_md_tracknumber_string() -> str:
         while True:
-            print(f"Input new tracknum metadata:\n>> ", end='')
+            print(f"Input new tracknumber metadata:\n>> ", end='')
             asker = input()
 
             if not asker.isdigit():

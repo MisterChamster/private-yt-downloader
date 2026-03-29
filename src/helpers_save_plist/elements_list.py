@@ -72,8 +72,8 @@ class Elements_List():
 
     def set_metadata_to_new(self) -> None:
         self.md_vars.md_album = self.new_plist_title
-        self.md_vars.md_names = self.new_names_list.copy()
-        self.md_vars.md_tracknums = self.new_numbers_list.copy()
+        self.md_vars.md_titles = self.new_names_list.copy()
+        self.md_vars.md_tracknumbers = self.new_numbers_list.copy()
 
 
     def calc_numbering_list(self) -> None:
