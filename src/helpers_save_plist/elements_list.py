@@ -44,7 +44,7 @@ class Elements_List():
         self.numbering_has_zeros = numbering_has_zeros
         self.del_duplicates      = del_duplicates
 
-        self.md_vars = Meta_Dator(len(names_list))
+        self.md_vars = Meta_Dator(names_list)
 
         self.reset_new_to_og()
 
