@@ -313,7 +313,6 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
         elif asker_menu == "metadata_settings":
             while True:
-                print("Hello! I'm a md menu!!!")
                 asker = Plist_Askers.ask_metadata_menu()
 
                 if asker == "change_appending":
@@ -428,14 +427,11 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
 
                 # ========== NOT DONE ==========
-                # set stuff (set/not set) (embed/not embed)
-                # set stuff - print if set. Tracknum and names always set
-                # to something.
-                # User can specify which md will be embedded. This
-                # will NOT be in settings, bc yeah
+                # set stuff (set/not set) (embed/not embed) - printing
+                # User can specify which md will be embedded.
                 # Setting md sets it to embed automatically!
 
-                # Reset metadator when needed
+                # Tracknum and names are set from the beginning.
 
 
         elif asker_menu == "change_link":
