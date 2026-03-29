@@ -9,7 +9,7 @@ class Meta_Dator():
     def __init__(
             self,
             md_titles:        list[str],
-            md_tracknumbers:  list[str] = [],
+            md_tracknumbers:  list[str] = [None],
             md_album:        str | None = None,
             md_artist:       str | None = None,
             md_date:         str | None = None,

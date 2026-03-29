@@ -480,11 +480,11 @@ class Plist_Askers():
     @staticmethod
     def ask_which_md_embed(
         md_to_emb: dict[Literal[
-        "album",
-        "artist",
-        "date",
-        "title",
-        "tracknumber"]:bool],
+            "album",
+            "artist",
+            "date",
+            "title",
+            "tracknumber"]:bool],
         md_album_set:  bool,
         md_artist_set: bool,
         md_date_set:   bool) -> Literal[
@@ -528,7 +528,7 @@ class Plist_Askers():
 
         while True:
             print("Choose metadata to be embedded:\n"
-                  "e - Embed all metadata with value\n"
+                  "e - Enable embedding all metadata with set value\n"
                  f"l - {md_album_set_msg_1      } embedding album metadata       (currently {md_album_set_msg_2})\n"
                  f"a - {md_artist_set_msg_1     } embedding artist metadata      (currently {md_artist_set_msg_2})\n"
                  f"d - {md_date_set_msg_1       } embedding date metadata        (currently {md_date_set_msg_2})\n"

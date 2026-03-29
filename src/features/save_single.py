@@ -57,12 +57,43 @@ def save_single(url: str) -> bool:
                     md_artist_set,
                     md_date_set,
                     md_tracknum_set)
+                print("\n")
 
                 if asker == "change_appending":
                     opts.change_include_md()
 
                 elif asker == "which_md_embedded":
-                    pass
+                    while True:
+                        asker = Plist_Askers.ask_which_md_embed(
+                            opts.md_to_emb,
+                            md_album_set,
+                            md_artist_set,
+                            md_date_set)
+                        print("\n")
+
+                        if asker == "all_legal":
+                            if md_album_set:
+                                opts.set_md_to_embed("album", True)
+                            if md_artist_set:
+                                opts.set_md_to_embed("artist", True)
+                            if md_date_set:
+                                opts.set_md_to_embed("date", True)
+                            opts.set_md_to_embed("title", True)
+                            opts.set_md_to_embed("tracknumber", True)
+                        elif asker == "change_set_album":
+                            opts.change_md_to_embed("album")
+                        elif asker == "change_set_artist":
+                            opts.change_md_to_embed("artist")
+                        elif asker == "change_set_date":
+                            opts.change_md_to_embed("date")
+                        elif asker == "change_set_title":
+                            opts.change_md_to_embed("title")
+                        elif asker == "change_set_tracknumber":
+                            opts.change_md_to_embed("tracknumber")
+                        elif asker == "return":
+                            break
+                        elif asker == "exit":
+                            return True
 
                 elif asker == "set_album":
                     asker = Plist_Askers.ask_set_album(
