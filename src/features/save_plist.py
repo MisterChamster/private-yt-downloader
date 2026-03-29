@@ -455,10 +455,12 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # Change list of md names and tnums when newlists are changed
                 # Setting md sets it to embed automatically!
                 # set stuff (embed/not embed) (set/not set) - printing
+                # User can specify which md will be embedded
 
 
                 # ========== NOT DONE ==========
-                # User can specify which md will be embedded
+                # Embed all option
+                # Conditional embedding - can't set embed to True if val not set
 
 
 
