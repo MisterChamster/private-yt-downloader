@@ -46,9 +46,17 @@ def save_single(url: str) -> bool:
 
         elif asker_single == "metadata_settings":
             while True:
+                md_album_set  = (metadator.md_album  != None)
+                md_artist_set = (metadator.md_artist != None)
+                md_date_set   = (metadator.md_date   != None)
+                md_tracknum_set = (len(metadator.md_tracknumbers) > 0)
                 asker = Askers.ask_single_md(
                     opts.include_md,
-                    opts.md_to_emb)
+                    opts.md_to_emb,
+                    md_album_set,
+                    md_artist_set,
+                    md_date_set,
+                    md_tracknum_set)
 
                 if asker == "change_appending":
                     opts.change_include_md()

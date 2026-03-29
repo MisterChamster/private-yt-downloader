@@ -93,7 +93,11 @@ class Askers():
     @staticmethod
     def ask_single_md(
         md_included: bool,
-        md_to_emb:   dict[Literal["album", "artist", "date", "title", "tracknumber"]:bool]
+        md_to_emb:   dict[Literal["album", "artist", "date", "title", "tracknumber"]:bool],
+        md_album_set:  bool,
+        md_artist_set: bool,
+        md_date_set:   bool,
+        md_tracknum_set: bool
         ) -> Literal[
             "change_appending",
             "which_md_embedded",
@@ -114,7 +118,7 @@ class Askers():
             "st": "set_tracknumber",
             "r":  "return",
             "x":  "exit"}
-        
+
         md_album_set_msg       = str(md_to_emb["album"]      ).replace("True", "True ")
         md_artist_set_msg      = str(md_to_emb["artist"]     ).replace("True", "True ")
         md_date_set_msg        = str(md_to_emb["date"]       ).replace("True", "True ")
@@ -127,11 +131,11 @@ class Askers():
         while True:
             print(f"a  - {able_msg}\n"
                    "e  - Specify which metadata will be embedded\n"
-                  f"sl - Set album        (Embed: {md_album_set_msg      })\n"
-                  f"sa - Set artist       (Embed: {md_artist_set_msg     })\n"
-                  f"sd - Set date         (Embed: {md_date_set_msg       })\n"
-                  f"sn - Set titles       (Embed: {md_title_set_msg      })\n"
-                  f"st - Set tracknumbers (Embed: {md_tracknumber_set_msg})\n"
+                  f"sl - Set album       (Embed: {md_album_set_msg      }) (Is set: {md_album_set})\n"
+                  f"sa - Set artist      (Embed: {md_artist_set_msg     }) (Is set: {md_artist_set})\n"
+                  f"sd - Set date        (Embed: {md_date_set_msg       }) (Is set: {md_date_set})\n"
+                  f"sn - Set title       (Embed: {md_title_set_msg      }) (Is set: True)\n" #Troll!
+                  f"st - Set tracknumber (Embed: {md_tracknumber_set_msg}) (Is set: {md_tracknum_set})\n"
                    "r  - Return\n"
                    "x  - Exit program\n"
                    ">> ", end="")
