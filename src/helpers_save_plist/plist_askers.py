@@ -470,6 +470,31 @@ class Plist_Askers():
 
 
     @staticmethod
+    def ask_which_md_embed() -> None:
+        returns_dict = {
+            "l": "",
+            "a": "",
+            "d": "",
+            "n": "",
+            "t": "",
+            "r": "",
+            "x": ""}
+
+        while True:
+            print("Choose metadata to be embedded:\n"
+                  "l - \n"
+                  "a - \n"
+                  "d - \n"
+                  "n - \n"
+                  "t - \n"
+                  "r - \n"
+                  "x - \n"
+                  "\n>> ", end='')
+            break
+        
+
+
+    @staticmethod
     def ask_set_album(current_album: str | None) -> str:
         if current_album == None:
             current_album = "Not set"
