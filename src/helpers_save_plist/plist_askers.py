@@ -470,12 +470,16 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_which_md_embed(md_to_emb: dict[Literal[
+    def ask_which_md_embed(
+        md_to_emb: dict[Literal[
         "album",
         "artist",
         "date",
         "name",
-        "tracknum"]:bool]) -> Literal[
+        "tracknum"]:bool],
+        md_album_set:  bool,
+        md_artist_set: bool,
+        md_date_set:   bool) -> Literal[
             "change_set_album",
             "change_set_artist",
             "change_set_date",
@@ -507,6 +511,11 @@ class Plist_Askers():
         md_name_set_msg_2     = md_name_set_msg_1.replace(    "Disable", "enabled").replace("Enable ", "disabled")
         md_tracknum_set_msg_2 = md_tracknum_set_msg_1.replace("Disable", "enabled").replace("Enable ", "disabled")
 
+        legality_to_set = {
+            "l": md_album_set,
+            "a": md_artist_set,
+            "d": md_date_set}
+
         while True:
             print("Choose metadata to be embedded:\n"
                  f"l - {md_album_set_msg_1   } embedding album metadata    (currently {md_album_set_msg_2})\n"
@@ -518,6 +527,11 @@ class Plist_Askers():
                   "x - Exit\n"
                   ">> ", end='')
             asker = input().strip().lower()
+
+            if asker in legality_to_set:
+                if legality_to_set[asker] is False:
+                    print("Can't enable embedding; value has to be set first\n\n")
+                    continue
 
             if asker in returns_dict:
                 return returns_dict[asker]

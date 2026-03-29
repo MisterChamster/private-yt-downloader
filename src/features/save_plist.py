@@ -329,7 +329,11 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
                 elif asker == "which_md_embedded":
                     while True:
-                        asker = Plist_Askers.ask_which_md_embed(opts.md_to_emb)
+                        asker = Plist_Askers.ask_which_md_embed(
+                            opts.md_to_emb,
+                            md_album_set,
+                            md_artist_set,
+                            md_date_set)
 
                         if asker == "change_set_album":
                             opts.change_md_to_embed("album")
@@ -456,11 +460,11 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # Setting md sets it to embed automatically!
                 # set stuff (embed/not embed) (set/not set) - printing
                 # User can specify which md will be embedded
+                # Conditional embedding - can't set embed to True if val not set
 
 
                 # ========== NOT DONE ==========
                 # Embed all option
-                # Conditional embedding - can't set embed to True if val not set
 
 
 
