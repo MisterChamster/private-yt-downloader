@@ -12,11 +12,11 @@ import src.common.utils_embedding as emb
 
 
 
-def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
+def save_plist(plist_url: str) -> bool:
     # Get playlist dictionary
     plist_dict = ydl_support.get_plist_dict(plist_url)
     if not plist_dict:
-        return
+        return False
 
     # Get playlist title and lists with videos data
     plist_title = plist_dict['title']
@@ -40,7 +40,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
     while True:
         if yt_list.new_len == 0:
             print("There are no elements left in the playlist!\n\n")
-            return
+            return False
 
         numbering_string = (
             "None"
@@ -103,7 +103,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
             while True:
                 if yt_list.new_len == 0:
                     print("There are no elements left in the playlist!\n\n")
-                    return
+                    return False
 
                 print("Current elements in playlist:")
                 Utils.print_list(yt_list.new_names_list, True)
@@ -116,7 +116,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     while True:
                         if yt_list.new_len == 0:
                             print("There are no elements left in the playlist!\n\n")
-                            return
+                            return False
 
                         Utils.print_list(yt_list.new_names_list, True)
                         print()
@@ -147,7 +147,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     yt_list.pop_new_range(start_el_index, ending_el_index)
                     if yt_list.new_len == 0:
                         print("There are no elements left in the playlist!\n\n")
-                        return
+                        return False
 
                 elif action == 'return':
                     break
@@ -363,7 +363,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                         elif asker == "return":
                             break
                         elif asker == "exit":
-                            return "exit"
+                            return True
 
                 elif asker == "set_album":
                     current_album = yt_list.md_vars.md_album
@@ -446,7 +446,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     break
 
                 elif asker == "exit":
-                    return "exit"
+                    return True
 
                 # ========== DONE ==========
                 # Enable/disable md saving
@@ -482,7 +482,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # ========== NOT DONE ==========
 
         elif asker_menu == "change_link":
-            return "repeat"
+            return False
 
         elif asker_menu == "rev_to_original":
             yt_list.reset_new_to_og()
@@ -571,4 +571,4 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 print(f"Downloading {yt_list.new_plist_title} didn't go smooth. There have been {total_errors} exceptions.\n\n")
 
         elif asker_menu == "exit":
-            return "exit"
+            return True

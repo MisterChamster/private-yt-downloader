@@ -5,7 +5,7 @@ import src.common.ydl_support as ydl_support
 
 
 
-def save_single(url: str) -> str:
+def save_single(url: str) -> bool:
     opts = Download_Opts()
     video_title = ydl_support.get_video_title(url)
 
@@ -39,7 +39,7 @@ def save_single(url: str) -> str:
             opts.set_save_path(asker)
 
         elif asker_single == "change_link":
-            return "repeat"
+            return False
 
         elif asker_single == "download":
             save_path_string = str(opts.save_path)
@@ -62,4 +62,4 @@ def save_single(url: str) -> str:
                 print(f"{filename} has been successfully downloaded.\n\n")
 
         elif asker_single == "exit":
-            return "exit"
+            return True
