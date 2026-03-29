@@ -333,6 +333,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     print("\n")
                     if asker == "":
                         continue
+                    opts.set_md_to_embed("album", True)
                     yt_list.md_vars.md_album = asker
 
                 elif asker == "set_artist":
@@ -341,6 +342,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     print("\n")
                     if asker == "":
                         continue
+                    opts.set_md_to_embed("artist", True)
                     yt_list.md_vars.md_artist = asker
 
                 elif asker == "set_date":
@@ -349,6 +351,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     print("\n")
                     if asker == "":
                         continue
+                    opts.set_md_to_embed("date", True)
                     yt_list.md_vars.md_date = asker
 
                 elif asker == "set_name":
@@ -366,7 +369,9 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                             break
                         elif name_to_set == 0:
                             yt_list.md_vars.md_names = yt_list.new_names_list.copy()
+                            opts.set_md_to_embed("name", True)
                             continue
+                        opts.set_md_to_embed("name", True)
                         index_to_set = name_to_set - 1
 
                         new_name = Plist_Askers.ask_md_name_string(names[index_to_set])
@@ -390,7 +395,9 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                         elif tnum_to_set == 0:
                             yt_list.md_vars.md_tracknums = [
                                 el+1 for el in range(len(files_names))]
+                            opts.set_md_to_embed("tracknum", True)
                             continue
+                        opts.set_md_to_embed("tracknum", True)
                         index_to_set = tnum_to_set - 1
 
                         new_tracknum = Plist_Askers.ask_md_tracknum_string()
@@ -427,12 +434,12 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # names (has option set to new names!)
                 # Tracknum and names are set TO VALUES from the beginning.
                 # Change list of md names and tnums when newlists are changed
+                # Setting md sets it to embed automatically!
 
 
                 # ========== NOT DONE ==========
                 # set stuff (set/not set) (embed/not embed) - printing
-                # User can specify which md will be embedded.
-                # Setting md sets it to embed automatically!
+                # User can specify which md will be embedded
 
 
 

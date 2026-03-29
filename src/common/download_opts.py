@@ -60,3 +60,14 @@ class Download_Opts():
             "tracknum"]) -> None:
         current_val = self.md_to_emb[md_key]
         self.md_to_emb[md_key] = not current_val
+
+    def set_md_to_embed(self,
+            md_key: Literal[
+            "album",
+            "artist",
+            "date",
+            "name",
+            "tracknum"],
+            set_val: bool) -> None:
+        self.md_to_emb[md_key] = set_val
+
