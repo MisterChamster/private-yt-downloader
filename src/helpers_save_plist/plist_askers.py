@@ -489,7 +489,7 @@ class Plist_Askers():
         while True:
             print(f"Current date: {current_date}"
                    "Input new date or leave empty to return\n>> ", end='')
-            asker = input()
+            asker = input().strip()
 
             if (asker.isdigit() and
                 len(asker) == 4):
@@ -499,10 +499,50 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_set_names() -> str:
-        return ""
+    def ask_set_names_num(names_count: int) -> int | None:
+        while True:
+            print("Input number of the name to change\n"
+                  "(leave empty to return)\n"
+                  "(input 0 to revert to files names)\n>> ", end='')
+            asker = input().strip()
+
+            if asker == "":
+                return
+
+            if (asker.isdigit() and
+                int(asker) <= names_count):
+                return asker
+            else:
+                print("Invalid input\n\n")
 
 
     @staticmethod
-    def ask_set_tracknums() -> str:
-        return ""
+    def ask_set_tracknums_num(tnums_count: int) -> int | None:
+        while True:
+            print("Input number of the tracknum to change\n"
+                  "(leave empty to return)\n"
+                  "(input 0 to revert to file numbering)\n>> ", end='')
+            asker = input().strip()
+
+            if asker == "":
+                return
+
+            if (asker.isdigit() and
+                int(asker) <= tnums_count):
+                return asker
+            else:
+                print("Invalid input\n\n")
+
+
+    @staticmethod
+    def ask_md_string(md_type: Literal["name", "tracknum"]) -> str:
+        while True:
+            print(f"Input new {md_type} metadata\n>> ", end='')
+            asker = input()
+
+            if md_type == "tracknum":
+                if not asker.isdigit():
+                    print("Invalid input\n\n")
+                    continue
+
+            return asker

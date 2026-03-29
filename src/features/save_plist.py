@@ -353,15 +353,49 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
                 elif asker == "set_name":
                     while True:
-                        asker = Plist_Askers.ask_set_names()
-                        break
-                    pass
+                        names = yt_list.md_vars.md_names
+                        if names is not None:
+                            for i, name in enumerate(names):
+                                print(f"{i}. {name}")
+                        else:
+                            print("Not set")
+                        print()
+
+                        name_to_set = Plist_Askers.ask_set_names_num(len(names))
+                        print()
+                        if name_to_set == None:
+                            break
+                        elif name_to_set == 0:
+                            yt_list.md_vars.md_names = yt_list.new_names_list.copy()
+                            continue
+                        index_to_set = name_to_set - 1
+
+                        new_name = Plist_Askers.ask_md_string("name")
+                        yt_list.md_vars.md_names[index_to_set] = new_name
 
                 elif asker == "set_tracknum":
                     while True:
-                        asker = Plist_Askers.ask_set_tracknums()
-                        break
-                    pass
+                        tracknums = yt_list.md_vars.md_tracknums
+                        files_names = yt_list.new_names_list
+                        if tracknums is not None:
+                            for i, tnum in enumerate(tracknums):
+                                print(f"{i}. [{tnum}] for {files_names[i]}")
+                        else:
+                            print("Not set")
+                        print()
+
+                        tnum_to_set = Plist_Askers.ask_set_tracknums_num(len(tracknums))
+                        print()
+                        if tnum_to_set == None:
+                            break
+                        elif tnum_to_set == 0:
+                            yt_list.md_vars.md_tracknums = [
+                                el+1 for el in range(len(files_names))]
+                            continue
+                        index_to_set = tnum_to_set - 1
+
+                        new_tracknum = Plist_Askers.ask_md_string("tracknum")
+                        yt_list.md_vars.md_tracknums[index_to_set] = new_tracknum
 
                 elif asker == "return":
                     break
@@ -390,10 +424,10 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # set names
                 # set date
 
+                # names (has option set to new names!)
+
 
                 # ========== NOT DONE ==========
-
-                # names (has option set to new names!)
                 # set stuff (set/not set) (embed/not embed)
                 # set stuff - print if set. Tracknum and names always set
                 # to something.
