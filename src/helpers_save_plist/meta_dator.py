@@ -21,7 +21,7 @@ class Meta_Dator():
 
         if md_tracknums == None:
             self.md_tracknums = [
-                num+1
+                str(num+1)
                 for num
                 in range(len(md_names))]
         else:

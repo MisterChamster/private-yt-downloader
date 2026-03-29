@@ -61,7 +61,9 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
         print()
 
         download_md = opts.is_md_saved()
-        asker_menu = Plist_Askers.ask_plist_menu(duplis_flag, download_md)
+        asker_menu = Plist_Askers.ask_plist_menu(
+            duplis_flag,
+            download_md)
         print("\n")
 
         if asker_menu == "handle_duplicates" and duplis_flag:
@@ -336,6 +338,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                             md_album_set,
                             md_artist_set,
                             md_date_set)
+                        print("\n")
 
                         if asker == "all_legal":
                             if md_album_set:
@@ -428,7 +431,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                             break
                         elif tnum_to_set == 0:
                             yt_list.md_vars.md_tracknums = [
-                                el+1 for el in range(len(files_names))]
+                                str(el+1) for el in range(len(files_names))]
                             opts.set_md_to_embed("tracknum", True)
                             continue
                         opts.set_md_to_embed("tracknum", True)
@@ -525,30 +528,39 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     print(f"Downloading {filename} failed. Link: {url}")
 
             # Metadata loop
-            for i, file_path in enumerate(files_paths):
-                if opts.md_to_emb["album"] == True:
-                    emb.append_metadata_file_universal(
-                        file_path,
-                        "album",
-                        yt_list.md_vars.md_album)
+            if opts.include_md:
+                for i, file_path in enumerate(files_paths):
+                    if opts.md_to_emb["album"] == True:
+                        emb.append_metadata_file_universal(
+                            file_path,
+                            "album",
+                            yt_list.md_vars.md_album)
 
-                if opts.md_to_emb["artist"] == True:
-                    emb.append_metadata_file_universal(
-                        file_path,
-                        "artist",
-                        yt_list.md_vars.md_artist)
+                    if opts.md_to_emb["artist"] == True:
+                        emb.append_metadata_file_universal(
+                            file_path,
+                            "artist",
+                            yt_list.md_vars.md_artist)
 
-                if opts.md_to_emb["date"] == True:
-                    emb.append_metadata_file_universal(
-                        file_path,
-                        "date",
-                        yt_list.md_vars.md_date)
+                    if opts.md_to_emb["date"] == True:
+                        emb.append_metadata_file_universal(
+                            file_path,
+                            "date",
+                            yt_list.md_vars.md_date)
 
-                if opts.md_to_emb["name"] == True:
-                    pass
+                    if opts.md_to_emb["name"] == True:
+                        # Works funkily (doesn't)
+                        emb.append_metadata_file_universal(
+                            file_path,
+                            "name",
+                            yt_list.md_vars.md_names[i])
 
-                if opts.md_to_emb["tracknum"] == True:
-                    pass
+                    if opts.md_to_emb["tracknum"] == True:
+                        # Works funkily (doesn't)
+                        emb.append_metadata_file_universal(
+                            file_path,
+                            "tracknum",
+                            yt_list.md_vars.md_tracknums[i])
 
             # Error count printing
             print()
