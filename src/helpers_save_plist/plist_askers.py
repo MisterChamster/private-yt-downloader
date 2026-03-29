@@ -480,6 +480,7 @@ class Plist_Askers():
         md_album_set:  bool,
         md_artist_set: bool,
         md_date_set:   bool) -> Literal[
+            "all_legal",
             "change_set_album",
             "change_set_artist",
             "change_set_date",
@@ -489,6 +490,7 @@ class Plist_Askers():
             "exit"]:
 
         returns_dict = {
+            "e": "all_legal",
             "l": "change_set_album",
             "a": "change_set_artist",
             "d": "change_set_date",
@@ -518,6 +520,7 @@ class Plist_Askers():
 
         while True:
             print("Choose metadata to be embedded:\n"
+                  "e - Embed all metadata with value\n"
                  f"l - {md_album_set_msg_1   } embedding album metadata    (currently {md_album_set_msg_2})\n"
                  f"a - {md_artist_set_msg_1  } embedding artist metadata   (currently {md_artist_set_msg_2})\n"
                  f"d - {md_date_set_msg_1    } embedding date metadata     (currently {md_date_set_msg_2})\n"

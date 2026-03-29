@@ -335,7 +335,16 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                             md_artist_set,
                             md_date_set)
 
-                        if asker == "change_set_album":
+                        if asker == "all_legal":
+                            if md_album_set:
+                                opts.set_md_to_embed("album", True)
+                            if md_artist_set:
+                                opts.set_md_to_embed("artist", True)
+                            if md_date_set:
+                                opts.set_md_to_embed("date", True)
+                            opts.set_md_to_embed("name", True)
+                            opts.set_md_to_embed("tracknum", True)
+                        elif asker == "change_set_album":
                             opts.change_md_to_embed("album")
                         elif asker == "change_set_artist":
                             opts.change_md_to_embed("artist")
@@ -461,11 +470,10 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # set stuff (embed/not embed) (set/not set) - printing
                 # User can specify which md will be embedded
                 # Conditional embedding - can't set embed to True if val not set
+                # Embed all option
 
 
                 # ========== NOT DONE ==========
-                # Embed all option
-
 
 
         elif asker_menu == "change_link":
