@@ -82,7 +82,8 @@ def save_single(url: str) -> bool:
                     print("\n")
                     if asker == "":
                         continue
-                    pass
+                    opts.set_md_to_embed("title", True)
+                    metadator.md_titles[0] = asker
 
                 elif asker == "set_tracknumber":
                     asker = Plist_Askers.ask_md_tracknumber_string(
@@ -90,7 +91,8 @@ def save_single(url: str) -> bool:
                     print("\n")
                     if asker == "":
                         continue
-                    pass
+                    opts.set_md_to_embed("tracknumber", True)
+                    metadator.md_tracknumbers[0] = asker
 
                 elif asker == "return":
                     break
