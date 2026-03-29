@@ -44,7 +44,6 @@ class Elements_List():
         self.numbering_has_zeros = numbering_has_zeros
         self.del_duplicates      = del_duplicates
 
-
         self.reset_new_to_og()
 
 

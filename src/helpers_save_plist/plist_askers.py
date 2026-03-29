@@ -9,7 +9,8 @@ class Plist_Askers():
     @staticmethod
     def ask_plist_menu(
             duplicates_problem: bool = False,
-            download_md: bool = False) -> str:
+            download_md: bool = False,
+            md_possible: bool = True) -> str:
         returns_dict = {
             "f": "change_format",
             "r": "remove_elements",
@@ -22,19 +23,24 @@ class Plist_Askers():
             "x": "exit"}
         if duplicates_problem:
             returns_dict["c"] = "handle_duplicates"
+        if md_possible:
+            returns_dict["m"] = "metadata_settings"
 
         download_string = ("(with metadata)"
                            if download_md
-                           else "(no metadata)")
+                           else "(no metadata)"
+                           if md_possible
+                           else "")
         while True:
             if duplicates_problem:
                 print("c - Handle duplicates")
             print("f - Change saving format\n"
                   "r - Remove elements to download\n"
                   "e - Edit captions...\n"
-                  "p - Change save path\n"
-                  "m - Metadata settings\n"
-                  "l - Change link\n"
+                  "p - Change save path")
+            if md_possible:
+                print("m - Metadata settings")
+            print("l - Change link\n"
                   "o - Revert to original playlist\n"
                  f"d - Download {download_string}\n"
                   "x - Exit program\n>> ", end="")

@@ -63,7 +63,8 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
         download_md = opts.is_md_saved()
         asker_menu = Plist_Askers.ask_plist_menu(
             duplis_flag,
-            download_md)
+            download_md,
+            opts.save_format in ("mp3", "ogg", "flac"))
         print("\n")
 
         if asker_menu == "handle_duplicates" and duplis_flag:
@@ -470,7 +471,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
                 # titles (has option set to new titles!)
                 # Tracknumber and titles are set TO VALUES from the beginning.
-                # Change list of md names and tnums when newlists are changed
+                # Change list of md titles and tnums when newlists are changed
                 # Setting md sets it to embed automatically!
                 # set stuff (embed/not embed) (set/not set) - printing
                 # User can specify which md will be embedded
