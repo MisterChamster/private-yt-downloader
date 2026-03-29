@@ -416,7 +416,12 @@ class Plist_Askers():
     # ================================ METADATA ================================
     # ==========================================================================
     @staticmethod
-    def ask_metadata_menu(md_included: bool) -> Literal[
+    def ask_metadata_menu(md_included: bool,
+                          md_to_emb:   dict[Literal["album", "artist", "date", "name", "tracknum"]:bool],
+                          md_album_set:  bool,
+                          md_artist_set: bool,
+                          md_date_set:   bool
+                ) -> Literal[
                 "change_appending",
                 "which_md_embedded",
                 "set_album",
@@ -440,15 +445,20 @@ class Plist_Askers():
         able_msg = ("Disable metadata appending"
                     if md_included
                     else "Enable metadata appending")
+        md_album_set_msg    = str(md_to_emb["album"]   ).replace("True", "True ")
+        md_artist_set_msg   = str(md_to_emb["artist"]  ).replace("True", "True ")
+        md_date_set_msg     = str(md_to_emb["date"]    ).replace("True", "True ")
+        md_name_set_msg     = str(md_to_emb["name"]    ).replace("True", "True ")
+        md_tracknum_set_msg = str(md_to_emb["tracknum"]).replace("True", "True ")
 
         while True:
             print(f"a  - {able_msg}\n"
                    "e  - Specify which metadata will be embedded\n"
-                   "sl - Set album\n"
-                   "sa - Set artist\n"
-                   "sd - Set date\n"
-                   "sn - Set names\n"
-                   "st - Set tracknums\n"
+                  f"sl - Set album     (Embed: {md_album_set_msg   }) (Is set: {md_album_set})\n"
+                  f"sa - Set artist    (Embed: {md_artist_set_msg  }) (Is set: {md_artist_set})\n"
+                  f"sd - Set date      (Embed: {md_date_set_msg    }) (Is set: {md_date_set})\n"
+                  f"sn - Set names     (Embed: {md_name_set_msg    }) (Is set: True)\n" #Troll!
+                  f"st - Set tracknums (Embed: {md_tracknum_set_msg}) (Is set: True)\n" #Troll!
                    "r  - Return\n"
                    "x  - Exit program\n>> ", end="")
             action = input().strip().lower()

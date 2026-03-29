@@ -313,7 +313,15 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
         elif asker_menu == "metadata_settings":
             while True:
-                asker = Plist_Askers.ask_metadata_menu(opts.include_md)
+                md_album_set  = yt_list.md_vars.md_album  != None
+                md_artist_set = yt_list.md_vars.md_artist != None
+                md_date_set   = yt_list.md_vars.md_date   != None
+                asker = Plist_Askers.ask_metadata_menu(
+                    opts.include_md,
+                    opts.md_to_emb,
+                    md_album_set,
+                    md_artist_set,
+                    md_date_set)
                 print("\n")
 
                 if asker == "change_appending":
@@ -438,7 +446,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
 
                 # ========== NOT DONE ==========
-                # set stuff (set/not set) (embed/not embed) - printing
+                # set stuff (embed/not embed) (set/not set) - printing
                 # User can specify which md will be embedded
 
 
