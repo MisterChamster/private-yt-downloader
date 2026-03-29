@@ -1,6 +1,7 @@
 from src.common.askers import Askers
 from src.common.utils  import Utils
 from src.common.download_opts import Download_Opts
+from src.helpers_save_plist.meta_dator import Meta_Dator
 import src.common.ydl_support as ydl_support
 
 
@@ -8,6 +9,7 @@ import src.common.ydl_support as ydl_support
 def save_single(url: str) -> bool:
     opts = Download_Opts()
     video_title = ydl_support.get_video_title(url)
+    metadata = Meta_Dator([video_title])
 
     while True:
         print()
@@ -15,7 +17,8 @@ def save_single(url: str) -> bool:
         print(f"Format:    {opts.save_format}")
         print(f"Save path: {opts.save_path}")
         print()
-        asker_single = Askers.ask_single_menu()
+        asker_single = Askers.ask_single_menu(
+            opts.save_format in ("mp3", "ogg", "flac"))
         print("\n")
 
         if asker_single == "change_format":
@@ -37,6 +40,10 @@ def save_single(url: str) -> bool:
                 continue
 
             opts.set_save_path(asker)
+
+        elif asker_single == "metadata_settings":
+            print("MD SETTINGS HIII")
+            pass
 
         elif asker_single == "change_link":
             return False

@@ -53,18 +53,22 @@ class Askers():
 
 
     @staticmethod
-    def ask_single_menu() -> str:
+    def ask_single_menu(md_possible: bool = True) -> str:
         returns_dict = {
             "f": "change_format",
             "p": "change_save_path",
             "l": "change_link",
             "d": "download",
             "e": "exit"}
+        if md_possible:
+            returns_dict["m"] = "metadata_settings"
 
         while True:
             print("f - Change saving format\n"
-                  "p - Change save path\n"
-                  "l - Change link\n"
+                  "p - Change save path")
+            if md_possible:
+                print("m - Metadata settings\n")
+            print("l - Change link\n"
                   "d - Download\n"
                   "e - Exit program\n>> ", end="")
             action = input().strip().lower()

@@ -1,4 +1,3 @@
-from typing import Literal
 from pathlib import Path
 
 from src.common.askers import Askers
