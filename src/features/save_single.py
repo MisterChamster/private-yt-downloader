@@ -79,11 +79,17 @@ def save_single(url: str) -> bool:
                 elif asker == "set_title":
                     asker = Plist_Askers.ask_md_title_string(
                         metadator.md_titles[0])
+                    print("\n")
+                    if asker == "":
+                        continue
                     pass
 
                 elif asker == "set_tracknumber":
                     asker = Plist_Askers.ask_md_tracknumber_string(
                         metadator.md_tracknumbers[0])
+                    print("\n")
+                    if asker == "":
+                        continue
                     pass
 
                 elif asker == "return":

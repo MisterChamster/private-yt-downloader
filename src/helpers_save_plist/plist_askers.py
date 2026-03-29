@@ -624,22 +624,30 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_md_title_string(curr_title: str) -> str:
+    def ask_md_title_string(curr_title: str) -> str | None:
         while True:
             print(curr_title)
-            print(f"Input new title metadata:\n>> ", end='')
+            print(f"Input new title metadata:\n"
+                   "(leave empty to return)\n"
+                   ">> ", end='')
             asker = input()
 
+            if asker == "":
+                return
             return asker
 
 
     @staticmethod
-    def ask_md_tracknumber_string(curr_tracknumber: str) -> str:
+    def ask_md_tracknumber_string(curr_tracknumber: str) -> str | None:
         while True:
             print(f"Current number: {curr_tracknumber}")
-            print(f"Input new tracknumber metadata:\n>> ", end='')
+            print(f"Input new tracknumber metadata:\n"
+                   "(leave empty to return)\n"
+                   ">> ", end='')
             asker = input()
 
+            if asker == "":
+                return
             if not asker.isdigit():
                 print("Invalid input\n\n")
                 continue

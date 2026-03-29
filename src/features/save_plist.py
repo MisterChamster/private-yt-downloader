@@ -413,6 +413,8 @@ def save_plist(plist_url: str) -> bool:
 
                         new_title = Plist_Askers.ask_md_title_string(titles[index_to_set])
                         print("\n")
+                        if new_title == "":
+                            continue
                         yt_list.md_vars.md_titles[index_to_set] = new_title
 
                 elif asker == "set_tracknumber":
@@ -439,6 +441,8 @@ def save_plist(plist_url: str) -> bool:
 
                         new_tracknumber = Plist_Askers.ask_md_tracknumber_string(tracknumbers[index_to_set])
                         print("\n")
+                        if new_tracknumber == "":
+                            continue
                         yt_list.md_vars.md_tracknumbers[index_to_set] = new_tracknumber
 
                 elif asker == "return":
