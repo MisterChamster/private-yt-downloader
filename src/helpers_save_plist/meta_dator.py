@@ -26,3 +26,13 @@ class Meta_Dator():
                 in range(len(md_names))]
         else:
             self.md_tracknums = md_tracknums
+
+
+    def pop_md_lists(self, index: int) -> None:
+        self.md_names.pop(index)
+        self.md_tracknums.pop(index)
+
+
+    def pop_md_list_range(self, index_s: int, index_e: int) -> None:
+        del(self.md_names[index_s:index_e])
+        del(self.md_tracknums[index_s:index_e])

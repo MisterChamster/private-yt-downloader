@@ -425,6 +425,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # set date
 
                 # names (has option set to new names!)
+                # Tracknum and names are set TO VALUES from the beginning.
 
 
                 # ========== NOT DONE ==========
@@ -433,7 +434,6 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # User can specify which md will be embedded.
                 # Setting md sets it to embed automatically!
 
-                # Tracknum and names are set TO VALUES from the beginning.
 
 
         elif asker_menu == "change_link":

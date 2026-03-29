@@ -44,7 +44,6 @@ class Elements_List():
         self.numbering_has_zeros = numbering_has_zeros
         self.del_duplicates      = del_duplicates
 
-        self.md_vars = Meta_Dator(names_list)
 
         self.reset_new_to_og()
 
@@ -56,6 +55,8 @@ class Elements_List():
         self.reset_new_index_in_og()
         self.update_newlen()
         self.calc_numbering_list()
+        self.md_vars = Meta_Dator(self.og_names_list)
+
         if self.del_duplicates:
             self.delete_duplicates()
 
@@ -118,19 +119,21 @@ class Elements_List():
 
 
     # ================================== POP ==================================
-    def pop_new(self, index) -> None:
+    def pop_new(self, index: int) -> None:
         self.new_urls_list.pop(index)
         self.new_names_list.pop(index)
         self.new_numbers_list.pop(index)
         self.new_index_in_og.pop(index)
+        self.md_vars.pop_md_lists(index)
         self.update_newlen()
 
 
-    def pop_new_range(self, index_s, index_e) -> None:
+    def pop_new_range(self, index_s: int, index_e: int) -> None:
         del(self.new_urls_list[index_s:index_e])
         del(self.new_names_list[index_s:index_e])
         del(self.new_numbers_list[index_s:index_e])
         del(self.new_index_in_og[index_s:index_e])
+        self.md_vars.pop_md_list_range(index_s, index_e)
         self.update_newlen()
 
 
