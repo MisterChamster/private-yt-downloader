@@ -443,10 +443,10 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # Tracknum and names are set TO VALUES from the beginning.
                 # Change list of md names and tnums when newlists are changed
                 # Setting md sets it to embed automatically!
+                # set stuff (embed/not embed) (set/not set) - printing
 
 
                 # ========== NOT DONE ==========
-                # set stuff (embed/not embed) (set/not set) - printing
                 # User can specify which md will be embedded
 
 
