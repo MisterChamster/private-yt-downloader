@@ -26,11 +26,13 @@ class Plist_Askers():
         if md_possible:
             returns_dict["m"] = "metadata_settings"
 
-        download_string = ("(with metadata)"
-                           if download_md
-                           else "(no metadata)"
-                           if md_possible
-                           else "")
+        download_string = (
+            "(with metadata)"
+            if download_md
+            else "(no metadata)"
+            if md_possible
+            else "")
+
         while True:
             if duplicates_problem:
                 print("c - Handle duplicates")

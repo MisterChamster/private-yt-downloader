@@ -54,7 +54,10 @@ class Askers():
 
 
     @staticmethod
-    def ask_single_menu(md_possible: bool = True) -> str:
+    def ask_single_menu(
+            md_possible: bool = True,
+            download_md: bool = False
+            ) -> str:
         returns_dict = {
             "f": "change_format",
             "p": "change_save_path",
@@ -64,13 +67,20 @@ class Askers():
         if md_possible:
             returns_dict["m"] = "metadata_settings"
 
+        download_string = (
+            "(with metadata)"
+            if download_md
+            else "(no metadata)"
+            if md_possible
+            else "")
+
         while True:
             print("f - Change saving format\n"
                   "p - Change save path")
             if md_possible:
                 print("m - Metadata settings")
             print("l - Change link\n"
-                  "d - Download\n"
+                 f"d - Download {download_string}\n"
                   "x - Exit program\n>> ", end="")
             action = input().strip().lower()
 
@@ -83,7 +93,7 @@ class Askers():
     @staticmethod
     def ask_single_md(
         md_included: bool,
-        md_to_emb:     dict[Literal["album", "artist", "date", "title", "tracknumber"]:bool]
+        md_to_emb:   dict[Literal["album", "artist", "date", "title", "tracknumber"]:bool]
         ) -> Literal[
             "change_appending",
             "set_album",

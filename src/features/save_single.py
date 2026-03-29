@@ -18,8 +18,10 @@ def save_single(url: str) -> bool:
         print(f"Format:    {opts.save_format}")
         print(f"Save path: {opts.save_path}")
         print()
+        download_md = opts.is_md_saved()
         asker_single = Askers.ask_single_menu(
-            opts.save_format in ("mp3", "ogg", "flac"))
+            opts.save_format in ("mp3", "ogg", "flac"),
+            download_md)
         print("\n")
 
         if asker_single == "change_format":
