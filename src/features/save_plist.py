@@ -328,12 +328,23 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     opts.change_include_md()
 
                 elif asker == "which_md_embedded":
-                    # opts.change_md_to_embed("album")
-                    # opts.change_md_to_embed("artist")
-                    # opts.change_md_to_embed("date")
-                    # opts.change_md_to_embed("name")
-                    # opts.change_md_to_embed("tracknum")
-                    pass
+                    while True:
+                        asker = Plist_Askers.ask_which_md_embed(opts.md_to_emb)
+
+                        if asker == "change_set_album":
+                            opts.change_md_to_embed("album")
+                        elif asker == "change_set_artist":
+                            opts.change_md_to_embed("artist")
+                        elif asker == "change_set_date":
+                            opts.change_md_to_embed("date")
+                        elif asker == "change_set_name":
+                            opts.change_md_to_embed("name")
+                        elif asker == "change_set_tracknum":
+                            opts.change_md_to_embed("tracknum")
+                        elif asker == "return":
+                            break
+                        elif asker == "exit":
+                            return "exit"
 
                 elif asker == "set_album":
                     current_album = yt_list.md_vars.md_album

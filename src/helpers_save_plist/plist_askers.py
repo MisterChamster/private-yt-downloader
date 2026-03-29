@@ -470,28 +470,59 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_which_md_embed() -> None:
+    def ask_which_md_embed(md_to_emb: dict[Literal[
+        "album",
+        "artist",
+        "date",
+        "name",
+        "tracknum"]:bool]) -> Literal[
+            "change_set_album",
+            "change_set_artist",
+            "change_set_date",
+            "change_set_name",
+            "change_set_tracknum",
+            "return",
+            "exit"]:
+
         returns_dict = {
-            "l": "",
-            "a": "",
-            "d": "",
-            "n": "",
-            "t": "",
-            "r": "",
-            "x": ""}
+            "l": "change_set_album",
+            "a": "change_set_artist",
+            "d": "change_set_date",
+            "n": "change_set_name",
+            "t": "change_set_tracknum",
+            "r": "return",
+            "x": "exit"}
+
+        # I know I'm lazy
+        md_album_set_msg_1    = str(md_to_emb["album"]   ).replace("True", "Disable").replace("False", "Enable ")
+        md_artist_set_msg_1   = str(md_to_emb["artist"]  ).replace("True", "Disable").replace("False", "Enable ")
+        md_date_set_msg_1     = str(md_to_emb["date"]    ).replace("True", "Disable").replace("False", "Enable ")
+        md_name_set_msg_1     = str(md_to_emb["name"]    ).replace("True", "Disable").replace("False", "Enable ")
+        md_tracknum_set_msg_1 = str(md_to_emb["tracknum"]).replace("True", "Disable").replace("False", "Enable ")
+
+        # I'm sure You'd do it better <3
+        md_album_set_msg_2    = md_album_set_msg_1.replace(   "Disable", "enabled").replace("Enable ", "disabled")
+        md_artist_set_msg_2   = md_artist_set_msg_1.replace(  "Disable", "enabled").replace("Enable ", "disabled")
+        md_date_set_msg_2     = md_date_set_msg_1.replace(    "Disable", "enabled").replace("Enable ", "disabled")
+        md_name_set_msg_2     = md_name_set_msg_1.replace(    "Disable", "enabled").replace("Enable ", "disabled")
+        md_tracknum_set_msg_2 = md_tracknum_set_msg_1.replace("Disable", "enabled").replace("Enable ", "disabled")
 
         while True:
             print("Choose metadata to be embedded:\n"
-                  "l - \n"
-                  "a - \n"
-                  "d - \n"
-                  "n - \n"
-                  "t - \n"
-                  "r - \n"
-                  "x - \n"
-                  "\n>> ", end='')
-            break
-        
+                 f"l - {md_album_set_msg_1   } embedding album metadata    (currently {md_album_set_msg_2})\n"
+                 f"a - {md_artist_set_msg_1  } embedding artist metadata   (currently {md_artist_set_msg_2})\n"
+                 f"d - {md_date_set_msg_1    } embedding date metadata     (currently {md_date_set_msg_2})\n"
+                 f"n - {md_name_set_msg_1    } embedding name metadata     (currently {md_name_set_msg_2})\n"
+                 f"t - {md_tracknum_set_msg_1} embedding tracknum metadata (currently {md_tracknum_set_msg_2})\n"
+                  "r - Return\n"
+                  "x - Exit\n"
+                  ">> ", end='')
+            asker = input().strip().lower()
+
+            if asker in returns_dict:
+                print("Invalid input\n\n")
+            else:
+                return returns_dict[asker]
 
 
     @staticmethod
