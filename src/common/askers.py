@@ -96,6 +96,7 @@ class Askers():
         md_to_emb:   dict[Literal["album", "artist", "date", "title", "tracknumber"]:bool]
         ) -> Literal[
             "change_appending",
+            "which_md_embedded",
             "set_album",
             "set_artist",
             "set_date",
@@ -104,14 +105,15 @@ class Askers():
             "return",
             "exit"]:
         returns_dict = {
-            "a": "change_appending",
+            "a":  "change_appending",
+            "e":  "which_md_embedded",
             "sl": "set_album",
             "sa": "set_artist",
             "sd": "set_date",
             "sn": "set_title",
             "st": "set_tracknumber",
-            "r": "return",
-            "x": "exit"}
+            "r":  "return",
+            "x":  "exit"}
         
         md_album_set_msg       = str(md_to_emb["album"]      ).replace("True", "True ")
         md_artist_set_msg      = str(md_to_emb["artist"]     ).replace("True", "True ")
@@ -123,15 +125,16 @@ class Askers():
                     else "Enable metadata appending")
 
         while True:
-            print(f"a - {able_msg}\n"
-                   " - \n"
+            print(f"a  - {able_msg}\n"
+                   "e  - Specify which metadata will be embedded\n"
                   f"sl - Set album        (Embed: {md_album_set_msg      })\n"
                   f"sa - Set artist       (Embed: {md_artist_set_msg     })\n"
                   f"sd - Set date         (Embed: {md_date_set_msg       })\n"
                   f"sn - Set titles       (Embed: {md_title_set_msg      })\n"
                   f"st - Set tracknumbers (Embed: {md_tracknumber_set_msg})\n"
-                   "r - Return\n"
-                   "x - Exit program\n>> ", end="")
+                   "r  - Return\n"
+                   "x  - Exit program\n"
+                   ">> ", end="")
             action = input().strip().lower()
 
             if action in returns_dict:

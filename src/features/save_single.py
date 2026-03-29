@@ -53,6 +53,9 @@ def save_single(url: str) -> bool:
                 if asker == "change_appending":
                     opts.change_include_md()
 
+                elif asker == "which_md_embedded":
+                    pass
+
                 elif asker == "set_album":
                     asker = Plist_Askers.ask_set_album(
                         metadator.md_album)
