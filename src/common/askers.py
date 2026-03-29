@@ -83,7 +83,6 @@ class Askers():
     @staticmethod
     def ask_single_md(md_included: bool) -> Literal[
             "change_appending",
-            "",
             "set_album",
             "set_artist",
             "set_date",
@@ -93,7 +92,6 @@ class Askers():
             "exit"]:
         returns_dict = {
             "a": "change_appending",
-            "": "",
             "sl": "set_album",
             "sa": "set_artist",
             "sd": "set_date",

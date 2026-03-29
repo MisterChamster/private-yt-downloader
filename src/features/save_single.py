@@ -2,6 +2,7 @@ from src.common.askers import Askers
 from src.common.utils  import Utils
 from src.common.download_opts import Download_Opts
 from src.helpers_save_plist.meta_dator import Meta_Dator
+from src.helpers_save_plist.plist_askers import Plist_Askers
 import src.common.ydl_support as ydl_support
 
 
@@ -9,7 +10,7 @@ import src.common.ydl_support as ydl_support
 def save_single(url: str) -> bool:
     opts = Download_Opts()
     video_title = ydl_support.get_video_title(url)
-    metadata = Meta_Dator([video_title], single=True)
+    metadator = Meta_Dator([video_title], single=True)
 
     while True:
         print()
@@ -48,10 +49,40 @@ def save_single(url: str) -> bool:
 
                 if asker == "change_appending":
                     opts.change_include_md()
-                elif asker == "":
+
+                elif asker == "set_album":
+                    asker = Plist_Askers.ask_set_album(metadator.md_album)
+                    print("\n")
+                    if asker == "":
+                        continue
+                    opts.set_md_to_embed("album", True)
+                    metadator.md_album = asker
+
+                elif asker == "set_artist":
+                    asker = Plist_Askers.ask_set_artist(metadator.md_artist)
+                    print("\n")
+                    if asker == "":
+                        continue
+                    opts.set_md_to_embed("artist", True)
+                    metadator.md_artist = asker
+
+                elif asker == "set_date":
+                    asker = Plist_Askers.ask_set_date(metadator.md_date)
+                    print("\n")
+                    if asker == "":
+                        continue
+                    opts.set_md_to_embed("date", True)
+                    metadator.md_date = asker
+
+                elif asker == "set_title":
                     pass
+
+                elif asker == "set_tracknumber":
+                    pass
+
                 elif asker == "return":
                     break
+
                 elif asker == "exit":
                     return True
 

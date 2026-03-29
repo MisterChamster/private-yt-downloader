@@ -317,9 +317,9 @@ def save_plist(plist_url: str) -> bool:
 
         elif asker_menu == "metadata_settings":
             while True:
-                md_album_set  = yt_list.md_vars.md_album  != None
-                md_artist_set = yt_list.md_vars.md_artist != None
-                md_date_set   = yt_list.md_vars.md_date   != None
+                md_album_set  = (yt_list.md_vars.md_album  != None)
+                md_artist_set = (yt_list.md_vars.md_artist != None)
+                md_date_set   = (yt_list.md_vars.md_date   != None)
                 asker = Plist_Askers.ask_metadata_menu(
                     opts.include_md,
                     opts.md_to_emb,
