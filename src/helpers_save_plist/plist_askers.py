@@ -464,7 +464,7 @@ class Plist_Askers():
         if current_album == None:
             current_album = "Not set"
 
-        print(f"Current album: {current_album}"
+        print(f"Current album: {current_album}\n"
                 "Input new album or leave empty to return\n>> ", end='')
         asker = input()
         return asker
@@ -475,7 +475,7 @@ class Plist_Askers():
         if current_artist == None:
             current_artist = "Not set"
 
-        print(f"Current artist: {current_artist}"
+        print(f"Current artist: {current_artist}\n"
                 "Input new artist or leave empty to return\n>> ", end='')
         asker = input()
         return asker
@@ -487,7 +487,7 @@ class Plist_Askers():
             current_date = "Not set"
 
         while True:
-            print(f"Current date: {current_date}"
+            print(f"Current date: {current_date}\n"
                    "Input new date or leave empty to return\n>> ", end='')
             asker = input().strip()
 

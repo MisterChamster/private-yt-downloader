@@ -313,7 +313,8 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
         elif asker_menu == "metadata_settings":
             while True:
-                asker = Plist_Askers.ask_metadata_menu()
+                asker = Plist_Askers.ask_metadata_menu(opts.include_md)
+                print("\n")
 
                 if asker == "change_appending":
                     opts.change_include_md()
@@ -329,7 +330,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 elif asker == "set_album":
                     current_album = yt_list.md_vars.md_album
                     asker = Plist_Askers.ask_set_album(current_album)
-                    print()
+                    print("\n")
                     if asker == "":
                         continue
                     yt_list.md_vars.md_album = asker
@@ -337,17 +338,17 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 elif asker == "set_artist":
                     current_artist = yt_list.md_vars.md_artist
                     asker = Plist_Askers.ask_set_artist(current_artist)
+                    print("\n")
                     if asker == "":
                         continue
-                    print()
                     yt_list.md_vars.md_artist = asker
 
                 elif asker == "set_date":
                     current_date = yt_list.md_vars.md_date
                     asker = Plist_Askers.ask_set_date(current_date)
+                    print("\n")
                     if asker == "":
                         continue
-                    print()
                     yt_list.md_vars.md_date = asker
 
                 elif asker == "set_name":
@@ -427,6 +428,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
 
                 # ========== NOT DONE ==========
+                # Change list of md names and tnums when newlists are changed
                 # set stuff (set/not set) (embed/not embed) - printing
                 # User can specify which md will be embedded.
                 # Setting md sets it to embed automatically!

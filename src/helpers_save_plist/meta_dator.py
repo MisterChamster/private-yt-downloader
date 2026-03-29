@@ -8,14 +8,13 @@ class Meta_Dator():
 
     def __init__(
             self,
+            el_count: int,
+            md_album:           str | None = None,
             md_artist:          str | None = None,
             md_date:            str | None = None,
-            md_album:           str | None = None,
             md_names:     list[str] | None = None,
             md_tracknums: list[str] | None = None):
 
+        self.md_album = md_album
         self.md_artist = md_artist
-        self.md_artist = md_date
-        self.md_artist = md_album
-        self.md_artist = md_names
-        self.md_artist = md_tracknums
+        self.md_date = md_date
