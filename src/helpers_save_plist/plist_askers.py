@@ -520,9 +520,9 @@ class Plist_Askers():
             asker = input().strip().lower()
 
             if asker in returns_dict:
-                print("Invalid input\n\n")
-            else:
                 return returns_dict[asker]
+            else:
+                print("Invalid input\n\n")
 
 
     @staticmethod
