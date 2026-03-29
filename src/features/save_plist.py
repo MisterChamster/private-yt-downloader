@@ -534,6 +534,9 @@ def save_plist(plist_url: str) -> bool:
             # Metadata loop
             if opts.include_md:
                 for i, file_path in enumerate(files_paths):
+                    if not file_path.exists():
+                        continue
+
                     if opts.md_to_emb["album"] == True:
                         emb.append_metadata_file_universal(
                             file_path,

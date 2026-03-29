@@ -4,6 +4,7 @@ from src.common.download_opts import Download_Opts
 from src.helpers_save_plist.meta_dator import Meta_Dator
 from src.helpers_save_plist.plist_askers import Plist_Askers
 import src.common.ydl_support as ydl_support
+import src.common.utils_embedding as emb
 
 
 
@@ -153,6 +154,7 @@ def save_single(url: str) -> bool:
             save_path_string = str(opts.save_path)
             opts.mutate_ydl("paths", {"home": save_path_string})
 
+            # Determine file name
             filename = Utils.illegal_char_remover(video_title)
             i = 1
             while True:
@@ -164,8 +166,42 @@ def save_single(url: str) -> bool:
                 i += 1
             opts.mutate_ydl("outtmpl", filename)
 
+            # Download
             print("Downloading...")
             download_flag = ydl_support.download_fromyt(opts.ydl_opts, url)
+
+            # Metadata loop
+            if opts.include_md and predicted_file_path.exists():
+                if opts.md_to_emb["album"] == True:
+                    emb.append_metadata_file_universal(
+                        predicted_file_path,
+                        "album",
+                        metadator.md_album)
+
+                if opts.md_to_emb["artist"] == True:
+                    emb.append_metadata_file_universal(
+                        predicted_file_path,
+                        "artist",
+                        metadator.md_artist)
+
+                if opts.md_to_emb["date"] == True:
+                    emb.append_metadata_file_universal(
+                        predicted_file_path,
+                        "date",
+                        metadator.md_date)
+
+                if opts.md_to_emb["title"] == True:
+                    emb.append_metadata_file_universal(
+                        predicted_file_path,
+                        "title",
+                        metadator.md_titles[0])
+
+                if opts.md_to_emb["tracknumber"] == True:
+                    emb.append_metadata_file_universal(
+                        predicted_file_path,
+                        "tracknumber",
+                        metadator.md_tracknumbers[0])
+
             if download_flag:
                 print(f"{filename} has been successfully downloaded.\n\n")
 
