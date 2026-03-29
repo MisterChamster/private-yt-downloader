@@ -12,17 +12,20 @@ class Download_Opts():
     md_to_emb:   dict[str: bool]
     ydl_opts:    dict
 
-    def __init__(self) -> None:
+    def __init__(self, is_plist: bool = False) -> None:
         self.save_format = Utils.get_val_from_settings("SAVE_FORMAT")
         self.save_path   = Utils.get_val_from_settings("SAVE_PATH")
         self.include_md  = Utils.get_val_from_settings("INCLUDE_METADATA")
         self.save_path   = Path(self.save_path)
-        self.md_to_emb   = {"album":       False,
-                            "artist":      False,
-                            "date":        False,
-                            #These will be True bc I want to nye hye hye
-                            "title":       True,
-                            "tracknumber": True}
+        self.md_to_emb   = {"album":  False,
+                            "artist": False,
+                            "date":   False,
+                            "title":  False,
+                            "tracknumber": False}
+        if is_plist:
+            #These will be True bc I want to nye hye hye
+            self.md_to_emb["title"] = True
+            self.md_to_emb["tracknumber"] = True
         self.reset_ydl()
 
 

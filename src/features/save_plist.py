@@ -23,7 +23,7 @@ def save_plist(plist_url: str) -> bool:
     plist_el_titles = [el['title'] for el in plist_dict['entries']]
     del(plist_dict)
 
-    opts = Download_Opts()
+    opts = Download_Opts(True)
     save_numbering           = Utils.get_val_from_settings("PLIST_NUMBERING")
     save_numbering_has_zeros = Utils.get_val_from_settings("PLIST_NUMBERING_HAS_ZEROS")
     del_duplicates           = Utils.get_val_from_settings("PLIST_DEL_DUPLICATES")
