@@ -18,3 +18,13 @@ class Meta_Dator():
         self.md_album = md_album
         self.md_artist = md_artist
         self.md_date = md_date
+
+        if md_names == None:
+            self.md_names = [None for _ in range(el_count)]
+        else:
+            self.md_names = md_names
+
+        if md_tracknums == None:
+            self.md_tracknums = [None for _ in range(el_count)]
+        else:
+            self.md_tracknums = md_tracknums

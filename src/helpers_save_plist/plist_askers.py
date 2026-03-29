@@ -465,7 +465,7 @@ class Plist_Askers():
             current_album = "Not set"
 
         print(f"Current album: {current_album}\n"
-                "Input new album or leave empty to return\n>> ", end='')
+                "Input new album (leave empty to return):\n>> ", end='')
         asker = input()
         return asker
 
@@ -476,7 +476,7 @@ class Plist_Askers():
             current_artist = "Not set"
 
         print(f"Current artist: {current_artist}\n"
-                "Input new artist or leave empty to return\n>> ", end='')
+                "Input new artist (leave empty to return):\n>> ", end='')
         asker = input()
         return asker
 
@@ -488,7 +488,7 @@ class Plist_Askers():
 
         while True:
             print(f"Current date: {current_date}\n"
-                   "Input new date or leave empty to return\n>> ", end='')
+                   "Input new date (leave empty to return):\n>> ", end='')
             asker = input().strip()
 
             if (asker.isdigit() and
@@ -501,7 +501,7 @@ class Plist_Askers():
     @staticmethod
     def ask_set_names_num(names_count: int) -> int | None:
         while True:
-            print("Input number of the name to change\n"
+            print("Input number of the name to change:\n"
                   "(leave empty to return)\n"
                   "(input 0 to revert to files names)\n>> ", end='')
             asker = input().strip()
@@ -511,7 +511,7 @@ class Plist_Askers():
 
             if (asker.isdigit() and
                 int(asker) <= names_count):
-                return asker
+                return int(asker)
             else:
                 print("Invalid input\n\n")
 
@@ -519,7 +519,7 @@ class Plist_Askers():
     @staticmethod
     def ask_set_tracknums_num(tnums_count: int) -> int | None:
         while True:
-            print("Input number of the tracknum to change\n"
+            print("Input number of the tracknum to change:\n"
                   "(leave empty to return)\n"
                   "(input 0 to revert to file numbering)\n>> ", end='')
             asker = input().strip()
@@ -529,20 +529,29 @@ class Plist_Askers():
 
             if (asker.isdigit() and
                 int(asker) <= tnums_count):
-                return asker
+                return int(asker)
             else:
                 print("Invalid input\n\n")
 
 
     @staticmethod
-    def ask_md_string(md_type: Literal["name", "tracknum"]) -> str:
+    def ask_md_name_string(curr_name: str) -> str:
         while True:
-            print(f"Input new {md_type} metadata\n>> ", end='')
+            print(curr_name)
+            print(f"Input new name metadata:\n>> ", end='')
             asker = input()
 
-            if md_type == "tracknum":
-                if not asker.isdigit():
-                    print("Invalid input\n\n")
-                    continue
+            return asker
+
+
+    @staticmethod
+    def ask_md_tracknum_string() -> str:
+        while True:
+            print(f"Input new tracknum metadata:\n>> ", end='')
+            asker = input()
+
+            if not asker.isdigit():
+                print("Invalid input\n\n")
+                continue
 
             return asker

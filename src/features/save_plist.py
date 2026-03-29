@@ -354,15 +354,14 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 elif asker == "set_name":
                     while True:
                         names = yt_list.md_vars.md_names
-                        if names is not None:
-                            for i, name in enumerate(names):
-                                print(f"{i}. {name}")
-                        else:
-                            print("Not set")
+                        for i, name in enumerate(names):
+                            if name is None:
+                                name = "Name not set"
+                            print(f"{i+1}. {name}")
                         print()
 
                         name_to_set = Plist_Askers.ask_set_names_num(len(names))
-                        print()
+                        print("\n")
                         if name_to_set == None:
                             break
                         elif name_to_set == 0:
@@ -370,22 +369,22 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                             continue
                         index_to_set = name_to_set - 1
 
-                        new_name = Plist_Askers.ask_md_string("name")
+                        new_name = Plist_Askers.ask_md_name_string(names[index_to_set])
+                        print("\n")
                         yt_list.md_vars.md_names[index_to_set] = new_name
 
                 elif asker == "set_tracknum":
                     while True:
                         tracknums = yt_list.md_vars.md_tracknums
                         files_names = yt_list.new_names_list
-                        if tracknums is not None:
-                            for i, tnum in enumerate(tracknums):
-                                print(f"{i}. [{tnum}] for {files_names[i]}")
-                        else:
-                            print("Not set")
+                        for i, tnum in enumerate(tracknums):
+                            if tnum is None:
+                                tnum = "Not set"
+                            print(f"{i+1}. [{tnum}] for {files_names[i]}")
                         print()
 
                         tnum_to_set = Plist_Askers.ask_set_tracknums_num(len(tracknums))
-                        print()
+                        print("\n")
                         if tnum_to_set == None:
                             break
                         elif tnum_to_set == 0:
@@ -394,7 +393,8 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                             continue
                         index_to_set = tnum_to_set - 1
 
-                        new_tracknum = Plist_Askers.ask_md_string("tracknum")
+                        new_tracknum = Plist_Askers.ask_md_tracknum_string()
+                        print("\n")
                         yt_list.md_vars.md_tracknums[index_to_set] = new_tracknum
 
                 elif asker == "return":
@@ -433,7 +433,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                 # User can specify which md will be embedded.
                 # Setting md sets it to embed automatically!
 
-                # Tracknum and names are set from the beginning.
+                # Tracknum and names are set TO VALUES from the beginning.
 
 
         elif asker_menu == "change_link":
