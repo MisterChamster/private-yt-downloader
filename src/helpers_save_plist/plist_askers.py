@@ -460,10 +460,10 @@ class Plist_Askers():
         while True:
             print(f"a  - {able_msg}\n"
                    "e  - Specify which metadata will be embedded\n"
-                  f"sl - Set album        (Embed: {md_album_set_msg   }) (Is set: {md_album_set})\n"
-                  f"sa - Set artist       (Embed: {md_artist_set_msg  }) (Is set: {md_artist_set})\n"
-                  f"sd - Set date         (Embed: {md_date_set_msg    }) (Is set: {md_date_set})\n"
-                  f"sn - Set titles       (Embed: {md_title_set_msg    }) (Is set: True)\n" #Troll!
+                  f"sl - Set album        (Embed: {md_album_set_msg      }) (Is set: {md_album_set})\n"
+                  f"sa - Set artist       (Embed: {md_artist_set_msg     }) (Is set: {md_artist_set})\n"
+                  f"sd - Set date         (Embed: {md_date_set_msg       }) (Is set: {md_date_set})\n"
+                  f"sn - Set titles       (Embed: {md_title_set_msg      }) (Is set: True)\n" #Troll!
                   f"st - Set tracknumbers (Embed: {md_tracknumber_set_msg}) (Is set: True)\n" #Troll!
                    "r  - Return\n"
                    "x  - Exit program\n>> ", end="")

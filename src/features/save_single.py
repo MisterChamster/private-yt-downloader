@@ -44,7 +44,9 @@ def save_single(url: str) -> bool:
 
         elif asker_single == "metadata_settings":
             while True:
-                asker = Askers.ask_single_md(opts.include_md)
+                asker = Askers.ask_single_md(
+                    opts.include_md,
+                    opts.md_to_emb)
 
                 if asker == "change_appending":
                     opts.change_include_md()
