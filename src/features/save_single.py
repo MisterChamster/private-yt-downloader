@@ -9,7 +9,7 @@ import src.common.ydl_support as ydl_support
 def save_single(url: str) -> bool:
     opts = Download_Opts()
     video_title = ydl_support.get_video_title(url)
-    metadata = Meta_Dator([video_title])
+    metadata = Meta_Dator([video_title], single=True)
 
     while True:
         print()
@@ -43,7 +43,17 @@ def save_single(url: str) -> bool:
 
         elif asker_single == "metadata_settings":
             print("MD SETTINGS HIII")
-            pass
+            while True:
+                asker = Askers.ask_single_md(opts.include_md)
+
+                if asker == "change_appending":
+                    opts.change_include_md()
+                elif asker == "":
+                    pass
+                elif asker == "return":
+                    break
+                elif asker == "exit":
+                    return True
 
         elif asker_single == "change_link":
             return False

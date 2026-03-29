@@ -1,5 +1,6 @@
-from tkinter import filedialog
+from typing  import Literal
 from pathlib import Path
+from tkinter import filedialog
 from os import chdir
 
 
@@ -77,3 +78,47 @@ class Askers():
                 return returns_dict[action]
             else:
                 print("Incorrect input.\n")
+
+
+    @staticmethod
+    def ask_single_md(md_included: bool) -> Literal[
+            "change_appending",
+            "",
+            "set_album",
+            "set_artist",
+            "set_date",
+            "set_title",
+            "set_tracknumber",
+            "return",
+            "exit"]:
+        returns_dict = {
+            "a": "change_appending",
+            "": "",
+            "sl": "set_album",
+            "sa": "set_artist",
+            "sd": "set_date",
+            "sn": "set_title",
+            "st": "set_tracknumber",
+            "r": "return",
+            "x": "exit"}
+        able_msg = ("Disable metadata appending"
+                    if md_included
+                    else "Enable metadata appending")
+
+        while True:
+            print(f"a - {able_msg}\n"
+                   " - \n"
+                  f"sl - Set album\n"
+                  f"sa - Set artist\n"
+                  f"sd - Set date\n"
+                  f"sn - Set titles\n"
+                  f"st - Set tracknumbers\n"
+                   "r - Return\n"
+                   "x - Exit program\n>> ", end="")
+            action = input().strip().lower()
+
+            if action in returns_dict:
+                return returns_dict[action]
+            else:
+                print("Incorrect input.\n\n")
+        return ""
