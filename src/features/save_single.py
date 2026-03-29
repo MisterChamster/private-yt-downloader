@@ -43,7 +43,6 @@ def save_single(url: str) -> bool:
             opts.set_save_path(asker)
 
         elif asker_single == "metadata_settings":
-            print("MD SETTINGS HIII")
             while True:
                 asker = Askers.ask_single_md(opts.include_md)
 
@@ -51,7 +50,8 @@ def save_single(url: str) -> bool:
                     opts.change_include_md()
 
                 elif asker == "set_album":
-                    asker = Plist_Askers.ask_set_album(metadator.md_album)
+                    asker = Plist_Askers.ask_set_album(
+                        metadator.md_album)
                     print("\n")
                     if asker == "":
                         continue
@@ -59,7 +59,8 @@ def save_single(url: str) -> bool:
                     metadator.md_album = asker
 
                 elif asker == "set_artist":
-                    asker = Plist_Askers.ask_set_artist(metadator.md_artist)
+                    asker = Plist_Askers.ask_set_artist(
+                        metadator.md_artist)
                     print("\n")
                     if asker == "":
                         continue
@@ -67,7 +68,8 @@ def save_single(url: str) -> bool:
                     metadator.md_artist = asker
 
                 elif asker == "set_date":
-                    asker = Plist_Askers.ask_set_date(metadator.md_date)
+                    asker = Plist_Askers.ask_set_date(
+                        metadator.md_date)
                     print("\n")
                     if asker == "":
                         continue
@@ -75,9 +77,13 @@ def save_single(url: str) -> bool:
                     metadator.md_date = asker
 
                 elif asker == "set_title":
+                    asker = Plist_Askers.ask_md_title_string(
+                        metadator.md_titles[0])
                     pass
 
                 elif asker == "set_tracknumber":
+                    asker = Plist_Askers.ask_md_tracknumber_string(
+                        metadator.md_tracknumbers[0])
                     pass
 
                 elif asker == "return":

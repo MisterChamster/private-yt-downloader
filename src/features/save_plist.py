@@ -437,7 +437,7 @@ def save_plist(plist_url: str) -> bool:
                         opts.set_md_to_embed("tracknumber", True)
                         index_to_set = tnum_to_set - 1
 
-                        new_tracknumber = Plist_Askers.ask_md_tracknumber_string()
+                        new_tracknumber = Plist_Askers.ask_md_tracknumber_string(tracknumbers[index_to_set])
                         print("\n")
                         yt_list.md_vars.md_tracknumbers[index_to_set] = new_tracknumber
 

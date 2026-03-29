@@ -634,8 +634,9 @@ class Plist_Askers():
 
 
     @staticmethod
-    def ask_md_tracknumber_string() -> str:
+    def ask_md_tracknumber_string(curr_tracknumber: str) -> str:
         while True:
+            print(f"Current number: {curr_tracknumber}")
             print(f"Input new tracknumber metadata:\n>> ", end='')
             asker = input()
 
