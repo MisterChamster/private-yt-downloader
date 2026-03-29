@@ -1,4 +1,5 @@
 from typing import Literal
+from pathlib import Path
 
 from src.common.askers import Askers
 from src.common.utils  import Utils
@@ -6,7 +7,8 @@ from src.common.download_opts import Download_Opts
 from src.helpers_save_plist.plist_askers  import Plist_Askers
 from src.helpers_save_plist.plist_utils   import Plist_Utils
 from src.helpers_save_plist.elements_list import Elements_List
-import src.common.ydl_support as ydl_support
+import src.common.ydl_support     as ydl_support
+import src.common.utils_embedding as emb
 
 
 
@@ -475,7 +477,6 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
 
                 # ========== NOT DONE ==========
 
-
         elif asker_menu == "change_link":
             return "repeat"
 
@@ -500,6 +501,8 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
             total_errors = 0
             print(f"Downloading {yt_list.new_plist_title}")
 
+            # Download loop
+            files_paths: list[Path] = []
             for index in range(yt_list.new_len):
                 filename = yt_list.get_filename_for_download(index)
                 filename = Utils.illegal_char_remover(filename)
@@ -507,6 +510,7 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     filename_and_ext = f"{filename}.{opts.save_format}"
                     predicted_path = dirpath / filename_and_ext
                     if not predicted_path.exists():
+                        files_paths.append(predicted_path)
                         break
                     filename += "_d"
                 opts.mutate_ydl("outtmpl", filename)
@@ -520,6 +524,33 @@ def save_plist(plist_url: str) -> Literal["repeat", "exit"]:
                     total_errors += 1
                     print(f"Downloading {filename} failed. Link: {url}")
 
+            # Metadata loop
+            for i, file_path in enumerate(files_paths):
+                if opts.md_to_emb["album"] == True:
+                    emb.append_metadata_file_universal(
+                        file_path,
+                        "album",
+                        yt_list.md_vars.md_album)
+
+                if opts.md_to_emb["artist"] == True:
+                    emb.append_metadata_file_universal(
+                        file_path,
+                        "artist",
+                        yt_list.md_vars.md_artist)
+
+                if opts.md_to_emb["date"] == True:
+                    emb.append_metadata_file_universal(
+                        file_path,
+                        "date",
+                        yt_list.md_vars.md_date)
+
+                if opts.md_to_emb["name"] == True:
+                    pass
+
+                if opts.md_to_emb["tracknum"] == True:
+                    pass
+
+            # Error count printing
             print()
             if not total_errors:
                 print(f"{yt_list.new_plist_title} playlist has been successfully downloaded.\n\n")
