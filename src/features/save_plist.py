@@ -98,6 +98,18 @@ def save_plist(plist_url: str) -> bool:
             opts.set_save_format(asker)
             opts.reset_ydl()
 
+        elif asker_menu == "change_save_path":
+            asker = Askers.ask_save_path()
+            print("\n")
+            if asker is None:
+                print("Empty path was chosen.\n\n")
+                continue
+            if not asker.exists():
+                print("Invalid path.\n\n")
+                continue
+
+            opts.set_save_path(asker)
+
         elif asker_menu == "remove_elements":
             while True:
                 if yt_list.new_len == 0:
@@ -301,18 +313,6 @@ def save_plist(plist_url: str) -> bool:
 
                 elif asker == 'return':
                     break
-
-        elif asker_menu == "change_save_path":
-            asker = Askers.ask_save_path()
-            print("\n")
-            if asker is None:
-                print("Empty path was chosen.\n\n")
-                continue
-            if not asker.exists():
-                print("Invalid path.\n\n")
-                continue
-
-            opts.set_save_path(asker)
 
         elif asker_menu == "metadata_settings":
             while True:

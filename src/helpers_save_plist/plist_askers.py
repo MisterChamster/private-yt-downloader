@@ -13,9 +13,9 @@ class Plist_Askers():
             md_possible: bool = True) -> str:
         returns_dict = {
             "f": "change_format",
+            "p": "change_save_path",
             "r": "remove_elements",
             "e": "edit_captions",
-            "p": "change_save_path",
             "m": "metadata_settings",
             "l": "change_link",
             "o": "rev_to_original",
@@ -37,9 +37,9 @@ class Plist_Askers():
             if duplicates_problem:
                 print("c - Handle duplicates")
             print("f - Change saving format\n"
+                  "p - Change save path"
                   "r - Remove elements to download\n"
-                  "e - Edit captions...\n"
-                  "p - Change save path")
+                  "e - Edit captions...\n")
             if md_possible:
                 print("m - Metadata settings")
             print("l - Change link\n"
