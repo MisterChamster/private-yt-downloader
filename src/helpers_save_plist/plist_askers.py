@@ -37,15 +37,16 @@ class Plist_Askers():
             if duplicates_problem:
                 print("c - Handle duplicates")
             print("f - Change saving format\n"
-                  "p - Change save path"
+                  "p - Change save path\n"
                   "r - Remove elements to download\n"
-                  "e - Edit captions...\n")
+                  "e - Edit captions...n")
             if md_possible:
                 print("m - Metadata settings")
             print("l - Change link\n"
                   "o - Revert to original playlist\n"
                  f"d - Download {download_string}\n"
-                  "x - Exit program\n>> ", end="")
+                  "x - Exit program\n"
+                  ">> ", end="")
             action = input().strip().lower()
 
             if action in returns_dict:
