@@ -3,19 +3,35 @@ from typing import Literal
 
 
 class Plist_Askers():
+    # ==========================================================================
     # =============================== PLIST MENU ===============================
-    def ask_plist_menu(duplicates_problem: bool = False) -> str:
+    # ==========================================================================
+    @staticmethod
+    def ask_plist_menu(
+            duplicates_problem: bool = False,
+            download_md: bool = False,
+            md_possible: bool = True) -> str:
         returns_dict = {
             "f": "change_format",
             "r": "remove_elements",
             "e": "edit_captions",
             "p": "change_save_path",
+            "m": "metadata_settings",
             "l": "change_link",
             "o": "rev_to_original",
             "d": "download",
             "x": "exit"}
         if duplicates_problem:
             returns_dict["c"] = "handle_duplicates"
+        if md_possible:
+            returns_dict["m"] = "metadata_settings"
+
+        download_string = (
+            "(with metadata)"
+            if download_md
+            else "(no metadata)"
+            if md_possible
+            else "")
 
         while True:
             if duplicates_problem:
@@ -23,10 +39,12 @@ class Plist_Askers():
             print("f - Change saving format\n"
                   "r - Remove elements to download\n"
                   "e - Edit captions...\n"
-                  "p - Change save path\n"
-                  "l - Change link\n"
+                  "p - Change save path")
+            if md_possible:
+                print("m - Metadata settings")
+            print("l - Change link\n"
                   "o - Revert to original playlist\n"
-                  "d - Download\n"
+                 f"d - Download {download_string}\n"
                   "x - Exit program\n>> ", end="")
             action = input().strip().lower()
 
@@ -36,7 +54,9 @@ class Plist_Askers():
                 print("Incorrect input.\n\n")
 
 
+    # ==========================================================================
     # =============================== DUPLICATES ===============================
+    # ==========================================================================
     @staticmethod
     def ask_delete_duplis() -> bool:
         returns_dict = {
@@ -84,12 +104,15 @@ class Plist_Askers():
         'return']:
         returns_dict = {
             'n': 'trim_names',
+            'e': 'edit_names',
             'b': 'edit_numbering',
             'p': 'edit_plist_name',
             'r': 'return'}
 
         while True:
+            print("Choose action:")
             print("n - Trim elements' names\n"
+                  "e - Edit elements' names\n"
                   "b - Edit elements' numbering\n"
                   "p - Edit playlist name\n"
                   "r - Return\n>> ", end="")
@@ -99,6 +122,35 @@ class Plist_Askers():
                 return returns_dict[action]
             else:
                 print("Incorrect input.\n\n")
+
+
+    @staticmethod
+    def ask_edit_names(max_num: int) -> str:
+        returns_dict = {'r': 'return'}
+
+        while True:
+            print("Input a file's number to manually change title ('r' to return)\n>> ", end="")
+            asker = input().strip()
+
+            if asker in returns_dict:
+                return returns_dict[asker]
+
+            elif asker.isdigit():
+                if (int(asker) < 1 or
+                    int(asker) > max_num):
+                    print("Incorrect input\n\n")
+                else:
+                    return asker
+            else:
+                print("Incorrect input\n\n")
+
+
+    @staticmethod
+    def ask_new_title(old_title: str) -> str:
+        print(old_title)
+        print("Input new title\n>> ", end="")
+        asker = input()
+        return asker
 
 
     @staticmethod
@@ -366,3 +418,96 @@ class Plist_Askers():
                     return plist_len
                 end_index = ending_el - 1
                 return end_index
+
+
+    # ==========================================================================
+    # ================================ METADATA ================================
+    # ==========================================================================
+    @staticmethod
+    def ask_metadata_menu(md_included:   bool,
+                          md_to_emb:     dict[Literal["album", "artist", "date", "title", "tracknumber"]:bool],
+                          md_album_set:  bool,
+                          md_artist_set: bool,
+                          md_date_set:   bool
+                ) -> Literal[
+                "change_appending",
+                "which_md_embedded",
+                "set_album",
+                "set_artist",
+                "set_date",
+                "set_title",
+                "set_tracknumber",
+                "return",
+                "exit"]:
+        returns_dict = {
+            "a":  "change_appending",
+            "e":  "which_md_embedded",
+            "sl": "set_album",
+            "sa": "set_artist",
+            "sd": "set_date",
+            "sn": "set_title",
+            "st": "set_tracknumber",
+            "r":  "return",
+            "x":  "exit"}
+
+        able_msg = ("Disable metadata appending"
+                    if md_included
+                    else "Enable metadata appending")
+        md_album_set_msg       = str(md_to_emb["album"]      ).replace("True", "True ")
+        md_artist_set_msg      = str(md_to_emb["artist"]     ).replace("True", "True ")
+        md_date_set_msg        = str(md_to_emb["date"]       ).replace("True", "True ")
+        md_title_set_msg       = str(md_to_emb["title"]      ).replace("True", "True ")
+        md_tracknumber_set_msg = str(md_to_emb["tracknumber"]).replace("True", "True ")
+
+        while True:
+            print(f"a  - {able_msg}\n"
+                   "e  - Specify which metadata will be embedded\n"
+                  f"sl - Set album        (Embed: {md_album_set_msg      }) (Is set: {md_album_set})\n"
+                  f"sa - Set artist       (Embed: {md_artist_set_msg     }) (Is set: {md_artist_set})\n"
+                  f"sd - Set date         (Embed: {md_date_set_msg       }) (Is set: {md_date_set})\n"
+                  f"sn - Set titles       (Embed: {md_title_set_msg      }) (Is set: True)\n" #Troll!
+                  f"st - Set tracknumbers (Embed: {md_tracknumber_set_msg}) (Is set: True)\n" #Troll!
+                   "r  - Return\n"
+                   "x  - Exit program\n>> ", end="")
+            action = input().strip().lower()
+
+            if action in returns_dict:
+                return returns_dict[action]
+            else:
+                print("Incorrect input.\n\n")
+
+
+    @staticmethod
+    def ask_set_titles_num(titles_count: int) -> int | None:
+        while True:
+            print("Input number of the title to change:\n"
+                  "(leave empty to return)\n"
+                  "(input 0 to revert to files titles)\n>> ", end='')
+            asker = input().strip()
+
+            if asker == "":
+                return
+
+            if (asker.isdigit() and
+                int(asker) <= titles_count):
+                return int(asker)
+            else:
+                print("Invalid input\n\n")
+
+
+    @staticmethod
+    def ask_set_tracknumbers_num(tnums_count: int) -> int | None:
+        while True:
+            print("Input number of the tracknumber to change:\n"
+                  "(leave empty to return)\n"
+                  "(input 0 to revert to file numbering)\n>> ", end='')
+            asker = input().strip()
+
+            if asker == "":
+                return
+
+            if (asker.isdigit() and
+                int(asker) <= tnums_count):
+                return int(asker)
+            else:
+                print("Invalid input\n\n")
