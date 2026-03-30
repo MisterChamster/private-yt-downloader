@@ -119,12 +119,11 @@ def save_plist(plist_url: str) -> bool:
 
                         Utils.print_list(yt_list.new_names_list, True)
                         print()
-                        remove_number = Plist_Askers.ask_single_index(yt_list.new_len, 'remove')
+                        remove_index = Plist_Askers.ask_single_index(yt_list.new_len, 'remove')
                         print("\n")
-                        if not remove_number:
+                        if not remove_index:
                             break
 
-                        remove_index = remove_number-1
                         yt_list.pop_new(remove_index)
 
                 elif action == 'remove_range':
