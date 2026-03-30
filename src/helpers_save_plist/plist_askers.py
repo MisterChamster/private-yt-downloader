@@ -104,7 +104,7 @@ class Plist_Askers():
         'edit_plist_name',
         'return']:
         returns_dict = {
-            'n': 'trim_names',
+            't': 'trim_names',
             'e': 'edit_names',
             'b': 'edit_numbering',
             'p': 'edit_plist_name',
@@ -112,9 +112,9 @@ class Plist_Askers():
 
         while True:
             print("Choose action:")
-            print("n - Trim elements' names\n"
-                  "e - Edit elements' names\n"
-                  "b - Edit elements' numbering\n"
+            print("t - Trim element names\n"
+                  "e - Edit element names\n"
+                  "b - Edit element numbering\n"
                   "p - Edit playlist name\n"
                   "r - Return\n>> ", end="")
             action = input().strip().lower()
