@@ -333,7 +333,7 @@ def save_plist(plist_url: str) -> bool:
 
                 elif asker == "which_md_embedded":
                     while True:
-                        asker = Plist_Askers.ask_which_md_embed(
+                        asker = Askers.ask_which_md_embed(
                             opts.md_to_emb,
                             md_album_set,
                             md_artist_set,
@@ -366,7 +366,7 @@ def save_plist(plist_url: str) -> bool:
 
                 elif asker == "set_album":
                     current_album = yt_list.md_vars.md_album
-                    asker = Plist_Askers.ask_set_album(current_album)
+                    asker = Askers.ask_set_album(current_album)
                     print("\n")
                     if asker == "":
                         continue
@@ -375,7 +375,7 @@ def save_plist(plist_url: str) -> bool:
 
                 elif asker == "set_artist":
                     current_artist = yt_list.md_vars.md_artist
-                    asker = Plist_Askers.ask_set_artist(current_artist)
+                    asker = Askers.ask_set_artist(current_artist)
                     print("\n")
                     if asker == "":
                         continue
@@ -384,7 +384,7 @@ def save_plist(plist_url: str) -> bool:
 
                 elif asker == "set_date":
                     current_date = yt_list.md_vars.md_date
-                    asker = Plist_Askers.ask_set_date(current_date)
+                    asker = Askers.ask_set_date(current_date)
                     print("\n")
                     if asker == "":
                         continue
@@ -411,7 +411,7 @@ def save_plist(plist_url: str) -> bool:
                         opts.set_md_to_embed("title", True)
                         index_to_set = title_to_set - 1
 
-                        new_title = Plist_Askers.ask_md_title_string(titles[index_to_set])
+                        new_title = Askers.ask_md_title_string(titles[index_to_set])
                         print("\n")
                         if new_title == "":
                             continue
@@ -439,7 +439,7 @@ def save_plist(plist_url: str) -> bool:
                         opts.set_md_to_embed("tracknumber", True)
                         index_to_set = tnum_to_set - 1
 
-                        new_tracknumber = Plist_Askers.ask_md_tracknumber_string(tracknumbers[index_to_set])
+                        new_tracknumber = Askers.ask_md_tracknumber_string(tracknumbers[index_to_set])
                         print("\n")
                         if new_tracknumber == "":
                             continue

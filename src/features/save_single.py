@@ -65,7 +65,7 @@ def save_single(url: str) -> bool:
 
                 elif asker == "which_md_embedded":
                     while True:
-                        asker = Plist_Askers.ask_which_md_embed(
+                        asker = Askers.ask_which_md_embed(
                             opts.md_to_emb,
                             md_album_set,
                             md_artist_set,
@@ -97,7 +97,7 @@ def save_single(url: str) -> bool:
                             return True
 
                 elif asker == "set_album":
-                    asker = Plist_Askers.ask_set_album(
+                    asker = Askers.ask_set_album(
                         metadator.md_album)
                     print("\n")
                     if asker == "":
@@ -106,7 +106,7 @@ def save_single(url: str) -> bool:
                     metadator.md_album = asker
 
                 elif asker == "set_artist":
-                    asker = Plist_Askers.ask_set_artist(
+                    asker = Askers.ask_set_artist(
                         metadator.md_artist)
                     print("\n")
                     if asker == "":
@@ -115,7 +115,7 @@ def save_single(url: str) -> bool:
                     metadator.md_artist = asker
 
                 elif asker == "set_date":
-                    asker = Plist_Askers.ask_set_date(
+                    asker = Askers.ask_set_date(
                         metadator.md_date)
                     print("\n")
                     if asker == "":
@@ -124,7 +124,7 @@ def save_single(url: str) -> bool:
                     metadator.md_date = asker
 
                 elif asker == "set_title":
-                    asker = Plist_Askers.ask_md_title_string(
+                    asker = Askers.ask_md_title_string(
                         metadator.md_titles[0])
                     print("\n")
                     if asker == "":
@@ -133,7 +133,7 @@ def save_single(url: str) -> bool:
                     metadator.md_titles[0] = asker
 
                 elif asker == "set_tracknumber":
-                    asker = Plist_Askers.ask_md_tracknumber_string(
+                    asker = Askers.ask_md_tracknumber_string(
                         metadator.md_tracknumbers[0])
                     print("\n")
                     if asker == "":
