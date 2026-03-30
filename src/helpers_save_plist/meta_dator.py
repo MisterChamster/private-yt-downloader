@@ -20,7 +20,7 @@ class Meta_Dator():
         self.md_artist  = md_artist
         self.md_date    = md_date
 
-        if md_tracknumbers == None and not single:
+        if md_tracknumbers == [None] and not single:
             self.md_tracknumbers = [
                 str(num+1)
                 for num
