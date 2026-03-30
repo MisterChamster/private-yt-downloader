@@ -39,7 +39,7 @@ class Plist_Askers():
             print("f - Change saving format\n"
                   "p - Change save path\n"
                   "r - Remove elements to download\n"
-                  "e - Edit captions...n")
+                  "e - Edit captions...")
             if md_possible:
                 print("m - Metadata settings")
             print("l - Change link\n"
