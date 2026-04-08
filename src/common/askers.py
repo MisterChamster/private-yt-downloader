@@ -167,6 +167,8 @@ class Askers():
             if (asker.isdigit() and
                 len(asker) == 4):
                 return asker
+            elif asker == "":
+                return asker
             else:
                 print("Invalid input\n\n")
 
