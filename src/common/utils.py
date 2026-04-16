@@ -16,6 +16,7 @@ class Utils():
         bad_stuff = ['&list', #If user copies browser link when on vid from playlist
                     '&si',   #ID tracker lmao
                     '?si',
+                    '?is',   #Idk
                     '&ab_channel', #A/B testing
                     '&feature',    #How opened
                     '&pp',         #Promotion
