@@ -16,7 +16,8 @@ downloads_path = Path(proj_path) / "downloads"
 Askers.downloads_path = downloads_path
 path_in_setts = Utils.get_val_from_settings("SAVE_PATH")
 if path_in_setts == "None":
-    Utils.save_value_to_settings("SAVE_PATH", downloads_path)
+    path_str = str(downloads_path)
+    Utils.save_value_to_settings("SAVE_PATH", path_str)
 
 
 def main_loop() -> None:
