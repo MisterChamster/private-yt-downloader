@@ -46,6 +46,7 @@ def main_loop() -> None:
             continue
 
         print()
+        exit_flag = None #Weird af. Without resetting save_single somehow keeps values??
         # Single stuff
         if url_type == "single":
             print()
