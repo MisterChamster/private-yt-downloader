@@ -2,7 +2,6 @@ from src.common.askers import Askers
 from src.common.utils  import Utils
 from src.common.download_opts import Download_Opts
 from src.helpers_save_plist.meta_dator import Meta_Dator
-from src.helpers_save_plist.plist_askers import Plist_Askers
 import src.common.ydl_support as ydl_support
 import src.common.utils_embedding as emb
 
@@ -11,7 +10,7 @@ import src.common.utils_embedding as emb
 def save_single(url: str) -> bool:
     opts = Download_Opts()
     video_title = ydl_support.get_video_title(url)
-    metadator = Meta_Dator([video_title], single=True)
+    metadator = Meta_Dator(True, [video_title])
 
     while True:
         print()

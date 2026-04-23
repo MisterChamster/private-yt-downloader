@@ -54,7 +54,7 @@ class Elements_List():
         self.reset_new_index_in_og()
         self.update_newlen()
         self.calc_numbering_list()
-        self.md_vars = Meta_Dator(self.og_names_list)
+        self.md_vars = Meta_Dator(False, self.og_names_list)
 
         if self.del_duplicates:
             self.delete_duplicates()

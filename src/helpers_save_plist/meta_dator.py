@@ -8,12 +8,12 @@ class Meta_Dator():
 
     def __init__(
             self,
+            single:                bool,
             md_titles:        list[str],
             md_tracknumbers:  list[str] = [None],
             md_album:        str | None = None,
             md_artist:       str | None = None,
-            md_date:         str | None = None,
-            single:                bool = False):
+            md_date:         str | None = None):
 
         self.md_titles  = md_titles
         self.md_album   = md_album
