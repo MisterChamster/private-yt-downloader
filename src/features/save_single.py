@@ -49,7 +49,7 @@ def save_single(url: str) -> bool:
                 md_album_set  = (metadator.md_album  != None)
                 md_artist_set = (metadator.md_artist != None)
                 md_date_set   = (metadator.md_date   != None)
-                md_tracknum_set = (len(metadator.md_tracknumbers) > 0)
+                md_tracknum_set = (metadator.md_tracknumbers[0] != None)
                 asker = Askers.ask_single_md(
                     opts.include_md,
                     opts.md_to_emb,

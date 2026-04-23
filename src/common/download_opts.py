@@ -26,6 +26,10 @@ class Download_Opts():
             #These will be True bc I want to nye hye hye
             self.md_to_emb["title"] = True
             self.md_to_emb["tracknumber"] = True
+        if not is_plist:
+            #This will be True bc I want to nye hye hye
+            self.md_to_emb["title"] = True
+
         self.reset_ydl()
 
 
