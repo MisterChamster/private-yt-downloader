@@ -531,7 +531,8 @@ def save_plist(plist_url: str) -> bool:
                     print(f"Downloading {filename} failed. Link: {url}")
 
             # Metadata loop
-            if opts.include_md:
+            if (opts.include_md and
+               opts.save_format in ('ogg', 'flac', "mp3")):
                 for i, file_path in enumerate(files_paths):
                     if not file_path.exists():
                         continue

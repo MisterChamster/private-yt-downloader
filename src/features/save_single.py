@@ -170,7 +170,9 @@ def save_single(url: str) -> bool:
             download_flag = ydl_support.download_fromyt(opts.ydl_opts, url)
 
             # Metadata loop
-            if opts.include_md and predicted_file_path.exists():
+            if (opts.include_md and
+                predicted_file_path.exists() and
+                opts.save_format in ('ogg', 'flac', "mp3")):
                 if opts.md_to_emb["album"] == True:
                     emb.append_metadata_file_universal(
                         predicted_file_path,
