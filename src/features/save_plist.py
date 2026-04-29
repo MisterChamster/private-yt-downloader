@@ -314,7 +314,8 @@ def save_plist(plist_url: str) -> bool:
                 elif asker == 'return':
                     break
 
-        elif asker_menu == "metadata_settings":
+        elif (asker_menu == "metadata_settings" and
+              opts.save_format in ("mp3", "ogg", "flac")):
             while True:
                 md_album_set  = (yt_list.md_vars.md_album  != None)
                 md_artist_set = (yt_list.md_vars.md_artist != None)
