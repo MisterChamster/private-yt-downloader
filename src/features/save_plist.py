@@ -143,7 +143,7 @@ def save_plist(plist_url: str) -> bool:
                         yt_list.new_len,
                         'remove')
                     print("\n")
-                    if not start_el_index:
+                    if start_el_index is None:
                         continue
 
                     ending_el_index = Plist_Askers.ask_second_index(
@@ -151,7 +151,7 @@ def save_plist(plist_url: str) -> bool:
                         'remove',
                         start_el_index)
                     print("\n")
-                    if not ending_el_index:
+                    if ending_el_index is None:
                         continue
 
                     yt_list.pop_new_range(start_el_index, ending_el_index)
