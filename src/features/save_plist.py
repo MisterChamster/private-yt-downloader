@@ -133,7 +133,7 @@ def save_plist(plist_url: str) -> bool:
                         print()
                         remove_index = Plist_Askers.ask_single_index(yt_list.new_len, 'remove')
                         print("\n")
-                        if not remove_index:
+                        if remove_index is None:
                             break
 
                         yt_list.pop_new(remove_index)
