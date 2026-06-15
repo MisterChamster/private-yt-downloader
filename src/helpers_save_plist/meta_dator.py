@@ -40,7 +40,8 @@ class Meta_Dator():
 
 
     def pop_md_list_range(self, index_s: int, index_e: int) -> None:
-        del(self.md_titles[index_s:index_e])
+        end_el = index_e + 1
+        del(self.md_titles[index_s:end_el])
         # del(self.md_tracknumbers[index_s:index_e])
         self.recalc_tracknums()
 

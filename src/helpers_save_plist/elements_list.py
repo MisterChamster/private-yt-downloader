@@ -128,10 +128,11 @@ class Elements_List():
 
 
     def pop_new_range(self, index_s: int, index_e: int) -> None:
-        del(self.new_urls_list[index_s:index_e])
-        del(self.new_names_list[index_s:index_e])
-        del(self.new_numbers_list[index_s:index_e])
-        del(self.new_index_in_og[index_s:index_e])
+        end_el = index_e + 1
+        del(self.new_urls_list[index_s:end_el])
+        del(self.new_names_list[index_s:end_el])
+        del(self.new_numbers_list[index_s:end_el])
+        del(self.new_index_in_og[index_s:end_el])
         self.md_vars.pop_md_list_range(index_s, index_e)
         self.update_newlen()
 
