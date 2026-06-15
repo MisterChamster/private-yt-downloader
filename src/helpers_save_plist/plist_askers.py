@@ -397,7 +397,7 @@ class Plist_Askers():
         start_el_index: int
     ) -> int | None:
         while True:
-            print(f"Input number of the first element to {action}:\n"
+            print(f"Input number of the las element to {action}:\n"
                    "(input 'l' to select last element of the playlist)\n"
                    "(input 'r' to return)\n>> ", end="")
             asker = input().strip().lower()
