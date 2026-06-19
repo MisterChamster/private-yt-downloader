@@ -530,6 +530,7 @@ def save_plist(plist_url: str) -> bool:
                 else:
                     total_errors += 1
                     print(f"Downloading {filename} failed. Link: {url}")
+                print()
 
             # Metadata loop
             if (opts.include_md and
