@@ -15,7 +15,7 @@ class Askers():
     def ask_url() -> str:
         print("Enter URL of YouTube video or playlist:\n"
               "(input 'e' to exit program)\n>> ", end="")
-        asker = input().strip()
+        asker = input().strip().lower()
         return asker
 
 

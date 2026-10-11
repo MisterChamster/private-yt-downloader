@@ -29,7 +29,7 @@ def main_loop() -> None:
               "=============================================================\n")
         # Get url from user and clean it
         url = Askers.ask_url()
-        if url == "e":
+        if url == "x":
             return
         cleaned_url = Utils.clean_url(url)
         if cleaned_url != url:
