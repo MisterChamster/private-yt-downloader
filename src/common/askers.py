@@ -187,7 +187,7 @@ class Askers():
             print(f"Current number: {curr_tracknumber}")
             print(f"Input new tracknumber metadata:\n"
                    "(leave empty to return)\n>> ", end='')
-            asker = input()
+            asker = input().strip()
 
             if not asker.isdigit():
                 print("Invalid input\n\n")
