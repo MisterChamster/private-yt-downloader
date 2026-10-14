@@ -43,10 +43,10 @@ def save_plist(plist_url: str) -> bool:
 
         numbering_string = (
             "None"
-            if not yt_list.numbering else
-            "Yes, with zeros"
-            if yt_list.numbering_has_zeros else
-            "Yes, without zeros")
+            if not yt_list.numbering
+            else "Yes, with zeros"
+            if yt_list.numbering_has_zeros
+            else "Yes, without zeros")
 
         Utils.print_list(yt_list.new_names_list)
         print()

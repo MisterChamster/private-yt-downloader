@@ -36,31 +36,21 @@ def main_loop() -> None:
             url = cleaned_url
             print("Your link has been cleaned of fluff.")
 
-        url_type: Literal[
-            'plist',
-            'single',
-            'invalid'] = Utils.determine_url_type(url)
-
+        url_type = Utils.determine_url_type(url)
         if not url_type:
             print("Invalid URL.\n\n")
             continue
 
-        print()
+        print("\n")
         exit_flag = None #Weird af. Without resetting save_single somehow keeps values??
-        # Single stuff
         if url_type == "single":
-            print()
             exit_flag = save_single.save_single(url)
             if exit_flag:
                 return
-            else:
-                continue
+            continue
 
-        # Playlist stuff
         elif url_type == 'plist':
-            print()
             exit_flag = save_plist.save_plist(url)
             if exit_flag:
                 return
-            else:
-                continue
+            continue

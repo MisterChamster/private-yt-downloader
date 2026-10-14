@@ -117,8 +117,7 @@ class Askers():
                  f"n - {md_title_set_msg_1      } embedding title metadata       (currently {md_title_set_msg_2})\n"
                  f"t - {md_tracknumber_set_msg_1} embedding tracknumber metadata (currently {md_tracknumber_set_msg_2})\n"
                   "r - Return\n"
-                  "x - Exit\n"
-                  ">> ", end='')
+                  "x - Exit\n>> ", end='')
             asker = input().strip().lower()
 
             if asker in legality_to_set:
@@ -138,7 +137,7 @@ class Askers():
             current_album = "Not set"
 
         print(f"Current album: {current_album}\n"
-                "Input new album (leave empty to return):\n>> ", end='')
+               "Input new album (leave empty to return):\n>> ", end='')
         asker = input()
         return asker
 
@@ -164,8 +163,7 @@ class Askers():
                    "Input new date (leave empty to return):\n>> ", end='')
             asker = input().strip()
 
-            if (asker.isdigit() and
-                len(asker) == 4):
+            if asker.isdigit() and len(asker) == 4:
                 return asker
             elif asker == "":
                 return asker
@@ -178,10 +176,8 @@ class Askers():
         while True:
             print(curr_title)
             print(f"Input new title metadata:\n"
-                   "(leave empty to return)\n"
-                   ">> ", end='')
+                   "(leave empty to return)\n>> ", end='')
             asker = input()
-
             return asker
 
 
@@ -190,8 +186,7 @@ class Askers():
         while True:
             print(f"Current number: {curr_tracknumber}")
             print(f"Input new tracknumber metadata:\n"
-                   "(leave empty to return)\n"
-                   ">> ", end='')
+                   "(leave empty to return)\n>> ", end='')
             asker = input()
 
             if not asker.isdigit():
@@ -288,12 +283,10 @@ class Askers():
                   f"sn - Set title       (Embed: {md_title_set_msg      }) (Is set: True)\n" #Troll!
                   f"st - Set tracknumber (Embed: {md_tracknumber_set_msg}) (Is set: {md_tracknum_set})\n"
                    "r  - Return\n"
-                   "x  - Exit program\n"
-                   ">> ", end="")
+                   "x  - Exit program\n>> ", end="")
             action = input().strip().lower()
 
             if action in returns_dict:
                 return returns_dict[action]
             else:
                 print("Incorrect input.\n\n")
-        return ""

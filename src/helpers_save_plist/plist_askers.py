@@ -45,8 +45,7 @@ class Plist_Askers():
             print("l - Change link\n"
                   "o - Revert to original playlist\n"
                  f"d - Download {download_string}\n"
-                  "x - Exit program\n"
-                  ">> ", end="")
+                  "x - Exit program\n>> ", end="")
             action = input().strip().lower()
 
             if action in returns_dict:
@@ -248,16 +247,15 @@ class Plist_Askers():
         len_type = Plist_Askers.ask_length_type()
         print("\n")
 
-        if len_type == 'input_integer':
-            trim_len = Plist_Askers.ask_length_int()
-            print("\n")
-            return trim_len
-        elif len_type == 'input_string':
-            trim_len = Plist_Askers.ask_length_str()
-            print("\n")
-            return trim_len
-        elif len_type == 'return':
-            return
+        match len_type:
+            case 'input_integer':
+                trim_len = Plist_Askers.ask_length_int()
+            case 'input_string':
+                trim_len = Plist_Askers.ask_length_str()
+            case 'return':
+                return
+        print("\n")
+        return trim_len
 
 
     @staticmethod
@@ -287,7 +285,7 @@ class Plist_Askers():
                   "(input 'r' to return)\n>> ", end="")
             asker = input().strip().lower()
 
-            if asker in ['r', '0']:
+            if asker in ('r', '0'):
                 return
             elif not asker.isdigit():
                 print("Incorrect input.\n\n")
@@ -303,7 +301,7 @@ class Plist_Askers():
                   "(input 'r' to return)\n>> ", end="")
             asker = input()
 
-            if asker in ['r', '']:
+            if asker in ('r', ''):
                 return
             return len(asker)
 
@@ -318,12 +316,14 @@ class Plist_Askers():
             "n": "change_numbering",
             "z": "change_zeros",
             "r": "return"}
-        numbering_msg = ("Disable"
-                         if numbering_enabled else
-                         "Enable")
-        zeros_msg = ("Disable"
-                     if zeros_enabled else
-                     "Enable")
+        numbering_msg = (
+            "Disable"
+            if numbering_enabled
+            else "Enable")
+        zeros_msg = (
+            "Disable"
+            if zeros_enabled
+            else "Enable")
 
         while True:
             print("Choose numbering option:\n"
@@ -345,8 +345,8 @@ class Plist_Askers():
         action: Literal['remove', 'trim']
     ) -> int | None:
         string = ('trim its name'
-                  if action == 'trim' else
-                  'remove it')
+                  if action == 'trim'
+                  else 'remove it')
         while True:
             print(f"Input number of the element to {string}:\n"
                    "('r' to return)\n>> ", end="")
@@ -404,7 +404,7 @@ class Plist_Askers():
 
             if asker == "r":
                 return
-            elif asker in ["l", "-1"]:
+            elif asker in ("l", "-1"):
                 return plist_len
             elif not asker.isdigit():
                 print("Incorrect input.\n")
@@ -425,21 +425,22 @@ class Plist_Askers():
     # ================================ METADATA ================================
     # ==========================================================================
     @staticmethod
-    def ask_metadata_menu(md_included:   bool,
-                          md_to_emb:     dict[Literal["album", "artist", "date", "title", "tracknumber"]:bool],
-                          md_album_set:  bool,
-                          md_artist_set: bool,
-                          md_date_set:   bool
-                ) -> Literal[
-                "change_appending",
-                "which_md_embedded",
-                "set_album",
-                "set_artist",
-                "set_date",
-                "set_title",
-                "set_tracknumber",
-                "return",
-                "exit"]:
+    def ask_metadata_menu(
+        md_included:   bool,
+        md_to_emb:     dict[Literal["album", "artist", "date", "title", "tracknumber"]:bool],
+        md_album_set:  bool,
+        md_artist_set: bool,
+        md_date_set:   bool
+        ) -> Literal[
+            "change_appending",
+            "which_md_embedded",
+            "set_album",
+            "set_artist",
+            "set_date",
+            "set_title",
+            "set_tracknumber",
+            "return",
+            "exit"]:
         returns_dict = {
             "a":  "change_appending",
             "e":  "which_md_embedded",
@@ -488,7 +489,6 @@ class Plist_Askers():
 
             if asker == "":
                 return
-
             if (asker.isdigit() and
                 int(asker) <= titles_count):
                 return int(asker)
@@ -506,7 +506,6 @@ class Plist_Askers():
 
             if asker == "":
                 return
-
             if (asker.isdigit() and
                 int(asker) <= tnums_count):
                 return int(asker)

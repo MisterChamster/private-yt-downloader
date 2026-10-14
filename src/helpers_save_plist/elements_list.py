@@ -25,12 +25,12 @@ class Elements_List():
 
 
     def __init__(self,
-                 plist_title: str,
-                 urls_list:   list[str],
-                 names_list:  list[str],
-                 numbering:   bool,
-                 numbering_has_zeros: bool,
-                 del_duplicates: bool
+        plist_title: str,
+        urls_list:   list[str],
+        names_list:  list[str],
+        numbering:   bool,
+        numbering_has_zeros: bool,
+        del_duplicates: bool
     ) -> None:
         if len(urls_list) != len(names_list):
             raise ValueError("Lists not of the same length")

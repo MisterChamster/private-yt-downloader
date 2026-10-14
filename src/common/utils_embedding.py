@@ -16,7 +16,6 @@ def append_metadata_file_universal(
         return
 
     audio = get_audio(file_path)
-
     audio[md_type] = md_text
     audio.save()
 

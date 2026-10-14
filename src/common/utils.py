@@ -83,7 +83,6 @@ class Utils():
                 print(f"{json_key} has been fixed in {adress}")
             except Exception as e:
                 print(f"{json_key} could not have been fixed in {adress}\n{e}")
-        return
 
 
     @staticmethod
@@ -91,7 +90,6 @@ class Utils():
         adress:   Path,
         json_key: str
     ) -> str|bool|int|float:
-
         with open(adress) as f:
             config = json.load(f)
 
