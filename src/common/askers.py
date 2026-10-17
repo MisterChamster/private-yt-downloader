@@ -148,7 +148,7 @@ class Askers():
             current_artist = "Not set"
 
         print(f"Current artist: {current_artist}\n"
-                "Input new artist (leave empty to return):\n>> ", end='')
+               "Input new artist (leave empty to return):\n>> ", end='')
         asker = input()
         return asker
 
