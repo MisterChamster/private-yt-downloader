@@ -4,7 +4,7 @@ from src.common.utils import Utils
 
 
 
-def get_video_title(url: str):
+def get_video_title(url: str) -> str | None:
     ydl_getdata = {
         'quiet': True,
         'extract_flat': True,
@@ -18,7 +18,7 @@ def get_video_title(url: str):
             print("Internet connection failed.\n\n")
         else:
             print("Something went wrong.\n\n")
-        return "Error"
+        return
 
 
 def get_plist_dict(url: str) -> dict | None:

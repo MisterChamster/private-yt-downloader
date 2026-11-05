@@ -10,6 +10,9 @@ import src.common.utils_embedding as emb
 def save_single(url: str) -> bool:
     opts = Download_Opts()
     video_title = ydl_support.get_video_title(url)
+    if video_title is None:
+        return False
+
     metadator = Meta_Dator(True, [video_title], md_tracknumbers=[None])
 
     while True:
